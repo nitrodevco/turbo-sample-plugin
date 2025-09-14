@@ -1,0 +1,38 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Dotnet: Format (Roslyn)",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "format"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "CSharpier: Format",
+            "type": "shell",
+            "command": "dotnet csharpier format .",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Format: All (Roslyn + CSharpier)",
+            "type": "shell",
+            "dependsOn": [
+                "Dotnet: Format (Roslyn)",
+                "CSharpier: Format"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        }
+    ]
+}

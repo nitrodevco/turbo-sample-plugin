@@ -1,0 +1,16 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+  <!-- Import the host’s central versions by absolute or env-driven path -->
+  <Import
+    Project="$(TurboCentralPackages)"
+    Condition="'$(TurboCentralPackages)' != '' and Exists('$(TurboCentralPackages)')"
+  />
+  <!-- Optional: fallback relative path for local dev -->
+  <Import
+    Project="..\turbo-cloud\Directory.Packages.props"
+    Condition="Exists('..\turbo-cloud\Directory.Packages.props')"
+  />
+</Project>

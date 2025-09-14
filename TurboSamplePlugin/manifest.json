@@ -1,0 +1,8 @@
+{
+    "Id": "turbo-sample",
+    "Name": "Turbo Sample Plugin",
+    "Author": "Billsonnn",
+    "Version": "1.0.0",
+    "EntryAssembly": "TurboSamplePlugin.dll",
+    "TablePrefix": "ts_"
+}

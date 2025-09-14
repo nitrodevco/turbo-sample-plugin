@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <SelfContained>false</SelfContained>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <BuildProjectReferences>false</BuildProjectReferences>
+  </PropertyGroup>
+  <ItemGroup>
+    <None
+      Include="manifest.json"
+      CopyToOutputDirectory="PreserveNewest"
+      CopyToPublishDirectory="PreserveNewest"
+    />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Microsoft.Extensions.Logging" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference
+      Include="..\..\turbo-cloud\Turbo.Contracts\Turbo.Contracts.csproj"
+      Private="false"
+      ExcludeAssets="runtime"
+    />
+    <ProjectReference
+      Include="..\..\turbo-cloud\Turbo.Database\Turbo.Database.csproj"
+      Private="false"
+      ExcludeAssets="runtime"
+    />
+    <ProjectReference
+      Include="..\..\turbo-cloud\Turbo.Events\Turbo.Events.csproj"
+      Private="false"
+      ExcludeAssets="runtime"
+    />
+    <ProjectReference
+      Include="..\..\turbo-cloud\Turbo.Messages\Turbo.Messages.csproj"
+      Private="false"
+      ExcludeAssets="runtime"
+    />
+    <ProjectReference
+      Include="..\..\turbo-cloud\Turbo.Networking.Abstractions\Turbo.Networking.Abstractions.csproj"
+      Private="false"
+      ExcludeAssets="runtime"
+    />
+    <ProjectReference
+      Include="..\..\turbo-cloud\Turbo.Packets.Abstractions\Turbo.Packets.Abstractions.csproj"
+      Private="false"
+      ExcludeAssets="runtime"
+    />
+    <ProjectReference
+      Include="..\..\turbo-cloud\Turbo.Primitives\Turbo.Primitives.csproj"
+      Private="false"
+      ExcludeAssets="runtime"
+    />
+  </ItemGroup>
+</Project>
