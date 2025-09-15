@@ -17,7 +17,7 @@ public class TurboSamplePlugin : ITurboPlugin
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddPluginDbContext<SampleDbContext>();
+        services.AddPluginDatabaseContext<SampleDbContext>();
         services.AddTransient<IPluginDbModule, SampleDbModule>();
 
         services.AddSingleton<SamplePluginService>();
