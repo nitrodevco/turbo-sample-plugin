@@ -56,5 +56,10 @@
       Private="false"
       ExcludeAssets="runtime"
     />
+    <ProjectReference
+      Include="..\..\turbo-cloud\Turbo.Crypto\Turbo.Crypto.csproj"
+      Private="false"
+      ExcludeAssets="runtime"
+    />
   </ItemGroup>
 </Project>

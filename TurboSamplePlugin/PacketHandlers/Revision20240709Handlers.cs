@@ -1,8 +1,8 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Turbo.Crypto;
 using Turbo.Messages.Registry;
-using Turbo.Networking.Abstractions.Encryption;
 using Turbo.Primitives.Messages.Incoming.Handshake;
 using Turbo.Primitives.Messages.Outgoing.Handshake;
 using Turbo.Primitives.Messages.Outgoing.Users;
@@ -45,12 +45,9 @@ public class Revision20240709Handlers(IDiffieService diffieService)
         await Task.CompletedTask;
     }
 
-    public async Task HandleAsync(
-        InfoRetrieveMessage message,
-        MessageContext ctx,
-        CancellationToken ct
-    )
+    public Task HandleAsync(InfoRetrieveMessage message, MessageContext ctx, CancellationToken ct)
     {
+        return Task.CompletedTask;
         //var player = await _playerManager.GetPlayerGrain(ctx.Session.PlayerId);
         //var summary = await player.GetAsync();
 

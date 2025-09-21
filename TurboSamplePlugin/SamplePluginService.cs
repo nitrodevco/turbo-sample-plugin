@@ -3,26 +3,30 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Turbo.Contracts.Plugins;
 using Turbo.Networking.Abstractions.Revisions;
 using TurboSamplePlugin.Revision.Revision20240709;
 using TurboSamplePlugin.Revision.RevisionDefault;
 
 namespace TurboSamplePlugin;
 
-public class SamplePluginService(
-    IRevisionManager revisionManager,
-    ILogger<SamplePluginService> logger
-) : IHostedService
+public class SamplePluginService(IHostServices host, ILogger<SamplePluginService> logger)
+    : IHostedService
 {
-    private readonly IRevisionManager _revisionManager = revisionManager;
+    private readonly IHostServices _host = host;
     private readonly ILogger<SamplePluginService> _logger = logger;
 
-    public async Task StartAsync(CancellationToken ct)
+    public Task StartAsync(CancellationToken ct)
     {
         try
         {
-            _revisionManager.RegisterRevision(new RevisionDefault());
-            _revisionManager.RegisterRevision(new Revision20240709());
+            var revisionManager = _host.GetRequiredService<IRevisionManager>();
+
+            if (revisionManager is not null)
+            {
+                revisionManager.RegisterRevision(new RevisionDefault());
+                revisionManager.RegisterRevision(new Revision20240709());
+            }
 
             _logger.LogInformation("SamplePluginService started successfully.");
         }
@@ -38,6 +42,8 @@ public class SamplePluginService(
 
             throw;
         }
+
+        return Task.CompletedTask;
     }
 
     public async Task StopAsync(CancellationToken cancellationToken)

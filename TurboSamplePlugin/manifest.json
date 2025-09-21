@@ -1,8 +1,14 @@
 {
-    "Id": "turbo-sample",
     "Name": "Turbo Sample Plugin",
-    "Author": "Billsonnn",
+    "Key": "turbo-sample-plugin",
     "Version": "1.0.0",
-    "EntryAssembly": "TurboSamplePlugin.dll",
+    "Author": "Billsonnn",
+    "AssemblyFile": "TurboSamplePlugin.dll",
+    "Dependencies": [
+        {
+            "Key": "turbo-core",
+            "MinVersion": "1.0.0"
+        }
+    ],
     "TablePrefix": "ts_"
 }
