@@ -4,7 +4,7 @@ using Turbo.Primitives.Messages.Incoming.Handshake;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Handshake;
 
-public class SSOTicketMessageParser : IParser
+internal class SSOTicketMessageParser : IParser
 {
     public IMessageEvent Parse(IClientPacket packet) =>
         new SSOTicketMessage { SSO = packet.PopString(), ElapsedMilliseconds = packet.PopInt() };

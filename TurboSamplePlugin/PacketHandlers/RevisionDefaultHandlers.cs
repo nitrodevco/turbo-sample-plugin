@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using SuperSocket.Connection;
@@ -7,7 +6,7 @@ using Turbo.Primitives.Messages.Incoming.Handshake;
 
 namespace TurboSamplePlugin.PacketHandlers;
 
-public class PacketHandlers : IMessageHandler<ClientHelloMessage>
+public class RevisionDefaultHandlers : IMessageHandler<ClientHelloMessage>
 {
     public async Task HandleAsync(
         ClientHelloMessage message,

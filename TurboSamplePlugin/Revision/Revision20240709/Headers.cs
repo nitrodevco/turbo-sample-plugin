@@ -1,6 +1,6 @@
 namespace TurboSamplePlugin.Revision.Revision20240709;
 
-public enum MessageEvent
+internal enum MessageEvent
 {
     CompleteDiffieHandshakeMessageEvent = 2616,
     DisconnectMessageEvent = 1113,
@@ -11,7 +11,7 @@ public enum MessageEvent
     VersionCheckMessageEvent = 2602,
 }
 
-public static class MessageComposer
+internal static class MessageComposer
 {
     // Handshake
     public const int AuthenticationOKMessageComposer = 2323;

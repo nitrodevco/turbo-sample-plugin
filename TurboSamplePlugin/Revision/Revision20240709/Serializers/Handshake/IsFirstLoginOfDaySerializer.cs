@@ -3,7 +3,7 @@ using Turbo.Primitives.Messages.Outgoing.Handshake;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Handshake;
 
-public class IsFirstLoginOfDaySerializer(int header)
+internal class IsFirstLoginOfDaySerializer(int header)
     : AbstractSerializer<IsFirstLoginOfDayMessage>(header)
 {
     protected override void Serialize(IServerPacket packet, IsFirstLoginOfDayMessage message)

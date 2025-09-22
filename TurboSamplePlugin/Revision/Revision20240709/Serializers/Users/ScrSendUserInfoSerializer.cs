@@ -3,7 +3,7 @@ using Turbo.Primitives.Messages.Outgoing.Users;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Users;
 
-public class ScrSendUserInfoSerializer(int header)
+internal class ScrSendUserInfoSerializer(int header)
     : AbstractSerializer<ScrSendUserInfoMessage>(header)
 {
     protected override void Serialize(IServerPacket packet, ScrSendUserInfoMessage message)

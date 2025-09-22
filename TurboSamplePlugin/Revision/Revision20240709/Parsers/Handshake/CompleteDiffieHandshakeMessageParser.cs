@@ -4,7 +4,7 @@ using Turbo.Primitives.Messages.Incoming.Handshake;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Handshake;
 
-public class CompleteDiffieHandshakeMessageParser : IParser
+internal class CompleteDiffieHandshakeMessageParser : IParser
 {
     public IMessageEvent Parse(IClientPacket packet) =>
         new CompleteDiffieHandshakeMessage { SharedKey = packet.PopString() };

@@ -4,7 +4,7 @@ using Turbo.Primitives.Messages.Incoming.Handshake;
 
 namespace TurboSamplePlugin.Revision.RevisionDefault.Parsers.Handshake;
 
-public class ClientHelloParser : IParser
+internal class ClientHelloParser : IParser
 {
     public IMessageEvent Parse(IClientPacket packet) =>
         new ClientHelloMessage

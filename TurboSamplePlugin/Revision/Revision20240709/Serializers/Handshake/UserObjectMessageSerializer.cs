@@ -3,7 +3,8 @@ using Turbo.Primitives.Messages.Outgoing.Handshake;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Handshake;
 
-public class UserObjectMessageSerializer(int header) : AbstractSerializer<UserObjectMessage>(header)
+internal class UserObjectMessageSerializer(int header)
+    : AbstractSerializer<UserObjectMessage>(header)
 {
     protected override void Serialize(IServerPacket packet, UserObjectMessage message)
     {

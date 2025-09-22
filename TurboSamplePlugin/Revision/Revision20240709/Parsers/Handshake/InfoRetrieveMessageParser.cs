@@ -4,7 +4,7 @@ using Turbo.Primitives.Messages.Incoming.Handshake;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Handshake;
 
-public class InfoRetrieveMessageParser : IParser
+internal class InfoRetrieveMessageParser : IParser
 {
     public IMessageEvent Parse(IClientPacket packet) => new InfoRetrieveMessage();
 }

@@ -3,7 +3,7 @@ using Turbo.Primitives.Messages.Outgoing.Handshake;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Handshake;
 
-public class AuthenticationOKMessageSerializer(int header)
+internal class AuthenticationOKMessageSerializer(int header)
     : AbstractSerializer<AuthenticationOKMessage>(header)
 {
     protected override void Serialize(IServerPacket packet, AuthenticationOKMessage message)
