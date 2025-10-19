@@ -1,3 +1,4 @@
+using Turbo.Contracts.Enums.Rooms.Object;
 using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Messages.Outgoing.Handshake;
 
@@ -11,7 +12,7 @@ internal class UserObjectMessageSerializer(int header)
         packet.WriteInteger((int)message.Player.PlayerId);
         packet.WriteString(message.Player.Name);
         packet.WriteString(message.Player.Figure);
-        packet.WriteString(message.Player.Gender.ToString());
+        packet.WriteString(message.Player.Gender.ToLegacyString());
         packet.WriteString(message.Player.Motto);
         packet.WriteString(message.Player.Name); // real name
         packet.WriteBoolean(false); // direct mail

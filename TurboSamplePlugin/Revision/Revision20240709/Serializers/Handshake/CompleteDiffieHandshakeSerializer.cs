@@ -9,5 +9,6 @@ internal class CompleteDiffieHandshakeSerializer(int header)
     protected override void Serialize(IServerPacket packet, CompleteDiffieHandshakeComposer message)
     {
         packet.WriteString(message.PublicKey);
+        packet.WriteBoolean(message.ServerClientEncryption);
     }
 }
