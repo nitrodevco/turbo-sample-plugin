@@ -1,9 +1,9 @@
 using Turbo.Contracts.Abstractions;
 using Turbo.Contracts.Enums.Navigator;
 using Turbo.Packets.Abstractions;
-using Turbo.Primitives.Messages.Incoming.Navigator;
+using Turbo.Primitives.Messages.Incoming.NewNavigator;
 
-namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Navigator;
+namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.NewNavigator;
 
 public class NavigatorSetSearchCodeViewModeParser : IParser
 {

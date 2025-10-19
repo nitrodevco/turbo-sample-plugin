@@ -10,6 +10,9 @@ using Turbo.Primitives.Messages.Outgoing.Users;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Catalog;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Handshake;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Navigator;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.NewNavigator;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.RoomSettings;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Tracking;
 using TurboSamplePlugin.Revision.Revision20240709.Serializer.Availability;
 using TurboSamplePlugin.Revision.Revision20240709.Serializer.Catalog;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Handshake;
@@ -112,7 +115,6 @@ public class Revision20240709 : IRevision
             { MessageEvent.ConvertGlobalRoomIdMessageEvent, new ConvertGlobalRoomIdParser() },
             { MessageEvent.CreateFlatMessageEvent, new CreateFlatParser() },
             { MessageEvent.DeleteFavouriteRoomMessageEvent, new DeleteFavouriteRoomParser() },
-            { MessageEvent.DeleteRoomMessageEvent, new DeleteRoomParser() },
             { MessageEvent.EditEventMessageEvent, new EditEventParser() },
             {
                 MessageEvent.ForwardToARandomPromotedRoomMessageEvent,
@@ -136,23 +138,6 @@ public class Revision20240709 : IRevision
             { MessageEvent.MyRoomHistorySearchMessageEvent, new MyRoomHistorySearchParser() },
             { MessageEvent.MyRoomRightsSearchMessageEvent, new MyRoomRightsSearchParser() },
             { MessageEvent.MyRoomsSearchMessageEvent, new MyRoomsSearchParser() },
-            {
-                MessageEvent.NavigatorAddCollapsedCategoryMessageEvent,
-                new NavigatorAddCollapsedCategoryParser()
-            },
-            { MessageEvent.NavigatorAddSavedSearchEvent, new NavigatorAddSavedSearchParser() },
-            {
-                MessageEvent.NavigatorDeleteSavedSearchEvent,
-                new NavigatorDeleteSavedSearchParser()
-            },
-            {
-                MessageEvent.NavigatorRemoveCollapsedCategoryMessageEvent,
-                new NavigatorRemoveCollapsedCategoryParser()
-            },
-            {
-                MessageEvent.NavigatorSetSearchCodeViewModeMessageEvent,
-                new NavigatorSetSearchCodeViewModeParser()
-            },
             { MessageEvent.PopularRoomsSearchMessageEvent, new PopularRoomsSearchParser() },
             { MessageEvent.RateFlatMessageEvent, new RateFlatParser() },
             {
@@ -174,6 +159,48 @@ public class Revision20240709 : IRevision
             { MessageEvent.SetRoomSessionTagsMessageEvent, new SetRoomSessionTagsParser() },
             { MessageEvent.ToggleStaffPickMessageEvent, new ToggleStaffPickParser() },
             { MessageEvent.UpdateHomeRoomMessageEvent, new UpdateHomeRoomParser() },
+            // New Navigator
+            {
+                MessageEvent.NavigatorAddCollapsedCategoryMessageEvent,
+                new NavigatorAddCollapsedCategoryParser()
+            },
+            { MessageEvent.NavigatorAddSavedSearchEvent, new NavigatorAddSavedSearchParser() },
+            {
+                MessageEvent.NavigatorDeleteSavedSearchEvent,
+                new NavigatorDeleteSavedSearchParser()
+            },
+            {
+                MessageEvent.NavigatorRemoveCollapsedCategoryMessageEvent,
+                new NavigatorRemoveCollapsedCategoryParser()
+            },
+            {
+                MessageEvent.NavigatorSetSearchCodeViewModeMessageEvent,
+                new NavigatorSetSearchCodeViewModeParser()
+            },
+            { MessageEvent.NewNavigatorInitEvent, new NewNavigatorInitParser() },
+            { MessageEvent.NewNavigatorSearchEvent, new NewNavigatorSearchParser() },
+            {
+                MessageEvent.SetNewNavigatorWindowPreferencesMessageEvent,
+                new NewNavigatorSearchParser()
+            },
+            //RoomSettings
+            { MessageEvent.DeleteRoomMessageEvent, new DeleteRoomParser() },
+            { MessageEvent.GetBannedUsersFromRoomMessageEvent, new GetBannedUsersFromRoomParser() },
+            { MessageEvent.GetCustomRoomFilterMessageEvent, new GetCustomRoomFilterParser() },
+            { MessageEvent.GetFlatControllersMessageEvent, new GetFlatControllersParser() },
+            { MessageEvent.GetRoomSettingsMessageEvent, new GetRoomSettingsParser() },
+            { MessageEvent.SaveRoomSettingsMessageEvent, new SaveRoomSettingsParser() },
+            {
+                MessageEvent.UpdateRoomCategoryAndTradeSettingsEvent,
+                new UpdateRoomCategoryAndTradeSettingsParser()
+            },
+            { MessageEvent.UpdateRoomFilterMessageEvent, new UpdateRoomFilterParser() },
+            // Tracking
+            { MessageEvent.EventLogMessageEvent, new EventLogParser() },
+            { MessageEvent.LagWarningReportMessageEvent, new LagWarningReportParser() },
+            { MessageEvent.LatencyPingReportMessageEvent, new LatencyPingReportParser() },
+            { MessageEvent.LatencyPingRequestMessageEvent, new LatencyPingRequestParser() },
+            { MessageEvent.PerformanceLogMessageEvent, new PerformanceLogParser() },
         };
 
     public IDictionary<Type, ISerializer> Serializers { get; } =
