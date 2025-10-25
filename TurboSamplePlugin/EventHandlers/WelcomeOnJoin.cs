@@ -13,10 +13,10 @@ public class WelcomeOnJoin(ILogger<PlayerJoinedEvent> logger)
 {
     private readonly ILogger<PlayerJoinedEvent> _logger = logger;
 
-    public async Task InvokeAsync(
+    public async ValueTask InvokeAsync(
         PlayerJoinedEvent e,
         EventContext ctx,
-        Func<Task> next,
+        Func<ValueTask> next,
         CancellationToken ct
     )
     {
@@ -31,9 +31,10 @@ public class WelcomeOnJoin(ILogger<PlayerJoinedEvent> logger)
         }
     }
 
-    public Task HandleAsync(PlayerJoinedEvent e, EventContext ctx, CancellationToken ct)
+    public async ValueTask HandleAsync(PlayerJoinedEvent e, EventContext ctx, CancellationToken ct)
     {
         Console.WriteLine($"Welcome player {e.PlayerId}");
-        return Task.CompletedTask;
+
+        await Task.CompletedTask;
     }
 }

@@ -8,7 +8,7 @@ namespace TurboSamplePlugin.PacketHandlers;
 
 public class RevisionDefaultHandlers : IMessageHandler<ClientHelloMessage>
 {
-    public async Task HandleAsync(
+    public async ValueTask HandleAsync(
         ClientHelloMessage message,
         MessageContext ctx,
         CancellationToken ct

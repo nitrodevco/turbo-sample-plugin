@@ -9,11 +9,19 @@ using Turbo.Primitives.Messages.Outgoing.Navigator;
 using Turbo.Primitives.Messages.Outgoing.Tracking;
 using Turbo.Primitives.Messages.Outgoing.Users;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Catalog;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Collectibles;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.FriendList;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.GroupForums;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Handshake;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Help;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Inventory;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Inventory.Badges;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Navigator;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.NewNavigator;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Nft;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Preferences;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.RoomSettings;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Sound;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Tracking;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Users;
 using TurboSamplePlugin.Revision.Revision20240709.Serializer.Availability;
@@ -100,6 +108,34 @@ public class Revision20240709 : IRevision
             { MessageEvent.ShopTargetedOfferViewedEvent, new ShopTargetedOfferViewedParser() },
             #endregion
 
+            #region Collectibles
+            { MessageEvent.GetNftTransferFeeMessageEvent, new GetNftTransferFeeMessageParser() },
+            #endregion
+
+            #region FriendList
+            { MessageEvent.AcceptFriendMessageEvent, new AcceptFriendMessageParser() },
+            { MessageEvent.DeclineFriendMessageEvent, new DeclineFriendMessageParser() },
+            { MessageEvent.FindNewFriendsMessageEvent, new FindNewFriendsMessageParser() },
+            { MessageEvent.FollowFriendMessageEvent, new FollowFriendMessageParser() },
+            { MessageEvent.FriendListUpdateMessageEvent, new FriendListUpdateMessageParser() },
+            { MessageEvent.GetFriendRequestsMessageEvent, new GetFriendRequestsMessageParser() },
+            { MessageEvent.GetMessengerHistoryEvent, new GetMessengerHistoryParser() },
+            { MessageEvent.HabboSearchMessageEvent, new HabboSearchMessageParser() },
+            { MessageEvent.MessengerInitMessageEvent, new MessengerInitMessageParser() },
+            { MessageEvent.RemoveFriendMessageEvent, new RemoveFriendMessageParser() },
+            { MessageEvent.RequestFriendMessageEvent, new RequestFriendMessageParser() },
+            { MessageEvent.SendMsgMessageEvent, new SendMsgMessageParser() },
+            { MessageEvent.SendRoomInviteMessageEvent, new SendRoomInviteMessageParser() },
+            { MessageEvent.VisitUserMessageEvent, new VisitUserMessageParser() },
+            #endregion
+
+            #region GroupForums
+            {
+                MessageEvent.GetUnreadForumsCountMessageEvent,
+                new GetUnreadForumsCountMessageParser()
+            },
+            #endregion
+
             #region Handshake
             {
                 MessageEvent.CompleteDiffieHandshakeMessageEvent,
@@ -118,6 +154,15 @@ public class Revision20240709 : IRevision
 
             #region Help
             { MessageEvent.GetCfhStatusMessageEvent, new GetCfhStatusParser() },
+            #endregion
+
+            #region Inventory
+            { MessageEvent.GetCreditsInfoEvent, new GetCreditsInfoParser() },
+            #region Badges
+            { MessageEvent.GetBadgePointLimitsEvent, new GetBadgePointLimitsMessageParser() },
+            { MessageEvent.GetBadgesEvent, new GetBadgesMessageParser() },
+            #endregion
+
             #endregion
 
             #region Navigator
@@ -194,9 +239,17 @@ public class Revision20240709 : IRevision
             },
             { MessageEvent.NewNavigatorInitEvent, new NewNavigatorInitParser() },
             { MessageEvent.NewNavigatorSearchEvent, new NewNavigatorSearchParser() },
+            #endregion
+
+            #region Nft
+            { MessageEvent.GetNftCreditsMessageEvent, new GetNftCreditsMessageParser() },
+            { MessageEvent.GetSilverMessageEvent, new GetSilverMessageParser() },
+            #endregion
+
+            #region Preferences
             {
                 MessageEvent.SetNewNavigatorWindowPreferencesMessageEvent,
-                new NewNavigatorSearchParser()
+                new SetNewNavigatorWindowPreferencesParser()
             },
             #endregion
 
@@ -214,6 +267,10 @@ public class Revision20240709 : IRevision
             { MessageEvent.UpdateRoomFilterMessageEvent, new UpdateRoomFilterParser() },
             #endregion
 
+            #region Sound
+            { MessageEvent.GetSoundSettingsEvent, new GetSoundSettingsMessageParser() },
+            #endregion
+
             #region Tracking
             { MessageEvent.EventLogMessageEvent, new EventLogParser() },
             { MessageEvent.LagWarningReportMessageEvent, new LagWarningReportParser() },
@@ -226,6 +283,7 @@ public class Revision20240709 : IRevision
             { MessageEvent.GetIgnoredUsersMessageEvent, new GetIgnoredUsersParser() },
             { MessageEvent.GetMOTDMessageEvent, new GetMOTDParser() },
             { MessageEvent.GetUserNftChatStylesMessageEvent, new GetUserNftChatStylesParser() },
+            { MessageEvent.ScrGetUserInfoMessageEvent, new ScrGetUserInfoMessageParser() },
             #endregion
         };
 
