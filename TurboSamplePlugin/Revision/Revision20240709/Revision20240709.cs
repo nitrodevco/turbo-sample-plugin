@@ -6,6 +6,7 @@ using Turbo.Primitives.Messages.Outgoing.Availability;
 using Turbo.Primitives.Messages.Outgoing.Catalog;
 using Turbo.Primitives.Messages.Outgoing.Handshake;
 using Turbo.Primitives.Messages.Outgoing.Navigator;
+using Turbo.Primitives.Messages.Outgoing.Tracking;
 using Turbo.Primitives.Messages.Outgoing.Users;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Catalog;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Handshake;
@@ -19,6 +20,7 @@ using TurboSamplePlugin.Revision.Revision20240709.Serializer.Availability;
 using TurboSamplePlugin.Revision.Revision20240709.Serializer.Catalog;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Handshake;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Navigator;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Tracking;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Users;
 
 namespace TurboSamplePlugin.Revision.Revision20240709;
@@ -230,16 +232,23 @@ public class Revision20240709 : IRevision
     public IDictionary<Type, ISerializer> Serializers { get; } =
         new Dictionary<Type, ISerializer>
         {
+            #region Availability
             {
                 typeof(AvailabilityStatusMessage),
                 new AvailabilityStatusMessageSerializer(
                     MessageComposer.AvailabilityStatusMessageComposer
                 )
             },
+            #endregion
+
+            #region Catalog
             {
                 typeof(FigureSetIdsMessage),
                 new FigureSetIdsSerializer(MessageComposer.FigureSetIdsComposer)
             },
+            #endregion
+
+            #region Handshake
             {
                 typeof(AuthenticationOKMessage),
                 new AuthenticationOKMessageSerializer(
@@ -247,13 +256,13 @@ public class Revision20240709 : IRevision
                 )
             },
             {
-                typeof(CompleteDiffieHandshakeComposer),
+                typeof(CompleteDiffieHandshakeMessage),
                 new CompleteDiffieHandshakeSerializer(
                     MessageComposer.CompleteDiffieHandshakeComposer
                 )
             },
             {
-                typeof(InitDiffieHandshakeComposer),
+                typeof(InitDiffieHandshakeMessage),
                 new InitDiffieHandshakeSerializer(MessageComposer.InitDiffieHandshakeComposer)
             },
             {
@@ -272,13 +281,29 @@ public class Revision20240709 : IRevision
                 typeof(UserRightsMessage),
                 new UserRightsMessageSerializer(MessageComposer.UserRightsMessageComposer)
             },
+            #endregion
+
+            #region Navigator
             {
                 typeof(NavigatorSettingsMessage),
                 new NavigatorSettingsSerializer(MessageComposer.NavigatorSettingsComposer)
             },
+            #endregion
+
+            #region Tracking
+            {
+                typeof(LatencyPingResponseMessage),
+                new LatencyPingResponseSerializer(
+                    MessageComposer.LatencyPingResponseMessageComposer
+                )
+            },
+            #endregion
+
+            #region Users
             {
                 typeof(ScrSendUserInfoMessage),
                 new ScrSendUserInfoSerializer(MessageComposer.ScrSendUserInfoComposer)
             },
+            #endregion
         };
 }

@@ -7,5 +7,5 @@ namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Tracking;
 public class LatencyPingRequestParser : IParser
 {
     public IMessageEvent Parse(IClientPacket packet) =>
-        new LatencyPingRequestMessage { Id = packet.PopInt() };
+        new LatencyPingRequestMessage { RequestId = packet.PopInt() };
 }
