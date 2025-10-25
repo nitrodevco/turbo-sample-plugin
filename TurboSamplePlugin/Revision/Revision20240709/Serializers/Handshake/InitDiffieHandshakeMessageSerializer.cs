@@ -3,7 +3,7 @@ using Turbo.Primitives.Messages.Outgoing.Handshake;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Handshake;
 
-internal class InitDiffieHandshakeSerializer(int header)
+internal class InitDiffieHandshakeMessageSerializer(int header)
     : AbstractSerializer<InitDiffieHandshakeMessageComposer>(header)
 {
     protected override void Serialize(

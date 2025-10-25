@@ -4,6 +4,7 @@ using Turbo.Networking.Abstractions.Revisions;
 using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Messages.Outgoing.Availability;
 using Turbo.Primitives.Messages.Outgoing.Catalog;
+using Turbo.Primitives.Messages.Outgoing.FriendList;
 using Turbo.Primitives.Messages.Outgoing.Handshake;
 using Turbo.Primitives.Messages.Outgoing.Navigator;
 using Turbo.Primitives.Messages.Outgoing.Tracking;
@@ -26,6 +27,7 @@ using TurboSamplePlugin.Revision.Revision20240709.Parsers.Tracking;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Users;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Availability;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Catalog;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Handshake;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Navigator;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Tracking;
@@ -302,7 +304,86 @@ public class Revision20240709 : IRevision
             #region Catalog
             {
                 typeof(FigureSetIdsMessage),
-                new FigureSetIdsSerializer(MessageComposer.FigureSetIdsComposer)
+                new FigureSetIdsMessageSerializer(MessageComposer.FigureSetIdsComposer)
+            },
+            #endregion
+
+            #region FriendList
+            {
+                typeof(AcceptFriendResultMessage),
+                new AcceptFriendResultMessageSerializer(MessageComposer.AcceptFriendResultComposer)
+            },
+            {
+                typeof(ConsoleMessageHistoryMessage),
+                new ConsoleMessageHistoryMessageSerializer(
+                    MessageComposer.ConsoleMessageHistoryComposer
+                )
+            },
+            {
+                typeof(FollowFriendFailedMessage),
+                new FollowFriendFailedMessageSerializer(MessageComposer.FollowFriendFailedComposer)
+            },
+            {
+                typeof(FriendListFragmentMessage),
+                new FriendListFragmentMessageSerializer(
+                    MessageComposer.FriendListFragmentMessageComposer
+                )
+            },
+            {
+                typeof(FriendListUpdateMessage),
+                new FriendListUpdateMessageSerializer(MessageComposer.FriendListUpdateComposer)
+            },
+            {
+                typeof(FriendNotificationMessage),
+                new FriendNotificationMessageSerializer(MessageComposer.FriendNotificationComposer)
+            },
+            {
+                typeof(FriendRequestsMessage),
+                new FriendRequestsMessageSerializer(MessageComposer.FriendRequestsComposer)
+            },
+            {
+                typeof(HabboSearchResultMessage),
+                new HabboSearchResultMessageSerializer(MessageComposer.HabboSearchResultComposer)
+            },
+            {
+                typeof(InstantMessageErrorMessage),
+                new InstantMessageErrorMessageSerializer(
+                    MessageComposer.InstantMessageErrorComposer
+                )
+            },
+            {
+                typeof(MessengerErrorMessage),
+                new MessengerErrorMessageSerializer(MessageComposer.MessengerErrorComposer)
+            },
+            {
+                typeof(MessengerInitMessageComposer),
+                new MessengerInitMessageSerializer(MessageComposer.MessengerInitComposer)
+            },
+            {
+                typeof(MiniMailNewMessage),
+                new MiniMailNewMessageSerializer(MessageComposer.MiniMailNewMessageComposer)
+            },
+            {
+                typeof(MiniMailUnreadCountMessage),
+                new MiniMailUnreadCountMessageSerializer(
+                    MessageComposer.MiniMailUnreadCountComposer
+                )
+            },
+            {
+                typeof(NewConsoleMessageMessage),
+                new NewConsoleMessageMessageSerializer(MessageComposer.NewConsoleMessageComposer)
+            },
+            {
+                typeof(NewFriendRequestMessage),
+                new NewFriendRequestMessageSerializer(MessageComposer.NewFriendRequestComposer)
+            },
+            {
+                typeof(RoomInviteErrorMessage),
+                new RoomInviteErrorMessageSerializer(MessageComposer.RoomInviteErrorComposer)
+            },
+            {
+                typeof(RoomInviteMessage),
+                new RoomInviteMessageSerializer(MessageComposer.RoomInviteComposer)
             },
             #endregion
 
@@ -315,21 +396,31 @@ public class Revision20240709 : IRevision
             },
             {
                 typeof(CompleteDiffieHandshakeMessageComposer),
-                new CompleteDiffieHandshakeSerializer(
+                new CompleteDiffieHandshakeMessageSerializer(
                     MessageComposer.CompleteDiffieHandshakeComposer
                 )
             },
             {
+                typeof(GenericErrorMessage),
+                new GenericErrorMessageSerializer(MessageComposer.GenericErrorComposer)
+            },
+            {
                 typeof(InitDiffieHandshakeMessageComposer),
-                new InitDiffieHandshakeSerializer(MessageComposer.InitDiffieHandshakeComposer)
+                new InitDiffieHandshakeMessageSerializer(
+                    MessageComposer.InitDiffieHandshakeComposer
+                )
             },
             {
                 typeof(IsFirstLoginOfDayMessage),
-                new IsFirstLoginOfDaySerializer(MessageComposer.IsFirstLoginOfDayComposer)
+                new IsFirstLoginOfDayMessageSerializer(MessageComposer.IsFirstLoginOfDayComposer)
             },
             {
                 typeof(NoobnessLevelMessage),
-                new NoobnessLevelSerializer(MessageComposer.NoobnessLevelMessageComposer)
+                new NoobnessLevelMessageSerializer(MessageComposer.NoobnessLevelMessageComposer)
+            },
+            {
+                typeof(UniqueMachineIdMessage),
+                new UniqueMachineIdMessageSerializer(MessageComposer.UniqueMachineIDComposer)
             },
             {
                 typeof(UserObjectMessage),
@@ -344,14 +435,14 @@ public class Revision20240709 : IRevision
             #region Navigator
             {
                 typeof(NavigatorSettingsMessage),
-                new NavigatorSettingsSerializer(MessageComposer.NavigatorSettingsComposer)
+                new NavigatorSettingsMessageSerializer(MessageComposer.NavigatorSettingsComposer)
             },
             #endregion
 
             #region Tracking
             {
                 typeof(LatencyPingResponseMessage),
-                new LatencyPingResponseSerializer(
+                new LatencyPingResponseMessageSerializer(
                     MessageComposer.LatencyPingResponseMessageComposer
                 )
             },
@@ -360,7 +451,7 @@ public class Revision20240709 : IRevision
             #region Users
             {
                 typeof(ScrSendUserInfoMessage),
-                new ScrSendUserInfoSerializer(MessageComposer.ScrSendUserInfoComposer)
+                new ScrSendUserInfoMessageSerializer(MessageComposer.ScrSendUserInfoComposer)
             },
             #endregion
         };
