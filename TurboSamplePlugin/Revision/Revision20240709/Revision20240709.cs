@@ -9,10 +9,12 @@ using Turbo.Primitives.Messages.Outgoing.Navigator;
 using Turbo.Primitives.Messages.Outgoing.Users;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Catalog;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Handshake;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Help;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Navigator;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.NewNavigator;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.RoomSettings;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Tracking;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Users;
 using TurboSamplePlugin.Revision.Revision20240709.Serializer.Availability;
 using TurboSamplePlugin.Revision.Revision20240709.Serializer.Catalog;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Handshake;
@@ -28,20 +30,7 @@ public class Revision20240709 : IRevision
     public IDictionary<int, IParser> Parsers { get; } =
         new Dictionary<int, IParser>
         {
-            {
-                MessageEvent.CompleteDiffieHandshakeMessageEvent,
-                new CompleteDiffieHandshakeMessageParser()
-            },
-            { MessageEvent.DisconnectMessageEvent, new DisconnectMessageParser() },
-            { MessageEvent.InfoRetrieveMessageEvent, new InfoRetrieveMessageParser() },
-            {
-                MessageEvent.InitDiffieHandshakeMessageEvent,
-                new InitDiffieHandshakeMessageParser()
-            },
-            { MessageEvent.SSOTicketMessageEvent, new SSOTicketMessageParser() },
-            { MessageEvent.UniqueIDMessageEvent, new UniqueIdMessageParser() },
-            { MessageEvent.VersionCheckMessageEvent, new VersionCheckMessageParser() },
-            // Catalog
+            #region Catalog
             {
                 MessageEvent.BuildersClubPlaceRoomItemMessageEvent,
                 new BuildersClubPlaceRoomItemParser()
@@ -107,7 +96,29 @@ public class Revision20240709 : IRevision
             { MessageEvent.SelectClubGiftEvent, new SelectClubGiftParser() },
             { MessageEvent.SetTargetedOfferStateEvent, new SetTargetedOfferStateParser() },
             { MessageEvent.ShopTargetedOfferViewedEvent, new ShopTargetedOfferViewedParser() },
-            // Navigator
+            #endregion
+
+            #region Handshake
+            {
+                MessageEvent.CompleteDiffieHandshakeMessageEvent,
+                new CompleteDiffieHandshakeMessageParser()
+            },
+            { MessageEvent.DisconnectMessageEvent, new DisconnectMessageParser() },
+            { MessageEvent.InfoRetrieveMessageEvent, new InfoRetrieveMessageParser() },
+            {
+                MessageEvent.InitDiffieHandshakeMessageEvent,
+                new InitDiffieHandshakeMessageParser()
+            },
+            { MessageEvent.SSOTicketMessageEvent, new SSOTicketMessageParser() },
+            { MessageEvent.UniqueIDMessageEvent, new UniqueIdMessageParser() },
+            { MessageEvent.VersionCheckMessageEvent, new VersionCheckMessageParser() },
+            #endregion
+
+            #region Help
+            { MessageEvent.GetCfhStatusMessageEvent, new GetCfhStatusParser() },
+            #endregion
+
+            #region Navigator
             { MessageEvent.AddFavouriteRoomMessageEvent, new AddFavouriteRoomParser() },
             { MessageEvent.CancelEventMessageEvent, new CancelEventParser() },
             { MessageEvent.CanCreateRoomMessageEvent, new CanCreateRoomParser() },
@@ -159,7 +170,9 @@ public class Revision20240709 : IRevision
             { MessageEvent.SetRoomSessionTagsMessageEvent, new SetRoomSessionTagsParser() },
             { MessageEvent.ToggleStaffPickMessageEvent, new ToggleStaffPickParser() },
             { MessageEvent.UpdateHomeRoomMessageEvent, new UpdateHomeRoomParser() },
-            // New Navigator
+            #endregion
+
+            #region NewNavigator
             {
                 MessageEvent.NavigatorAddCollapsedCategoryMessageEvent,
                 new NavigatorAddCollapsedCategoryParser()
@@ -183,7 +196,9 @@ public class Revision20240709 : IRevision
                 MessageEvent.SetNewNavigatorWindowPreferencesMessageEvent,
                 new NewNavigatorSearchParser()
             },
-            //RoomSettings
+            #endregion
+
+            #region RoomSettings
             { MessageEvent.DeleteRoomMessageEvent, new DeleteRoomParser() },
             { MessageEvent.GetBannedUsersFromRoomMessageEvent, new GetBannedUsersFromRoomParser() },
             { MessageEvent.GetCustomRoomFilterMessageEvent, new GetCustomRoomFilterParser() },
@@ -195,12 +210,21 @@ public class Revision20240709 : IRevision
                 new UpdateRoomCategoryAndTradeSettingsParser()
             },
             { MessageEvent.UpdateRoomFilterMessageEvent, new UpdateRoomFilterParser() },
-            // Tracking
+            #endregion
+
+            #region Tracking
             { MessageEvent.EventLogMessageEvent, new EventLogParser() },
             { MessageEvent.LagWarningReportMessageEvent, new LagWarningReportParser() },
             { MessageEvent.LatencyPingReportMessageEvent, new LatencyPingReportParser() },
             { MessageEvent.LatencyPingRequestMessageEvent, new LatencyPingRequestParser() },
             { MessageEvent.PerformanceLogMessageEvent, new PerformanceLogParser() },
+            #endregion
+
+            #region Users
+            { MessageEvent.GetIgnoredUsersMessageEvent, new GetIgnoredUsersParser() },
+            { MessageEvent.GetMOTDMessageEvent, new GetMOTDParser() },
+            { MessageEvent.GetUserNftChatStylesMessageEvent, new GetUserNftChatStylesParser() },
+            #endregion
         };
 
     public IDictionary<Type, ISerializer> Serializers { get; } =
