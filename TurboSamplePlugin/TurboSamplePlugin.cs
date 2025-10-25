@@ -21,8 +21,7 @@ public class TurboSamplePlugin : ITurboPlugin
 
     public void ConfigureServices(IServiceCollection services, PluginManifest manifest)
     {
-        services.AddPluginDatabaseContext<SampleDbContext>();
-        services.AddTransient<IPluginDbModule, SampleDbModule>();
+        services.AddPluginDatabaseContext<SampleDbContext, SampleDbModule>();
 
         services.AddSingleton<SamplePluginService>();
     }
@@ -36,7 +35,7 @@ public class TurboSamplePlugin : ITurboPlugin
 
     public async Task StopAsync(CancellationToken ct)
     {
-        return;
+        await Task.CompletedTask;
     }
 
     public async ValueTask DisposeAsync()
