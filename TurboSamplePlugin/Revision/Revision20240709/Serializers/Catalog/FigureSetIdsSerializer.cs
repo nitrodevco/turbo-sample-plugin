@@ -1,7 +1,7 @@
 using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Messages.Outgoing.Catalog;
 
-namespace TurboSamplePlugin.Revision.Revision20240709.Serializer.Catalog;
+namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Catalog;
 
 public class FigureSetIdsSerializer(int header) : AbstractSerializer<FigureSetIdsMessage>(header)
 {

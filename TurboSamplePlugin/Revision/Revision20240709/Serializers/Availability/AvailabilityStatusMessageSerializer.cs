@@ -1,7 +1,7 @@
 using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Messages.Outgoing.Availability;
 
-namespace TurboSamplePlugin.Revision.Revision20240709.Serializer.Availability;
+namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Availability;
 
 public class AvailabilityStatusMessageSerializer(int header)
     : AbstractSerializer<AvailabilityStatusMessage>(header)
