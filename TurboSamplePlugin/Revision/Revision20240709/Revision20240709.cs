@@ -314,13 +314,13 @@ public class Revision20240709 : IRevision
                 )
             },
             {
-                typeof(CompleteDiffieHandshakeMessage),
+                typeof(CompleteDiffieHandshakeMessageComposer),
                 new CompleteDiffieHandshakeSerializer(
                     MessageComposer.CompleteDiffieHandshakeComposer
                 )
             },
             {
-                typeof(InitDiffieHandshakeMessage),
+                typeof(InitDiffieHandshakeMessageComposer),
                 new InitDiffieHandshakeSerializer(MessageComposer.InitDiffieHandshakeComposer)
             },
             {
