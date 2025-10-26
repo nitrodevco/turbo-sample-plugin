@@ -418,6 +418,7 @@ public class Revision20240709 : IRevision
                 typeof(NoobnessLevelMessage),
                 new NoobnessLevelMessageSerializer(MessageComposer.NoobnessLevelMessageComposer)
             },
+            { typeof(PingMessage), new PingMessageSerializer(MessageComposer.PingMessageComposer) },
             {
                 typeof(UniqueMachineIdMessage),
                 new UniqueMachineIdMessageSerializer(MessageComposer.UniqueMachineIDComposer)
