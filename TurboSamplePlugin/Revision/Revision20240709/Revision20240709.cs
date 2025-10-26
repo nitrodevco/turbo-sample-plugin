@@ -7,10 +7,12 @@ using Turbo.Primitives.Messages.Outgoing.Catalog;
 using Turbo.Primitives.Messages.Outgoing.FriendList;
 using Turbo.Primitives.Messages.Outgoing.Handshake;
 using Turbo.Primitives.Messages.Outgoing.Navigator;
+using Turbo.Primitives.Messages.Outgoing.NewNavigator;
 using Turbo.Primitives.Messages.Outgoing.Tracking;
 using Turbo.Primitives.Messages.Outgoing.Users;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Catalog;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Collectibles;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Competition;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.FriendList;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.GroupForums;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Handshake;
@@ -30,6 +32,7 @@ using TurboSamplePlugin.Revision.Revision20240709.Serializers.Catalog;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Handshake;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Navigator;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.NewNavigator;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Tracking;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Users;
 
@@ -39,6 +42,7 @@ public class Revision20240709 : IRevision
 {
     public string Revision => "WIN63-202407091256-704579380";
 
+    #region Incoming
     public IDictionary<int, IParser> Parsers { get; } =
         new Dictionary<int, IParser>
         {
@@ -112,6 +116,13 @@ public class Revision20240709 : IRevision
 
             #region Collectibles
             { MessageEvent.GetNftTransferFeeMessageEvent, new GetNftTransferFeeMessageParser() },
+            #endregion
+
+            #region Competition
+            {
+                MessageEvent.GetCurrentTimingCodeMessageEvent,
+                new GetCurrentTimingCodeMessageParser()
+            },
             #endregion
 
             #region FriendList
@@ -288,7 +299,9 @@ public class Revision20240709 : IRevision
             { MessageEvent.ScrGetUserInfoMessageEvent, new ScrGetUserInfoMessageParser() },
             #endregion
         };
+    #endregion
 
+    #region Outgoing
     public IDictionary<Type, ISerializer> Serializers { get; } =
         new Dictionary<Type, ISerializer>
         {
@@ -435,8 +448,49 @@ public class Revision20240709 : IRevision
 
             #region Navigator
             {
+                typeof(FavouritesMessage),
+                new FavouritesMessageSerializer(MessageComposer.FavouritesComposer)
+            },
+            {
                 typeof(NavigatorSettingsMessage),
                 new NavigatorSettingsMessageSerializer(MessageComposer.NavigatorSettingsComposer)
+            },
+            #endregion
+
+            #region NewNavigator
+            {
+                typeof(NavigatorCollapsedCategoriesMessage),
+                new NavigatorCollapsedCategoriesMessageSerializer(
+                    MessageComposer.NavigatorCollapsedCategoriesMessageComposer
+                )
+            },
+            {
+                typeof(NavigatorLiftedRoomsMessage),
+                new NavigatorLiftedRoomsMessageSerializer(
+                    MessageComposer.NavigatorLiftedRoomsComposer
+                )
+            },
+            {
+                typeof(NavigatorMetaDataMessage),
+                new NavigatorMetaDataMessageSerializer(MessageComposer.NavigatorMetaDataComposer)
+            },
+            {
+                typeof(NavigatorSavedSearchesMessage),
+                new NavigatorSavedSearchesMessageSerializer(
+                    MessageComposer.NavigatorSavedSearchesComposer
+                )
+            },
+            {
+                typeof(NavigatorSearchResultBlocksMessage),
+                new NavigatorSearchResultBlocksMessageSerializer(
+                    MessageComposer.NavigatorSearchResultBlocksComposer
+                )
+            },
+            {
+                typeof(NewNavigatorPreferencesMessage),
+                new NewNavigatorPreferencesMessageSerializer(
+                    MessageComposer.NewNavigatorPreferencesComposer
+                )
             },
             #endregion
 
@@ -456,4 +510,5 @@ public class Revision20240709 : IRevision
             },
             #endregion
         };
+    #endregion
 }

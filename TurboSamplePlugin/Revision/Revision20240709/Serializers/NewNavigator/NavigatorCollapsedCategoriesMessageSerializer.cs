@@ -11,6 +11,11 @@ internal class NavigatorCollapsedCategoriesMessageSerializer(int header)
         NavigatorCollapsedCategoriesMessage message
     )
     {
-        //
+        packet.WriteInteger(message.CollapsedCategoryIds.Count);
+
+        foreach (var categoryId in message.CollapsedCategoryIds)
+        {
+            packet.WriteString(categoryId);
+        }
     }
 }
