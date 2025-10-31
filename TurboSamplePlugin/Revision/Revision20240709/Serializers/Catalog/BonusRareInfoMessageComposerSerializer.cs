@@ -8,6 +8,9 @@ internal class BonusRareInfoMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, BonusRareInfoMessageComposer message)
     {
-        //
+        packet.WriteString(message.ProductType);
+        packet.WriteInteger(message.ProductClassId);
+        packet.WriteInteger(message.TotalCoinsForBonus);
+        packet.WriteInteger(message.CoinsStillRequiredToBuy);
     }
 }

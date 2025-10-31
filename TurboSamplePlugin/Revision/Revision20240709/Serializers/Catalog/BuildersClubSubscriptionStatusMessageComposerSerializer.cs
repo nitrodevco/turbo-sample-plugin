@@ -11,6 +11,12 @@ internal class BuildersClubSubscriptionStatusMessageComposerSerializer(int heade
         BuildersClubSubscriptionStatusMessageComposer message
     )
     {
-        //
+        packet
+            .WriteInteger(message.SecondsLeft)
+            .WriteInteger(message.FurniLimit)
+            .WriteInteger(message.MaxFurniLimit);
+
+        if (message.SecondsLeftWithGrace.HasValue)
+            packet.WriteInteger(message.SecondsLeftWithGrace.Value);
     }
 }

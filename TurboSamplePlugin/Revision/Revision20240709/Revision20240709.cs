@@ -2,7 +2,12 @@ using System;
 using System.Collections.Generic;
 using Turbo.Networking.Abstractions.Revisions;
 using Turbo.Packets.Abstractions;
+using Turbo.Primitives.Messages.Outgoing.Advertisement;
 using Turbo.Primitives.Messages.Outgoing.Availability;
+using Turbo.Primitives.Messages.Outgoing.Avatar;
+using Turbo.Primitives.Messages.Outgoing.Callforhelp;
+using Turbo.Primitives.Messages.Outgoing.Camera;
+using Turbo.Primitives.Messages.Outgoing.Campaign;
 using Turbo.Primitives.Messages.Outgoing.Catalog;
 using Turbo.Primitives.Messages.Outgoing.FriendList;
 using Turbo.Primitives.Messages.Outgoing.Handshake;
@@ -27,7 +32,12 @@ using TurboSamplePlugin.Revision.Revision20240709.Parsers.RoomSettings;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Sound;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Tracking;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Users;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Advertisement;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Availability;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Avatar;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Callforhelp;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Camera;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Campaign;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Catalog;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Handshake;
@@ -305,19 +315,306 @@ public class Revision20240709 : IRevision
     public IDictionary<Type, ISerializer> Serializers { get; } =
         new Dictionary<Type, ISerializer>
         {
+            #region Advertisement
+            {
+                typeof(InterstitialMessageComposer),
+                new InterstitialMessageComposerSerializer(
+                    MessageComposer.InterstitialMessageComposer
+                )
+            },
+            {
+                typeof(RoomAdErrorEventMessageComposer),
+                new RoomAdErrorEventMessageComposerSerializer(MessageComposer.RoomAdErrorComposer)
+            },
+            #endregion
+
             #region Availability
             {
-                typeof(AvailabilityStatusMessage),
-                new AvailabilityStatusMessageSerializer(
+                typeof(AvailabilityStatusMessageComposer),
+                new AvailabilityStatusMessageComposerSerializer(
                     MessageComposer.AvailabilityStatusMessageComposer
+                )
+            },
+            {
+                typeof(InfoHotelClosedMessageComposer),
+                new InfoHotelClosedMessageComposerSerializer(
+                    MessageComposer.InfoHotelClosedMessageComposer
+                )
+            },
+            {
+                typeof(InfoHotelClosingMessageComposer),
+                new InfoHotelClosingMessageComposerSerializer(
+                    MessageComposer.InfoHotelClosingMessageComposer
+                )
+            },
+            {
+                typeof(LoginFailedHotelClosedMessageComposer),
+                new LoginFailedHotelClosedMessageComposerSerializer(
+                    MessageComposer.LoginFailedHotelClosedMessageComposer
+                )
+            },
+            {
+                typeof(MaintenanceStatusMessageComposer),
+                new MaintenanceStatusMessageComposerSerializer(
+                    MessageComposer.MaintenanceStatusMessageComposer
+                )
+            },
+            #endregion
+
+            #region Avatar
+            {
+                typeof(ChangeUserNameResultMessageComposer),
+                new ChangeUserNameResultMessageComposerSerializer(
+                    MessageComposer.ChangeUserNameResultMessageComposer
+                )
+            },
+            {
+                typeof(CheckUserNameResultMessageComposer),
+                new CheckUserNameResultMessageComposerSerializer(
+                    MessageComposer.CheckUserNameResultMessageComposer
+                )
+            },
+            {
+                typeof(FigureUpdateEventMessageComposer),
+                new FigureUpdateEventMessageComposerSerializer(MessageComposer.FigureUpdateComposer)
+            },
+            {
+                typeof(WardrobeMessageComposer),
+                new WardrobeMessageComposerSerializer(MessageComposer.WardrobeMessageComposer)
+            },
+            #endregion
+
+            #region Callforhelp
+            {
+                typeof(CfhSanctionMessageComposer),
+                new CfhSanctionMessageComposerSerializer(MessageComposer.CfhSanctionMessageComposer)
+            },
+            {
+                typeof(CfhTopicsInitMessageComposer),
+                new CfhTopicsInitMessageComposerSerializer(
+                    MessageComposer.CfhTopicsInitMessageComposer
+                )
+            },
+            {
+                typeof(SanctionStatusEventMessageComposer),
+                new SanctionStatusEventMessageComposerSerializer(
+                    MessageComposer.SanctionStatusComposer
+                )
+            },
+            #endregion
+
+            #region Camera
+            {
+                typeof(CameraPublishStatusMessageComposer),
+                new CameraPublishStatusMessageComposerSerializer(
+                    MessageComposer.CameraPublishStatusMessageComposer
+                )
+            },
+            {
+                typeof(CameraPurchaseOKMessageComposer),
+                new CameraPurchaseOKMessageComposerSerializer(
+                    MessageComposer.CameraPurchaseOKMessageComposer
+                )
+            },
+            {
+                typeof(CameraStorageUrlMessageComposer),
+                new CameraStorageUrlMessageComposerSerializer(
+                    MessageComposer.CameraStorageUrlMessageComposer
+                )
+            },
+            {
+                typeof(CompetitionStatusMessageComposer),
+                new CompetitionStatusMessageComposerSerializer(
+                    MessageComposer.CompetitionStatusMessageComposer
+                )
+            },
+            {
+                typeof(InitCameraMessageComposer),
+                new InitCameraMessageComposerSerializer(MessageComposer.InitCameraMessageComposer)
+            },
+            {
+                typeof(ThumbnailStatusMessageComposer),
+                new ThumbnailStatusMessageComposerSerializer(
+                    MessageComposer.ThumbnailStatusMessageComposer
+                )
+            },
+            #endregion
+
+            #region Campaign
+            {
+                typeof(CampaignCalendarDataMessageComposer),
+                new CampaignCalendarDataMessageComposerSerializer(
+                    MessageComposer.CampaignCalendarDataMessageComposer
+                )
+            },
+            {
+                typeof(CampaignCalendarDoorOpenedMessageComposer),
+                new CampaignCalendarDataMessageComposerSerializer(
+                    MessageComposer.CampaignCalendarDoorOpenedMessageComposer
                 )
             },
             #endregion
 
             #region Catalog
             {
-                typeof(FigureSetIdsMessage),
-                new FigureSetIdsMessageSerializer(MessageComposer.FigureSetIdsComposer)
+                typeof(BonusRareInfoMessageComposer),
+                new BonusRareInfoMessageComposerSerializer(
+                    MessageComposer.BonusRareInfoMessageComposer
+                )
+            },
+            {
+                typeof(BuildersClubSubscriptionStatusMessageComposer),
+                new BuildersClubSubscriptionStatusMessageComposerSerializer(
+                    MessageComposer.BuildersClubSubscriptionStatusMessageComposer
+                )
+            },
+            {
+                typeof(BundleDiscountRulesetMessageComposer),
+                new BundleDiscountRulesetMessageComposerSerializer(
+                    MessageComposer.BundleDiscountRulesetMessageComposer
+                )
+            },
+            {
+                typeof(CatalogIndexMessageComposer),
+                new CatalogIndexMessageComposerSerializer(
+                    MessageComposer.CatalogIndexMessageComposer
+                )
+            },
+            {
+                typeof(CatalogPageMessageComposer),
+                new CatalogPageMessageComposerSerializer(MessageComposer.CatalogPageMessageComposer)
+            },
+            {
+                typeof(CatalogPageWithEarliestExpiryMessageComposer),
+                new CatalogPageWithEarliestExpiryMessageComposerSerializer(
+                    MessageComposer.CatalogPageWithEarliestExpiryMessageComposer
+                )
+            },
+            {
+                typeof(CatalogPublishedMessageComposer),
+                new CatalogPublishedMessageComposerSerializer(
+                    MessageComposer.CatalogPublishedMessageComposer
+                )
+            },
+            {
+                typeof(ClubGiftInfoEventMessageComposer),
+                new ClubGiftInfoEventMessageComposerSerializer(MessageComposer.ClubGiftInfoComposer)
+            },
+            {
+                typeof(ClubGiftSelectedEventMessageComposer),
+                new ClubGiftSelectedEventMessageComposerSerializer(
+                    MessageComposer.ClubGiftSelectedComposer
+                )
+            },
+            {
+                typeof(GiftReceiverNotFoundEventMessageComposer),
+                new GiftReceiverNotFoundEventMessageComposerSerializer(
+                    MessageComposer.GiftReceiverNotFoundComposer
+                )
+            },
+            {
+                typeof(GiftWrappingConfigurationEventMessageComposer),
+                new GiftWrappingConfigurationEventMessageComposerSerializer(
+                    MessageComposer.GiftWrappingConfigurationComposer
+                )
+            },
+            {
+                typeof(HabboClubExtendOfferMessageComposer),
+                new HabboClubExtendOfferMessageComposerSerializer(
+                    MessageComposer.HabboClubExtendOfferMessageComposer
+                )
+            },
+            {
+                typeof(HabboClubOffersMessageComposer),
+                new HabboClubOffersMessageComposerSerializer(
+                    MessageComposer.HabboClubOffersMessageComposer
+                )
+            },
+            {
+                typeof(LimitedEditionSoldOutEventMessageComposer),
+                new LimitedEditionSoldOutEventMessageComposerSerializer(
+                    MessageComposer.LimitedEditionSoldOutComposer
+                )
+            },
+            {
+                typeof(LimitedOfferAppearingNextMessageComposer),
+                new LimitedOfferAppearingNextMessageComposerSerializer(
+                    MessageComposer.LimitedOfferAppearingNextMessageComposer
+                )
+            },
+            {
+                typeof(NotEnoughBalanceMessageComposer),
+                new NotEnoughBalanceMessageComposerSerializer(
+                    MessageComposer.NotEnoughBalanceMessageComposer
+                )
+            },
+            {
+                typeof(ProductOfferEventMessageComposer),
+                new ProductOfferEventMessageComposerSerializer(MessageComposer.ProductOfferComposer)
+            },
+            {
+                typeof(PurchaseErrorMessageComposer),
+                new PurchaseErrorMessageComposerSerializer(
+                    MessageComposer.PurchaseErrorMessageComposer
+                )
+            },
+            {
+                typeof(PurchaseNotAllowedMessageComposer),
+                new PurchaseNotAllowedMessageComposerSerializer(
+                    MessageComposer.PurchaseNotAllowedMessageComposer
+                )
+            },
+            {
+                typeof(PurchaseOKMessageComposer),
+                new PurchaseOKMessageComposerSerializer(MessageComposer.PurchaseOKMessageComposer)
+            },
+            {
+                typeof(RoomAdPurchaseInfoEventMessageComposer),
+                new RoomAdPurchaseInfoEventMessageComposerSerializer(
+                    MessageComposer.RoomAdPurchaseInfoComposer
+                )
+            },
+            {
+                typeof(SeasonalCalendarDailyOfferMessageComposer),
+                new SeasonalCalendarDailyOfferMessageComposerSerializer(
+                    MessageComposer.SeasonalCalendarDailyOfferMessageComposer
+                )
+            },
+            {
+                typeof(SellablePetPalettesMessageComposer),
+                new SellablePetPalettesMessageComposerSerializer(
+                    MessageComposer.SellablePetPalettesMessageComposer
+                )
+            },
+            {
+                typeof(SnowWarGameTokensMessageMessageComposer),
+                new SnowWarGameTokensMessageMessageComposerSerializer(
+                    MessageComposer.SnowWarGameTokensMessageComposer
+                )
+            },
+            {
+                typeof(TargetedOfferEventMessageComposer),
+                new TargetedOfferEventMessageComposerSerializer(
+                    MessageComposer.TargetedOfferComposer
+                )
+            },
+            {
+                typeof(TargetedOfferNotFoundEventMessageComposer),
+                new TargetedOfferNotFoundEventMessageComposerSerializer(
+                    MessageComposer.TargetedOfferNotFoundComposer
+                )
+            },
+            {
+                typeof(VoucherRedeemErrorMessageComposer),
+                new VoucherRedeemErrorMessageComposerSerializer(
+                    MessageComposer.VoucherRedeemErrorMessageComposer
+                )
+            },
+            {
+                typeof(VoucherRedeemOkMessageComposer),
+                new VoucherRedeemOkMessageComposerSerializer(
+                    MessageComposer.VoucherRedeemOkMessageComposer
+                )
             },
             #endregion
 
