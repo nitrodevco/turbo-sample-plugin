@@ -1,4 +1,5 @@
 using Turbo.Contracts.Abstractions;
+using Turbo.Contracts.Enums.Catalog;
 using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Messages.Incoming.Catalog;
 
@@ -11,6 +12,6 @@ public class GetCatalogPageParser : IParser
         {
             PageId = packet.PopInt(),
             OfferId = packet.PopInt(),
-            Type = packet.PopString(),
+            CatalogType = CatalogTypeEnumExtensions.FromLegacyString(packet.PopString()),
         };
 }

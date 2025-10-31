@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Snapshots.Catalog;
 using Turbo.Primitives.Snapshots.Furniture;
+using Turbo.Primitives.Snapshots.Furniture.Extensions;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Catalog.Data;
 
@@ -27,7 +28,9 @@ internal class CatalogOfferSerializer
 
         foreach (var product in products)
         {
-            CatalogProductSerializer.Serialize(packet, product, furniture);
+            var furniDef = furniture.GetDefinitionById(product.FurniDefinitionId);
+
+            CatalogProductSerializer.Serialize(packet, product, furniDef);
         }
 
         packet

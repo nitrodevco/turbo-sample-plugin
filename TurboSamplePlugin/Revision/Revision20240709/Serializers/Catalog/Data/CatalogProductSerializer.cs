@@ -10,17 +10,15 @@ internal class CatalogProductSerializer
     public static void Serialize(
         IServerPacket packet,
         CatalogProductSnapshot product,
-        FurnitureSnapshot furniture
+        FurnitureDefinitionSnapshot furniDef
     )
     {
         packet.WriteString(product.ProductType.ToLegacyString());
 
         if (product.ProductType is not ProductTypeEnum.Badge)
         {
-            var def = furniture.DefinitionsById[product.FurniDefinitionId ?? -1];
-
             packet
-                .WriteInteger(def?.SpriteId ?? -1)
+                .WriteInteger(furniDef?.SpriteId ?? -1)
                 .WriteString(product.ExtraParam ?? string.Empty)
                 .WriteInteger(product.Quantity)
                 .WriteBoolean(product.UniqueSize > 0);
