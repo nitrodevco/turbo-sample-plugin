@@ -1,4 +1,4 @@
-﻿using Turbo.Packets.Abstractions;
+using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Messages.Outgoing.NewNavigator;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.NewNavigator.Snapshots;
 
