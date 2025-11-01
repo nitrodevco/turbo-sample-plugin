@@ -1,5 +1,6 @@
 ﻿using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Messages.Outgoing.Navigator;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Navigator.Data;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Navigator;
 
@@ -11,6 +12,6 @@ internal class CategoriesWithVisitorCountMessageComposerSerializer(int header)
         CategoriesWithVisitorCountMessageComposer message
     )
     {
-        //
+        CategoriesWithVisitorCountSerializer.Serialize(packet, message.Categories);
     }
 }

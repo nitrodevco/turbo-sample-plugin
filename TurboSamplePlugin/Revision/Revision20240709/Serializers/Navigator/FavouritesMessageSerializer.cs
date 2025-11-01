@@ -8,6 +8,9 @@ internal class FavouritesMessageSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, FavouritesMessage message)
     {
-        //
+        packet.WriteInteger(message.FavoriteRoomIds.Count);
+
+        foreach (var roomId in message.FavoriteRoomIds)
+            packet.WriteInteger(roomId);
     }
 }

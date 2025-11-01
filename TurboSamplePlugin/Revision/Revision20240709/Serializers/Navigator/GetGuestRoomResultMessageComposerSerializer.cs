@@ -22,10 +22,10 @@ internal class GetGuestRoomResultMessageComposerSerializer(int header)
             .WriteBoolean(message.IsGroupMember)
             .WriteBoolean(message.AllInRoomMuted);
 
-        // mod settings
+        ModSettingsSnapshotSerializer.Serialize(packet, message.ModSettings);
 
         packet.WriteBoolean(message.CanMute);
 
-        // chat settings
+        RoomChatSettingsSerializer.Serialize(packet, message.ChatSettings);
     }
 }
