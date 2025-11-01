@@ -14,7 +14,7 @@ internal class GetGuestRoomResultMessageComposerSerializer(int header)
     {
         packet.WriteBoolean(message.EnterRoom);
 
-        RoomSettingsSerializer.Serialize(packet, message.RoomSettings);
+        RoomSettingsSerializer.Serialize(packet, message.RoomSnapshot);
 
         packet
             .WriteBoolean(message.RoomForward)
@@ -22,10 +22,10 @@ internal class GetGuestRoomResultMessageComposerSerializer(int header)
             .WriteBoolean(message.IsGroupMember)
             .WriteBoolean(message.AllInRoomMuted);
 
-        ModSettingsSnapshotSerializer.Serialize(packet, message.ModSettings);
+        ModSettingsSnapshotSerializer.Serialize(packet, message.RoomSnapshot.ModSettings);
 
         packet.WriteBoolean(message.CanMute);
 
-        RoomChatSettingsSerializer.Serialize(packet, message.ChatSettings);
+        RoomChatSettingsSerializer.Serialize(packet, message.RoomSnapshot.ChatSettings);
     }
 }

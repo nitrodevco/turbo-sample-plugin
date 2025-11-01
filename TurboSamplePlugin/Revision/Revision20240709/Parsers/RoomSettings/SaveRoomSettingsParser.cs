@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Turbo.Contracts.Abstractions;
+using Turbo.Contracts.Enums.Navigator;
+using Turbo.Contracts.Enums.Navigator.Chat;
 using Turbo.Contracts.Enums.Rooms;
 using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Messages.Incoming.RoomSettings;
@@ -19,21 +21,21 @@ public class SaveRoomSettingsParser : IParser
             MaxVisitors = packet.PopInt(),
             CategoryId = packet.PopInt(),
             Tags = ParseTags(packet),
-            TradeMode = (RoomTradeType)packet.PopInt(),
+            TradeMode = (TradeModeType)packet.PopInt(),
             AllowPets = packet.PopBoolean(),
             AllowFoodConsume = packet.PopBoolean(),
             AllowWalkThrough = packet.PopBoolean(),
             HideWalls = packet.PopBoolean(),
             WallThickness = (RoomThicknessType)packet.PopInt(),
             FloorThickness = (RoomThicknessType)packet.PopInt(),
-            WhoCanMute = (RoomMuteType)packet.PopInt(),
-            WhoCanKick = (RoomKickType)packet.PopInt(),
-            WhoCanBan = (RoomBanType)packet.PopInt(),
-            ChatMode = (RoomChatModeType)packet.PopInt(),
-            ChatBubbleSize = (RoomChatWeightType)packet.PopInt(),
-            ChatScrollUpFrequency = (RoomChatSpeedType)packet.PopInt(),
+            WhoCanMute = (ModSettingType)packet.PopInt(),
+            WhoCanKick = (ModSettingType)packet.PopInt(),
+            WhoCanBan = (ModSettingType)packet.PopInt(),
+            ChatMode = (ChatModeType)packet.PopInt(),
+            ChatBubbleSize = (ChatBubbleWidthType)packet.PopInt(),
+            ChatScrollUpFrequency = (ChatScrollSpeedType)packet.PopInt(),
             ChatFullHearRange = packet.PopInt(),
-            ChatFloodSensitivity = (RoomChatProtectionType)packet.PopInt(),
+            ChatFloodSensitivity = (ChatFloodSensitivityType)packet.PopInt(),
             AllowNavigatorDynCats = packet.PopBoolean(),
         };
 

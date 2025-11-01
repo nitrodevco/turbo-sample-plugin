@@ -1,39 +1,50 @@
+using System.Collections.Generic;
 using Turbo.Contracts.Enums.Navigator;
 using Turbo.Packets.Abstractions;
-using Turbo.Primitives.Snapshots.Navigator;
+using Turbo.Primitives.Snapshots.Rooms;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Navigator.Data;
 
 internal class RoomSettingsSerializer
 {
-    public static void Serialize(IServerPacket packet, RoomSettingsSnapshot message)
+    public static void Serialize(IServerPacket packet, RoomSnapshot message)
     {
+        var ownerName = string.Empty; // TODO: Fetch owner name by ownerId
+        var userCount = 0; // TODO: Fetch current user count in the room
+        var score = 0; // TODO: Fetch room score
+        var ranking = 0; // TODO: Fetch room ranking
+        var tags = new List<string>(); // TODO: Fetch room tags
+
         packet
-            .WriteInteger(message.RoomId)
+            .WriteInteger((int)message.Id)
             .WriteString(message.Name)
             .WriteInteger(message.OwnerId)
-            .WriteString(message.OwnerName)
+            .WriteString(ownerName)
             .WriteInteger((int)message.DoorMode)
-            .WriteInteger(message.UserCount)
-            .WriteInteger(message.MaxUserCount)
+            .WriteInteger(userCount)
+            .WriteInteger(message.PlayersMax)
             .WriteString(message.Description)
             .WriteInteger((int)message.TradeMode)
-            .WriteInteger(message.Score)
-            .WriteInteger(message.Ranking)
-            .WriteInteger(message.CategoryId)
-            .WriteInteger(message.Tags.Count);
+            .WriteInteger(score)
+            .WriteInteger(ranking)
+            .WriteInteger(message.CategoryId ?? -1)
+            .WriteInteger(tags.Count);
 
-        foreach (var tag in message.Tags)
+        foreach (var tag in tags)
             packet.WriteString(tag);
 
-        packet.WriteInteger((int)message.Bitmask);
+        var bitmask = RoomBitmask.None;
 
-        if (message.Bitmask.HasFlag(RoomBitmask.Thumbnail))
+        bitmask |= RoomBitmask.ShowOwner;
+
+        packet.WriteInteger((int)bitmask);
+
+        if (bitmask.HasFlag(RoomBitmask.Thumbnail))
         {
             packet.WriteString(string.Empty); // officialRoomPicRef
         }
 
-        if (message.Bitmask.HasFlag(RoomBitmask.GroupData))
+        if (bitmask.HasFlag(RoomBitmask.GroupData))
         {
             packet
                 .WriteInteger(0) // groupId
@@ -41,7 +52,7 @@ internal class RoomSettingsSerializer
                 .WriteString(string.Empty); // groupBadgeCode
         }
 
-        if (message.Bitmask.HasFlag(RoomBitmask.RoomAd))
+        if (bitmask.HasFlag(RoomBitmask.RoomAd))
         {
             packet
                 .WriteString(string.Empty) // adName

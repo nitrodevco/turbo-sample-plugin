@@ -13,6 +13,7 @@ using Turbo.Primitives.Messages.Outgoing.FriendList;
 using Turbo.Primitives.Messages.Outgoing.Handshake;
 using Turbo.Primitives.Messages.Outgoing.Navigator;
 using Turbo.Primitives.Messages.Outgoing.NewNavigator;
+using Turbo.Primitives.Messages.Outgoing.Room.Layout;
 using Turbo.Primitives.Messages.Outgoing.Room.Session;
 using Turbo.Primitives.Messages.Outgoing.Tracking;
 using Turbo.Primitives.Messages.Outgoing.Users;
@@ -44,6 +45,7 @@ using TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Handshake;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Navigator;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.NewNavigator;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Layout;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Session;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Tracking;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Users;
@@ -894,6 +896,15 @@ public class Revision20240709 : IRevision
             #endregion
 
             #region Room
+
+            #region Room Layout
+            {
+                typeof(RoomEntryTileMessageComposer),
+                new RoomEntryTileMessageComposerSerializer(
+                    MessageComposer.RoomEntryTileMessageComposer
+                )
+            },
+            #endregion
 
             #region Room Session
             {

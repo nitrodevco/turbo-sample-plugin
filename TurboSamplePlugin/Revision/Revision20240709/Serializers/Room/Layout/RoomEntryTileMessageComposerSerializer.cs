@@ -8,6 +8,6 @@ internal class RoomEntryTileMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, RoomEntryTileMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.X).WriteInteger(message.Y).WriteInteger((int)message.Rotation);
     }
 }
