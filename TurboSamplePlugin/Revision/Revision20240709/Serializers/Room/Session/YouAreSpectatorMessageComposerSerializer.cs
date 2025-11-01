@@ -8,6 +8,6 @@ internal class YouAreSpectatorMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, YouAreSpectatorMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.RoomId);
     }
 }

@@ -1,3 +1,4 @@
+using Turbo.Contracts.Enums.Rooms;
 using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Messages.Outgoing.Room.Session;
 
@@ -8,6 +9,9 @@ internal class CantConnectMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, CantConnectMessageComposer message)
     {
-        //
+        packet.WriteInteger((int)message.ErrorType);
+
+        if (message.ErrorType == RoomConnectionErrorType.Banned)
+            packet.WriteString(message.AdditionalInfo ?? string.Empty);
     }
 }

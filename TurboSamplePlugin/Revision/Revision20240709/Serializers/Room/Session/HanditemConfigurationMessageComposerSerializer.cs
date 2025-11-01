@@ -11,6 +11,6 @@ internal class HanditemConfigurationMessageComposerSerializer(int header)
         HanditemConfigurationMessageComposer message
     )
     {
-        //
+        packet.WriteBoolean(message.IsHanditemControlBlocked);
     }
 }

@@ -14,7 +14,7 @@ internal class CatalogProductSerializer
         {
             packet
                 .WriteInteger(product.SpriteId)
-                .WriteString(product.ExtraParam)
+                .WriteString(product.ExtraParam ?? string.Empty)
                 .WriteInteger(product.Quantity)
                 .WriteBoolean(product.UniqueSize > 0);
 

@@ -8,6 +8,6 @@ internal class FlatAccessibleMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, FlatAccessibleMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.RoomId).WriteString(message.Username);
     }
 }

@@ -11,6 +11,6 @@ internal class YouAreNotSpectatorMessageComposerSerializer(int header)
         YouAreNotSpectatorMessageComposer message
     )
     {
-        //
+        packet.WriteInteger(message.RoomId);
     }
 }

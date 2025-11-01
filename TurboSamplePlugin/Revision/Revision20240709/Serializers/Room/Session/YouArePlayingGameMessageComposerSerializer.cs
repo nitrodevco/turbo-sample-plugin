@@ -11,6 +11,6 @@ internal class YouArePlayingGameMessageComposerSerializer(int header)
         YouArePlayingGameMessageComposer message
     )
     {
-        //
+        packet.WriteBoolean(message.IsPlaying);
     }
 }
