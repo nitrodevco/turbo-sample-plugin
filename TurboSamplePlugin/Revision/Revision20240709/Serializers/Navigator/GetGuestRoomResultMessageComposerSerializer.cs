@@ -1,5 +1,6 @@
 ﻿using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Messages.Outgoing.Navigator;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Navigator.Data;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Navigator;
 
@@ -13,7 +14,7 @@ internal class GetGuestRoomResultMessageComposerSerializer(int header)
     {
         packet.WriteBoolean(message.EnterRoom);
 
-        //room info
+        RoomSettingsSerializer.Serialize(packet, message.RoomSettings);
 
         packet
             .WriteBoolean(message.RoomForward)

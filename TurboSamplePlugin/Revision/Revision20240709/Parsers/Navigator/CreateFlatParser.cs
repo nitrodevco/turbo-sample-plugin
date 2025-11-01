@@ -1,5 +1,5 @@
 using Turbo.Contracts.Abstractions;
-using Turbo.Contracts.Enums.Rooms;
+using Turbo.Contracts.Enums.Navigator;
 using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Messages.Incoming.Navigator;
 
@@ -15,6 +15,6 @@ public class CreateFlatParser : IParser
             FlatModelName = packet.PopString(),
             CategoryID = packet.PopInt(),
             MaxPlayers = packet.PopInt(),
-            TradeSetting = (RoomTradeType)packet.PopInt(),
+            TradeSetting = (TradeModeType)packet.PopInt(),
         };
 }
