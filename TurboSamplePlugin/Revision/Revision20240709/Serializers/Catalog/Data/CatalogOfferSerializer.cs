@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Snapshots.Catalog;
-using Turbo.Primitives.Snapshots.Furniture;
-using Turbo.Primitives.Snapshots.Furniture.Extensions;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Catalog.Data;
 
@@ -11,8 +9,7 @@ internal class CatalogOfferSerializer
     public static void Serialize(
         IServerPacket packet,
         CatalogOfferSnapshot offer,
-        List<CatalogProductSnapshot> products,
-        FurnitureSnapshot furniture
+        List<CatalogProductSnapshot> offerProducts
     )
     {
         packet
@@ -24,14 +21,10 @@ internal class CatalogOfferSerializer
             .WriteInteger(offer.CurrencyType ?? -1)
             .WriteInteger(offer.CostSilver)
             .WriteBoolean(offer.CanGift)
-            .WriteInteger(products.Count);
+            .WriteInteger(offerProducts.Count);
 
-        foreach (var product in products)
-        {
-            var furniDef = furniture.GetDefinitionById(product.FurniDefinitionId);
-
-            CatalogProductSerializer.Serialize(packet, product, furniDef);
-        }
+        foreach (var product in offerProducts)
+            CatalogProductSerializer.Serialize(packet, product);
 
         packet
             .WriteInteger(offer.ClubLevel)

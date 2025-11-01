@@ -1,25 +1,20 @@
 using Turbo.Contracts.Enums.Furniture;
 using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Snapshots.Catalog;
-using Turbo.Primitives.Snapshots.Furniture;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Catalog.Data;
 
 internal class CatalogProductSerializer
 {
-    public static void Serialize(
-        IServerPacket packet,
-        CatalogProductSnapshot product,
-        FurnitureDefinitionSnapshot furniDef
-    )
+    public static void Serialize(IServerPacket packet, CatalogProductSnapshot product)
     {
         packet.WriteString(product.ProductType.ToLegacyString());
 
         if (product.ProductType is not ProductTypeEnum.Badge)
         {
             packet
-                .WriteInteger(furniDef?.SpriteId ?? -1)
-                .WriteString(product.ExtraParam ?? string.Empty)
+                .WriteInteger(product.SpriteId)
+                .WriteString(product.ExtraParam)
                 .WriteInteger(product.Quantity)
                 .WriteBoolean(product.UniqueSize > 0);
 

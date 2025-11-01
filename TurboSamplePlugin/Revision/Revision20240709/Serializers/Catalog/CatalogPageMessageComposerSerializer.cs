@@ -1,8 +1,6 @@
-using System.Linq;
 using Turbo.Contracts.Enums.Catalog;
 using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Messages.Outgoing.Catalog;
-using Turbo.Primitives.Snapshots.Catalog.Extensions;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Catalog.Data;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Catalog;
@@ -12,35 +10,20 @@ internal class CatalogPageMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, CatalogPageMessageComposer message)
     {
-        var page = message.Catalog.GetPageById(message.PageId);
-
-        if (page is null)
-            return;
-
         packet
-            .WriteInteger(page.Id)
-            .WriteString(message.Catalog.CatalogType.ToLegacyString())
-            .WriteString(page.Layout);
+            .WriteInteger(message.Page.Id)
+            .WriteString(message.CatalogType.ToLegacyString())
+            .WriteString(message.Page.Layout);
 
-        CatalogPageLocalizationSerializer.Serialize(packet, page);
+        CatalogPageLocalizationSerializer.Serialize(packet, message.Page);
 
-        var offers = message
-            .Catalog.GetOfferIdsByPageId(page.Id)
-            .Select(message.Catalog.GetOfferById)
-            .Where(x => x != null)
-            .ToList();
+        packet.WriteInteger(message.Offers.Count);
 
-        packet.WriteInteger(offers.Count);
-
-        foreach (var offer in offers)
+        foreach (var offer in message.Offers)
         {
-            var products = message
-                .Catalog.GetProductIdsByOfferId(offer.Id)
-                .Select(message.Catalog.GetProductById)
-                .Where(x => x != null)
-                .ToList();
+            var products = message.OfferProducts[offer.Id];
 
-            CatalogOfferSerializer.Serialize(packet, offer, products, message.Furniture);
+            CatalogOfferSerializer.Serialize(packet, offer, products);
         }
 
         packet
