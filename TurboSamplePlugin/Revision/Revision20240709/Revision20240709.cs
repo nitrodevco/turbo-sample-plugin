@@ -13,7 +13,14 @@ using Turbo.Primitives.Messages.Outgoing.FriendList;
 using Turbo.Primitives.Messages.Outgoing.Handshake;
 using Turbo.Primitives.Messages.Outgoing.Navigator;
 using Turbo.Primitives.Messages.Outgoing.NewNavigator;
+using Turbo.Primitives.Messages.Outgoing.Room.Action;
+using Turbo.Primitives.Messages.Outgoing.Room.Bots;
+using Turbo.Primitives.Messages.Outgoing.Room.Chat;
+using Turbo.Primitives.Messages.Outgoing.Room.Engine;
+using Turbo.Primitives.Messages.Outgoing.Room.Furniture;
 using Turbo.Primitives.Messages.Outgoing.Room.Layout;
+using Turbo.Primitives.Messages.Outgoing.Room.Permissions;
+using Turbo.Primitives.Messages.Outgoing.Room.Pets;
 using Turbo.Primitives.Messages.Outgoing.Room.Session;
 using Turbo.Primitives.Messages.Outgoing.Tracking;
 using Turbo.Primitives.Messages.Outgoing.Users;
@@ -45,7 +52,14 @@ using TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Handshake;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Navigator;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.NewNavigator;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Action;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Bots;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Chat;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Engine;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Furniture;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Layout;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Permissions;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Pets;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Session;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Tracking;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Users;
@@ -897,11 +911,454 @@ public class Revision20240709 : IRevision
 
             #region Room
 
+            #region Room Action
+            {
+                typeof(AvatarEffectMessageComposer),
+                new AvatarEffectMessageComposerSerializer(
+                    MessageComposer.AvatarEffectMessageComposer
+                )
+            },
+            {
+                typeof(CarryObjectMessageComposer),
+                new CarryObjectMessageComposerSerializer(MessageComposer.CarryObjectMessageComposer)
+            },
+            {
+                typeof(DanceMessageComposer),
+                new DanceMessageComposerSerializer(MessageComposer.DanceMessageComposer)
+            },
+            {
+                typeof(ExpressionMessageComposer),
+                new ExpressionMessageComposerSerializer(MessageComposer.ExpressionMessageComposer)
+            },
+            {
+                typeof(SleepMessageComposer),
+                new SleepMessageComposerSerializer(MessageComposer.SleepMessageComposer)
+            },
+            {
+                typeof(UseObjectMessageComposer),
+                new UseObjectMessageComposerSerializer(MessageComposer.UseObjectMessageComposer)
+            },
+            #endregion
+
+            #region Room Bots
+            {
+                typeof(BotCommandConfigurationMessageComposer),
+                new BotCommandConfigurationMessageComposerSerializer(
+                    MessageComposer.BotCommandConfigurationComposer
+                )
+            },
+            {
+                typeof(BotErrorMessageComposer),
+                new BotErrorMessageComposerSerializer(MessageComposer.BotErrorComposer)
+            },
+            {
+                typeof(BotForceOpenContextMenuMessageComposerSerializer),
+                new BotForceOpenContextMenuMessageComposerSerializer(
+                    MessageComposer.BotForceOpenContextMenuComposer
+                )
+            },
+            {
+                typeof(BotSkillListUpdateMessageComposer),
+                new BotSkillListUpdateMessageComposerSerializer(
+                    MessageComposer.BotSkillListUpdateComposer
+                )
+            },
+            #endregion
+
+            #region Room Chat
+            {
+                typeof(ChatMessageComposer),
+                new ChatMessageComposerSerializer(MessageComposer.ChatMessageComposer)
+            },
+            {
+                typeof(FloodControlMessageComposer),
+                new FloodControlMessageComposerSerializer(
+                    MessageComposer.FloodControlMessageComposer
+                )
+            },
+            {
+                typeof(RemainingMutePeriodMessageComposer),
+                new RemainingMutePeriodMessageComposerSerializer(
+                    MessageComposer.RemainingMutePeriodComposer
+                )
+            },
+            {
+                typeof(RoomChatSettingsMessageComposer),
+                new RoomChatSettingsMessageComposerSerializer(
+                    MessageComposer.RoomChatSettingsMessageComposer
+                )
+            },
+            {
+                typeof(RoomFilterSettingsMessageComposer),
+                new RoomFilterSettingsMessageComposerSerializer(
+                    MessageComposer.RoomFilterSettingsMessageComposer
+                )
+            },
+            {
+                typeof(UserTypingMessageComposer),
+                new UserTypingMessageComposerSerializer(MessageComposer.UserTypingMessageComposer)
+            },
+            #endregion
+
+            #region Room Engine
+            {
+                typeof(BuildersClubPlacementWarningMessageComposer),
+                new BuildersClubPlacementWarningMessageComposerSerializer(
+                    MessageComposer.BuildersClubPlacementWarningMessageComposer
+                )
+            },
+            {
+                typeof(FavoriteMembershipUpdateMessageComposer),
+                new FavoriteMembershipUpdateMessageComposerSerializer(
+                    MessageComposer.FavoriteMembershipUpdateMessageComposer
+                )
+            },
+            {
+                typeof(FloorHeightMapMessageComposer),
+                new FloorHeightMapMessageComposerSerializer(
+                    MessageComposer.FloorHeightMapMessageComposer
+                )
+            },
+            {
+                typeof(FurnitureAliasesMessageComposer),
+                new FurnitureAliasesMessageComposerSerializer(
+                    MessageComposer.FurnitureAliasesMessageComposer
+                )
+            },
+            {
+                typeof(HeightMapMessageComposer),
+                new HeightMapMessageComposerSerializer(MessageComposer.HeightMapMessageComposer)
+            },
+            {
+                typeof(HeightMapUpdateMessageComposer),
+                new HeightMapUpdateMessageComposerSerializer(
+                    MessageComposer.HeightMapUpdateMessageComposer
+                )
+            },
+            {
+                typeof(ItemAddMessageComposer),
+                new ItemAddMessageComposerSerializer(MessageComposer.ItemAddMessageComposer)
+            },
+            {
+                typeof(ItemDataUpdateMessageComposer),
+                new ItemDataUpdateMessageComposerSerializer(
+                    MessageComposer.ItemDataUpdateMessageComposer
+                )
+            },
+            {
+                typeof(ItemRemoveMessageComposer),
+                new ItemRemoveMessageComposerSerializer(MessageComposer.ItemRemoveMessageComposer)
+            },
+            {
+                typeof(ItemsMessageComposer),
+                new ItemsMessageComposerSerializer(MessageComposer.ItemsMessageComposer)
+            },
+            {
+                typeof(ItemsStateUpdateMessageComposer),
+                new ItemsStateUpdateMessageComposerSerializer(
+                    MessageComposer.ItemsStateUpdateMessageComposer
+                )
+            },
+            {
+                typeof(ItemStateUpdateMessageComposer),
+                new ItemStateUpdateMessageComposerSerializer(
+                    MessageComposer.ItemStateUpdateMessageComposer
+                )
+            },
+            {
+                typeof(ItemUpdateMessageComposer),
+                new ItemUpdateMessageComposerSerializer(MessageComposer.ItemUpdateMessageComposer)
+            },
+            {
+                typeof(ObjectAddMessageComposer),
+                new ObjectAddMessageComposerSerializer(MessageComposer.ObjectAddMessageComposer)
+            },
+            {
+                typeof(ObjectDataUpdateMessageComposer),
+                new ObjectDataUpdateMessageComposerSerializer(
+                    MessageComposer.ObjectDataUpdateMessageComposer
+                )
+            },
+            {
+                typeof(ObjectRemoveConfirmMessageComposer),
+                new ObjectRemoveConfirmMessageComposerSerializer(
+                    MessageComposer.ObjectRemoveConfirmMessageComposer
+                )
+            },
+            {
+                typeof(ObjectRemoveMessageComposer),
+                new ObjectRemoveMessageComposerSerializer(
+                    MessageComposer.ObjectRemoveMessageComposer
+                )
+            },
+            {
+                typeof(ObjectRemoveMultipleMessageComposer),
+                new ObjectRemoveMultipleMessageComposerSerializer(
+                    MessageComposer.ObjectRemoveMultipleMessageComposer
+                )
+            },
+            {
+                typeof(ObjectsDataUpdateMessageComposer),
+                new ObjectsDataUpdateMessageComposerSerializer(
+                    MessageComposer.ObjectsDataUpdateMessageComposer
+                )
+            },
+            {
+                typeof(ObjectsMessageComposer),
+                new ObjectsMessageComposerSerializer(MessageComposer.ObjectsMessageComposer)
+            },
+            {
+                typeof(ObjectUpdateMessageComposer),
+                new ObjectUpdateMessageComposerSerializer(
+                    MessageComposer.ObjectUpdateMessageComposer
+                )
+            },
+            {
+                typeof(RoomEntryInfoMessageComposer),
+                new RoomEntryInfoMessageComposerSerializer(
+                    MessageComposer.RoomEntryInfoMessageComposer
+                )
+            },
+            {
+                typeof(RoomPropertyMessageComposer),
+                new RoomPropertyMessageComposerSerializer(
+                    MessageComposer.RoomPropertyMessageComposer
+                )
+            },
+            {
+                typeof(RoomVisualizationSettingsMessageComposer),
+                new RoomVisualizationSettingsMessageComposerSerializer(
+                    MessageComposer.RoomVisualizationSettingsComposer
+                )
+            },
+            {
+                typeof(SlideObjectBundleMessageComposer),
+                new SlideObjectBundleMessageComposerSerializer(
+                    MessageComposer.SlideObjectBundleMessageComposer
+                )
+            },
+            {
+                typeof(SpecialRoomEffectMessageComposer),
+                new SpecialRoomEffectMessageComposerSerializer(
+                    MessageComposer.SpecialRoomEffectMessageComposer
+                )
+            },
+            {
+                typeof(UserChangeMessageComposer),
+                new UserChangeMessageComposerSerializer(MessageComposer.UserChangeMessageComposer)
+            },
+            {
+                typeof(UserRemoveMessageComposer),
+                new UserRemoveMessageComposerSerializer(MessageComposer.UserRemoveMessageComposer)
+            },
+            {
+                typeof(UsersMessageComposer),
+                new UsersMessageComposerSerializer(MessageComposer.UsersMessageComposer)
+            },
+            {
+                typeof(UserUpdateMessageComposer),
+                new UserUpdateMessageComposerSerializer(MessageComposer.UserUpdateMessageComposer)
+            },
+            {
+                typeof(WiredMovementsMessageComposer),
+                new WiredMovementsMessageComposerSerializer(
+                    MessageComposer.WiredMovementsMessageComposer
+                )
+            },
+            #endregion
+
+            #region Room Furniture
+            {
+                typeof(AreaHideMessageComposer),
+                new AreaHideMessageComposerSerializer(MessageComposer.AreaHideMessageComposer)
+            },
+            {
+                typeof(CustomStackingHeightUpdateMessageComposer),
+                new CustomStackingHeightUpdateMessageComposerSerializer(
+                    MessageComposer.CustomStackingHeightUpdateMessageComposer
+                )
+            },
+            {
+                typeof(CustomUserNotificationMessageComposer),
+                new CustomUserNotificationMessageComposerSerializer(
+                    MessageComposer.CustomUserNotificationMessageComposer
+                )
+            },
+            {
+                typeof(DiceValueMessageComposer),
+                new DiceValueMessageComposerSerializer(MessageComposer.DiceValueMessageComposer)
+            },
+            {
+                typeof(FurniRentOrBuyoutOfferMessageComposer),
+                new FurniRentOrBuyoutOfferMessageComposerSerializer(
+                    MessageComposer.FurniRentOrBuyoutOfferMessageComposer
+                )
+            },
+            {
+                typeof(GuildFurniContextMenuInfoMessageComposer),
+                new GuildFurniContextMenuInfoMessageComposerSerializer(
+                    MessageComposer.GuildFurniContextMenuInfoMessageComposer
+                )
+            },
+            {
+                typeof(OneWayDoorStatusMessageComposer),
+                new OneWayDoorStatusMessageComposerSerializer(
+                    MessageComposer.OneWayDoorStatusMessageComposer
+                )
+            },
+            {
+                typeof(OpenPetPackageRequestedMessageComposer),
+                new OpenPetPackageRequestedMessageComposerSerializer(
+                    MessageComposer.OpenPetPackageRequestedMessageComposer
+                )
+            },
+            {
+                typeof(OpenPetPackageResultMessageComposer),
+                new OpenPetPackageResultMessageComposerSerializer(
+                    MessageComposer.OpenPetPackageResultMessageComposer
+                )
+            },
+            {
+                typeof(PresentOpenedMessageComposer),
+                new PresentOpenedMessageComposerSerializer(
+                    MessageComposer.PresentOpenedMessageComposer
+                )
+            },
+            {
+                typeof(RentableSpaceRentFailedMessageComposer),
+                new RentableSpaceRentFailedMessageComposerSerializer(
+                    MessageComposer.RentableSpaceRentFailedMessageComposer
+                )
+            },
+            {
+                typeof(RentableSpaceRentOkMessageComposer),
+                new RentableSpaceRentOkMessageComposerSerializer(
+                    MessageComposer.RentableSpaceRentOkMessageComposer
+                )
+            },
+            {
+                typeof(RentableSpaceStatusMessageComposer),
+                new RentableSpaceStatusMessageComposerSerializer(
+                    MessageComposer.RentableSpaceStatusMessageComposer
+                )
+            },
+            {
+                typeof(RequestSpamWallPostItMessageComposer),
+                new RequestSpamWallPostItMessageComposerSerializer(
+                    MessageComposer.RequestSpamWallPostItMessageComposer
+                )
+            },
+            {
+                typeof(RoomDimmerPresetsMessageComposer),
+                new RoomDimmerPresetsMessageComposerSerializer(
+                    MessageComposer.RoomDimmerPresetsMessageComposer
+                )
+            },
+            {
+                typeof(RoomMessageNotificationMessageComposer),
+                new RoomMessageNotificationMessageComposerSerializer(
+                    MessageComposer.RoomMessageNotificationMessageComposer
+                )
+            },
+            {
+                typeof(YoutubeControlVideoMessageComposer),
+                new YoutubeControlVideoMessageComposerSerializer(
+                    MessageComposer.YoutubeControlVideoMessageComposer
+                )
+            },
+            {
+                typeof(YoutubeDisplayPlaylistsMessageComposer),
+                new YoutubeDisplayPlaylistsMessageComposerSerializer(
+                    MessageComposer.YoutubeDisplayPlaylistsMessageComposer
+                )
+            },
+            {
+                typeof(YoutubeDisplayVideoMessageComposer),
+                new YoutubeDisplayVideoMessageComposerSerializer(
+                    MessageComposer.YoutubeDisplayVideoMessageComposer
+                )
+            },
+            #endregion
+
             #region Room Layout
             {
                 typeof(RoomEntryTileMessageComposer),
                 new RoomEntryTileMessageComposerSerializer(
                     MessageComposer.RoomEntryTileMessageComposer
+                )
+            },
+            {
+                typeof(RoomOccupiedTilesMessageComposer),
+                new RoomOccupiedTilesMessageComposerSerializer(
+                    MessageComposer.RoomOccupiedTilesMessageComposer
+                )
+            },
+            #endregion
+
+            #region Room Permissions
+            {
+                typeof(YouAreControllerMessageComposer),
+                new YouAreControllerMessageComposerSerializer(
+                    MessageComposer.YouAreControllerMessageComposer
+                )
+            },
+            {
+                typeof(YouAreNotControllerMessageComposer),
+                new YouAreNotControllerMessageComposerSerializer(
+                    MessageComposer.YouAreNotControllerMessageComposer
+                )
+            },
+            {
+                typeof(YouAreOwnerMessageComposer),
+                new YouAreOwnerMessageComposerSerializer(MessageComposer.YouAreOwnerMessageComposer)
+            },
+            #endregion
+
+            #region Room Pets
+            {
+                typeof(PetBreedingResultEventMessageComposer),
+                new PetBreedingResultEventMessageComposerSerializer(
+                    MessageComposer.PetBreedingResultComposer
+                )
+            },
+            {
+                typeof(PetCommandsMessageComposer),
+                new PetCommandsMessageComposerSerializer(MessageComposer.PetCommandsMessageComposer)
+            },
+            {
+                typeof(PetExperienceMessageComposer),
+                new PetExperienceMessageComposerSerializer(MessageComposer.PetExperienceComposer)
+            },
+            {
+                typeof(PetFigureUpdateMessageComposer),
+                new PetFigureUpdateMessageComposerSerializer(
+                    MessageComposer.PetFigureUpdateComposer
+                )
+            },
+            {
+                typeof(PetInfoMessageComposer),
+                new PetInfoMessageComposerSerializer(MessageComposer.PetInfoMessageComposer)
+            },
+            {
+                typeof(PetLevelUpdateMessageComposer),
+                new PetLevelUpdateMessageComposerSerializer(MessageComposer.PetLevelUpdateComposer)
+            },
+            {
+                typeof(PetPlacingErrorMessageComposer),
+                new PetPlacingErrorMessageComposerSerializer(
+                    MessageComposer.PetPlacingErrorComposer
+                )
+            },
+            {
+                typeof(PetRespectFailedMessageComposer),
+                new PetRespectFailedMessageComposerSerializer(
+                    MessageComposer.PetRespectFailedComposer
+                )
+            },
+            {
+                typeof(PetStatusUpdateMessageComposer),
+                new PetStatusUpdateMessageComposerSerializer(
+                    MessageComposer.PetStatusUpdateComposer
                 )
             },
             #endregion

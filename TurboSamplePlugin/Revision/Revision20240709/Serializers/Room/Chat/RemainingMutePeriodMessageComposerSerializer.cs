@@ -3,12 +3,12 @@ using Turbo.Primitives.Messages.Outgoing.Room.Chat;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Chat;
 
-internal class RemainingMutePeriodEventMessageComposerSerializer(int header)
-    : AbstractSerializer<RemainingMutePeriodEventMessageComposer>(header)
+internal class RemainingMutePeriodMessageComposerSerializer(int header)
+    : AbstractSerializer<RemainingMutePeriodMessageComposer>(header)
 {
     protected override void Serialize(
         IServerPacket packet,
-        RemainingMutePeriodEventMessageComposer message
+        RemainingMutePeriodMessageComposer message
     )
     {
         //
