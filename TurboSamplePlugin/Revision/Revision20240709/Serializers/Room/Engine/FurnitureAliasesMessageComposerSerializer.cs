@@ -8,6 +8,12 @@ internal class FurnitureAliasesMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, FurnitureAliasesMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.Aliases.Count);
+
+        foreach (var (alias, original) in message.Aliases)
+        {
+            packet.WriteString(alias);
+            packet.WriteString(original);
+        }
     }
 }

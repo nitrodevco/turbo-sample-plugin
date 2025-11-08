@@ -37,6 +37,8 @@ using TurboSamplePlugin.Revision.Revision20240709.Parsers.Navigator;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.NewNavigator;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Nft;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Preferences;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Engine;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Session;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.RoomSettings;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Sound;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Tracking;
@@ -292,6 +294,12 @@ public class Revision20240709 : IRevision
                 MessageEvent.SetNewNavigatorWindowPreferencesMessageEvent,
                 new SetNewNavigatorWindowPreferencesParser()
             },
+            #endregion
+
+            #region Room
+            { MessageEvent.GetFurnitureAliasesMessageEvent, new GetFurnitureAliasesParser() },
+            { MessageEvent.GetHeightMapMessageEvent, new GetHeightMapParser() },
+            { MessageEvent.OpenFlatConnectionMessageEvent, new OpenFlatConnectionParser() },
             #endregion
 
             #region RoomSettings
