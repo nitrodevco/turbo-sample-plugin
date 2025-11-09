@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Turbo.Contracts.Abstractions;
 using Turbo.Contracts.Enums.Navigator;
 using Turbo.Contracts.Enums.Navigator.Chat;

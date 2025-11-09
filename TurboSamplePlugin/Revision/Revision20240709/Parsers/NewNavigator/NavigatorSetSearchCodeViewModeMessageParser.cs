@@ -1,4 +1,4 @@
-﻿using Turbo.Contracts.Abstractions;
+using Turbo.Contracts.Abstractions;
 using Turbo.Contracts.Enums.Navigator;
 using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Messages.Incoming.NewNavigator;
