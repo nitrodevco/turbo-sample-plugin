@@ -6,9 +6,9 @@ using TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList.Snapsho
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;
 
 internal class FriendListUpdateMessageSerializer(int header)
-    : AbstractSerializer<FriendListUpdateMessage>(header)
+    : AbstractSerializer<FriendListUpdateMessageComposer>(header)
 {
-    protected override void Serialize(IServerPacket packet, FriendListUpdateMessage message)
+    protected override void Serialize(IServerPacket packet, FriendListUpdateMessageComposer message)
     {
         packet.WriteInteger(message.FriendCategories.Count);
 

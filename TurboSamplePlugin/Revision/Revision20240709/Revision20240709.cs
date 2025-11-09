@@ -24,25 +24,67 @@ using Turbo.Primitives.Messages.Outgoing.Room.Pets;
 using Turbo.Primitives.Messages.Outgoing.Room.Session;
 using Turbo.Primitives.Messages.Outgoing.Tracking;
 using Turbo.Primitives.Messages.Outgoing.Users;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Advertisement;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Avatar;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Camera;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Campaign;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Catalog;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Collectibles;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Competition;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Crafting;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Friendfurni;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.FriendList;
-using TurboSamplePlugin.Revision.Revision20240709.Parsers.GroupForums;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Game.Arena;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Game.Directory;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Game.Ingame;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Game.Lobby;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Game.Score;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Gifts;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Groupforums;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Handshake;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Help;
-using TurboSamplePlugin.Revision.Revision20240709.Parsers.Inventory;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Hotlooks;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Inventory.Achievements;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Inventory.Avatareffect;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Inventory.Badges;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Inventory.Bots;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Inventory.Furni;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Inventory.Pets;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Inventory.Purse;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Inventory.Trading;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Landingview;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Landingview.Votes;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Marketplace;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Moderator;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Mysterybox;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Navigator;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.NewNavigator;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Nft;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Notifications;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Nux;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Poll;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Preferences;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Quest;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Register;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Action;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Avatar;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Bots;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Chat;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Engine;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Furniture;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Layout;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Pets;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Session;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Roomdirectory;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.RoomSettings;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Sound;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Talent;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Tracking;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Userclassification;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Userdefinedroomevents;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Userdefinedroomevents.Wiredmenu;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Users;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Vault;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Advertisement;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Availability;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Avatar;
@@ -76,82 +118,206 @@ public class Revision20240709 : IRevision
     public IDictionary<int, IParser> Parsers { get; } =
         new Dictionary<int, IParser>
         {
+            #region Advertisement
+            { MessageEvent.GetInterstitialMessageEvent, new GetInterstitialMessageParser() },
+            { MessageEvent.InterstitialShownMessageEvent, new InterstitialShownMessageParser() },
+            #endregion
+
+            #region Avatar
+            {
+                MessageEvent.ChangeUserNameInRoomMessageEvent,
+                new ChangeUserNameInRoomMessageParser()
+            },
+            { MessageEvent.ChangeUserNameMessageEvent, new ChangeUserNameMessageParser() },
+            { MessageEvent.CheckUserNameMessageEvent, new CheckUserNameMessageParser() },
+            { MessageEvent.GetWardrobeMessageEvent, new GetWardrobeMessageParser() },
+            { MessageEvent.SaveWardrobeOutfitMessageEvent, new SaveWardrobeOutfitMessageParser() },
+            #endregion
+
+            #region Camera
+            { MessageEvent.PhotoCompetitionMessageEvent, new PhotoCompetitionMessageParser() },
+            { MessageEvent.PublishPhotoMessageEvent, new PublishPhotoMessageParser() },
+            { MessageEvent.PurchasePhotoMessageEvent, new PurchasePhotoMessageParser() },
+            { MessageEvent.RenderRoomMessageEvent, new RenderRoomMessageParser() },
+            {
+                MessageEvent.RequestCameraConfigurationMessageEvent,
+                new RequestCameraConfigurationMessageParser()
+            },
+            #endregion
+
+            #region Campaign
+            {
+                MessageEvent.OpenCampaignCalendarDoorAsStaffEvent,
+                new OpenCampaignCalendarDoorAsStaffMessageParser()
+            },
+            {
+                MessageEvent.OpenCampaignCalendarDoorEvent,
+                new OpenCampaignCalendarDoorMessageParser()
+            },
+            #endregion
+
             #region Catalog
             {
                 MessageEvent.BuildersClubPlaceRoomItemMessageEvent,
-                new BuildersClubPlaceRoomItemParser()
+                new BuildersClubPlaceRoomItemMessageParser()
             },
             {
                 MessageEvent.BuildersClubPlaceWallItemMessageEvent,
-                new BuildersClubPlaceWallItemParser()
+                new BuildersClubPlaceWallItemMessageParser()
             },
             {
                 MessageEvent.BuildersClubQueryFurniCountMessageEvent,
-                new BuildersClubQueryFurniCountParser()
+                new BuildersClubQueryFurniCountMessageParser()
             },
             // charge firework?
-            { MessageEvent.GetBonusRareInfoMessageEvent, new GetBonusRareInfoParser() },
-            { MessageEvent.GetBundleDiscountRulesetEvent, new GetBundleDiscountRulesetParser() },
-            { MessageEvent.GetCatalogIndexEvent, new GetCatalogIndexParser() },
-            { MessageEvent.GetCatalogPageEvent, new GetCatalogPageParser() },
+            { MessageEvent.GetBonusRareInfoMessageEvent, new GetBonusRareInfoMessageParser() },
+            {
+                MessageEvent.GetBundleDiscountRulesetEvent,
+                new GetBundleDiscountRulesetMessageParser()
+            },
+            { MessageEvent.GetCatalogIndexEvent, new GetCatalogIndexMessageParser() },
+            { MessageEvent.GetCatalogPageEvent, new GetCatalogPageMessageParser() },
             {
                 MessageEvent.GetCatalogPageWithEarliestExpiryEvent,
-                new GetCatalogPageWithEarliestExpiryParser()
+                new GetCatalogPageWithEarliestExpiryMessageParser()
             },
-            { MessageEvent.GetClubGiftMessageEvent, new GetClubGiftParser() },
-            { MessageEvent.GetClubOffersMessageEvent, new GetClubOffersParser() },
+            { MessageEvent.GetClubGiftMessageEvent, new GetClubGiftInfoMessageParser() },
+            { MessageEvent.GetClubOffersMessageEvent, new GetClubOffersMessageParser() },
             {
                 MessageEvent.GetGiftWrappingConfigurationEvent,
-                new GetGiftWrappingConfigurationParser()
+                new GetGiftWrappingConfigurationMessageParser()
             },
             {
                 MessageEvent.GetHabboClubExtendOfferMessageEvent,
-                new GetHabboClubExtendOfferParser()
+                new GetHabboClubExtendOfferMessageParser()
             },
-            { MessageEvent.GetIsOfferGiftableEvent, new GetIsOfferGiftableParser() },
+            { MessageEvent.GetIsOfferGiftableEvent, new GetIsOfferGiftableMessageParser() },
             {
                 MessageEvent.GetLimitedOfferAppearingNextEvent,
-                new GetLimitedOfferAppearingNextParser()
+                new GetLimitedOfferAppearingNextMessageParser()
             },
-            { MessageEvent.GetNextTargetedOfferEvent, new GetNextTargetedOfferParser() },
-            { MessageEvent.GetProductOfferEvent, new GetProductOfferParser() },
-            { MessageEvent.GetRoomAdPurchaseInfoEvent, new GetRoomAdPurchaseInfoParser() },
+            { MessageEvent.GetNextTargetedOfferEvent, new GetNextTargetedOfferMessageParser() },
+            { MessageEvent.GetProductOfferEvent, new GetProductOfferMessageParser() },
+            { MessageEvent.GetRoomAdPurchaseInfoEvent, new GetRoomAdPurchaseInfoMessageParser() },
             {
                 MessageEvent.GetSeasonalCalendarDailyEvent,
-                new GetSeasonalCalendarDailyOfferParser()
+                new GetSeasonalCalendarDailyOfferMessageParser()
             },
-            { MessageEvent.GetSellablePetPalettesEvent, new GetSellablePetPalettesParser() },
+            { MessageEvent.GetSellablePetPalettesEvent, new GetSellablePetPalettesMessageParser() },
             {
                 MessageEvent.MarkCatalogNewAdditionsPageOpenedEvent,
-                new MarkCatalogNewAdditionsPageOpenedParser()
+                new MarkCatalogNewAdditionsPageOpenedMessageParser()
             },
             {
                 MessageEvent.PurchaseBasicMembershipExtensionEvent,
-                new PurchaseBasicMembershipExtensionParser()
+                new PurchaseBasicMembershipExtensionMessageParser()
             },
-            { MessageEvent.PurchaseFromCatalogAsGiftEvent, new PurchaseFromCatalogAsGiftParser() },
-            { MessageEvent.PurchaseFromCatalogEvent, new PurchaseFromCatalogParser() },
-            { MessageEvent.PurchaseRoomAdMessageEvent, new PurchaseRoomAdParser() },
-            { MessageEvent.PurchaseTargetedOfferEvent, new PurchaseTargetedOfferParser() },
+            {
+                MessageEvent.PurchaseFromCatalogAsGiftEvent,
+                new PurchaseFromCatalogAsGiftMessageParser()
+            },
+            { MessageEvent.PurchaseFromCatalogEvent, new PurchaseFromCatalogMessageParser() },
+            { MessageEvent.PurchaseRoomAdMessageEvent, new PurchaseRoomAdMessageParser() },
+            { MessageEvent.PurchaseTargetedOfferEvent, new PurchaseTargetedOfferMessageParser() },
             {
                 MessageEvent.PurchaseVipMembershipExtensionEvent,
-                new PurchaseVipMembershipExtensionParser()
+                new PurchaseVipMembershipExtensionMessageParser()
             },
-            { MessageEvent.RedeemVoucherMessageEvent, new RedeemVoucherParser() },
-            { MessageEvent.RoomAdPurchaseInitiatedEvent, new RoomAdPurchaseInitiatedParser() },
-            { MessageEvent.SelectClubGiftEvent, new SelectClubGiftParser() },
-            { MessageEvent.SetTargetedOfferStateEvent, new SetTargetedOfferStateParser() },
-            { MessageEvent.ShopTargetedOfferViewedEvent, new ShopTargetedOfferViewedParser() },
+            { MessageEvent.RedeemVoucherMessageEvent, new RedeemVoucherMessageParser() },
+            {
+                MessageEvent.RoomAdPurchaseInitiatedEvent,
+                new RoomAdPurchaseInitiatedMessageParser()
+            },
+            { MessageEvent.SelectClubGiftEvent, new SelectClubGiftMessageParser() },
+            { MessageEvent.SetTargetedOfferStateEvent, new SetTargetedOfferStateMessageParser() },
+            {
+                MessageEvent.ShopTargetedOfferViewedEvent,
+                new ShopTargetedOfferViewedMessageParser()
+            },
             #endregion
 
             #region Collectibles
+            {
+                MessageEvent.GetCollectibleMintableItemTypesMessageEvent,
+                new GetCollectibleMintableItemTypesMessageParser()
+            },
+            {
+                MessageEvent.GetCollectibleMintingEnabledMessageEvent,
+                new GetCollectibleMintingEnabledMessageParser()
+            },
+            {
+                MessageEvent.GetCollectibleMintTokensMessageEvent,
+                new GetCollectibleMintTokensMessageParser()
+            },
+            {
+                MessageEvent.GetCollectibleWalletAddressesMessageEvent,
+                new GetCollectibleWalletAddressesMessageParser()
+            },
+            { MessageEvent.GetCollectorScoreMessageEvent, new GetCollectorScoreMessageParser() },
+            { MessageEvent.GetMintTokenOffersMessageEvent, new GetMintTokenOffersMessageParser() },
+            { MessageEvent.GetNftCollectionsMessageEvent, new GetNftCollectionsMessageParser() },
             { MessageEvent.GetNftTransferFeeMessageEvent, new GetNftTransferFeeMessageParser() },
+            { MessageEvent.MintItemMessageEvent, new MintItemMessageParser() },
+            {
+                MessageEvent.NftCollectiblesClaimBonusItemMessageEvent,
+                new NftCollectiblesClaimBonusItemMessageParser()
+            },
+            {
+                MessageEvent.NftCollectiblesClaimRewardItemMessageEvent,
+                new NftCollectiblesClaimRewardItemMessageParser()
+            },
+            { MessageEvent.NftTransferAssetsMessageEvent, new NftTransferAssetsMessageParser() },
+            { MessageEvent.PurchaseMintTokenMessageEvent, new PurchaseMintTokenMessageParser() },
             #endregion
 
             #region Competition
             {
+                MessageEvent.ForwardToACompetitionRoomMessageEvent,
+                new ForwardToACompetitionRoomMessageParser()
+            },
+            {
+                MessageEvent.ForwardToASubmittableRoomMessageEvent,
+                new ForwardToASubmittableRoomMessageParser()
+            },
+            {
+                MessageEvent.ForwardToRandomCompetitionRoomMessageEvent,
+                new ForwardToRandomCompetitionRoomMessageParser()
+            },
+            {
                 MessageEvent.GetCurrentTimingCodeMessageEvent,
                 new GetCurrentTimingCodeMessageParser()
+            },
+            {
+                MessageEvent.GetIsUserPartOfCompetitionMessageEvent,
+                new GetIsUserPartOfCompetitionMessageParser()
+            },
+            { MessageEvent.GetSecondsUntilMessageEvent, new GetSecondsUntilMessageParser() },
+            {
+                MessageEvent.RoomCompetitionInitMessageEvent,
+                new RoomCompetitionInitMessageParser()
+            },
+            {
+                MessageEvent.SubmitRoomToCompetitionMessageEvent,
+                new SubmitRoomToCompetitionMessageParser()
+            },
+            { MessageEvent.VoteForRoomMessageEvent, new VoteForRoomMessageParser() },
+            #endregion
+
+            #region Crafting
+            { MessageEvent.CraftEvent, new CraftMessageParser() },
+            { MessageEvent.CraftSecretEvent, new CraftSecretMessageParser() },
+            { MessageEvent.GetCraftableProductsEvent, new GetCraftableProductsMessageParser() },
+            { MessageEvent.GetCraftingRecipeEvent, new GetCraftingRecipeMessageParser() },
+            {
+                MessageEvent.GetCraftingRecipesAvailableEvent,
+                new GetCraftingRecipesAvailableMessageParser()
+            },
+            #endregion
+
+            #region Friendfurni
+            {
+                MessageEvent.FriendFurniConfirmLockMessageEvent,
+                new FriendFurniConfirmLockMessageParser()
             },
             #endregion
 
@@ -162,7 +328,7 @@ public class Revision20240709 : IRevision
             { MessageEvent.FollowFriendMessageEvent, new FollowFriendMessageParser() },
             { MessageEvent.FriendListUpdateMessageEvent, new FriendListUpdateMessageParser() },
             { MessageEvent.GetFriendRequestsMessageEvent, new GetFriendRequestsMessageParser() },
-            { MessageEvent.GetMessengerHistoryEvent, new GetMessengerHistoryParser() },
+            { MessageEvent.GetMessengerHistoryEvent, new GetMessengerHistoryMessageParser() },
             { MessageEvent.HabboSearchMessageEvent, new HabboSearchMessageParser() },
             { MessageEvent.MessengerInitMessageEvent, new MessengerInitMessageParser() },
             { MessageEvent.RemoveFriendMessageEvent, new RemoveFriendMessageParser() },
@@ -172,11 +338,127 @@ public class Revision20240709 : IRevision
             { MessageEvent.VisitUserMessageEvent, new VisitUserMessageParser() },
             #endregion
 
+            #region Game
+            {
+                MessageEvent.Game2CheckGameDirectoryStatusMessageEvent,
+                new Game2CheckGameDirectoryStatusMessageParser()
+            },
+            { MessageEvent.Game2ExitGameMessageEvent, new Game2ExitGameMessageParser() },
+            { MessageEvent.Game2GameChatMessageEvent, new Game2GameChatMessageParser() },
+            {
+                MessageEvent.Game2GetAccountGameStatusMessageEvent,
+                new Game2GetAccountGameStatusMessageParser()
+            },
+            {
+                MessageEvent.Game2GetFriendsLeaderboardEvent,
+                new Game2GetFriendsLeaderboardMessageParser()
+            },
+            {
+                MessageEvent.Game2GetTotalGroupLeaderboardEvent,
+                new Game2GetTotalGroupLeaderboardMessageParser()
+            },
+            {
+                MessageEvent.Game2GetTotalLeaderboardEvent,
+                new Game2GetTotalLeaderboardMessageParser()
+            },
+            {
+                MessageEvent.Game2GetWeeklyFriendsLeaderboardEvent,
+                new Game2GetWeeklyFriendsLeaderboardMessageParser()
+            },
+            {
+                MessageEvent.Game2GetWeeklyGroupLeaderboardEvent,
+                new Game2GetWeeklyGroupLeaderboardMessageParser()
+            },
+            {
+                MessageEvent.Game2GetWeeklyLeaderboardEvent,
+                new Game2GetWeeklyLeaderboardMessageParser()
+            },
+            { MessageEvent.Game2LeaveGameMessageEvent, new Game2LeaveGameMessageParser() },
+            {
+                MessageEvent.Game2LoadStageReadyMessageEvent,
+                new Game2LoadStageReadyMessageParser()
+            },
+            { MessageEvent.Game2MakeSnowballMessageEvent, new Game2MakeSnowballMessageParser() },
+            { MessageEvent.Game2PlayAgainMessageEvent, new Game2PlayAgainMessageParser() },
+            { MessageEvent.Game2QuickJoinGameMessageEvent, new Game2QuickJoinGameMessageParser() },
+            {
+                MessageEvent.Game2RequestFullStatusUpdateMessageEvent,
+                new Game2RequestFullStatusUpdateMessageParser()
+            },
+            {
+                MessageEvent.Game2SetUserMoveTargetMessageEvent,
+                new Game2SetUserMoveTargetMessageParser()
+            },
+            { MessageEvent.Game2StartSnowWarMessageEvent, new Game2StartSnowWarMessageParser() },
+            {
+                MessageEvent.Game2ThrowSnowballAtHumanMessageEvent,
+                new Game2ThrowSnowballAtHumanMessageParser()
+            },
+            {
+                MessageEvent.Game2ThrowSnowballAtPositionMessageEvent,
+                new Game2ThrowSnowballAtPositionMessageParser()
+            },
+            /* {
+                MessageEvent.GetFriendsWeeklyCompetitiveLeaderboardMessageEvent,
+                new GetFriendsWeeklyCompetitiveLeaderboardMessageParser()
+            }, */
+            {
+                MessageEvent.GetResolutionAchievementsMessageEvent,
+                new GetResolutionAchievementsMessageParser()
+            },
+            /* {
+                MessageEvent.GetUserGameAchievementsMessageEvent,
+                new GetUserGameAchievementsMessageParser()
+            },
+            {
+                MessageEvent.GetWeeklyCompetitiveLeaderboardMessageEvent,
+                new GetWeeklyCompetitiveLeaderboardMessageParser()
+            },
+            {
+                MessageEvent.GetWeeklyGameRewardMessageEvent,
+                new GetWeeklyGameRewardMessageParser()
+            },
+            {
+                MessageEvent.GetWeeklyGameRewardWinnersMessageEvent,
+                new GetWeeklyGameRewardWinnersMessageParser()
+            }, */
+            #endregion
+
+            #region Gifts
+            {
+                MessageEvent.ResetPhoneNumberStateMessageEvent,
+                new ResetPhoneNumberStateMessageParser()
+            },
+            {
+                MessageEvent.SetPhoneNumberVerificationStatusMessageEvent,
+                new SetPhoneNumberVerificationStatusMessageParser()
+            },
+            { MessageEvent.TryPhoneNumberMessageEvent, new TryPhoneNumberMessageParser() },
+            { MessageEvent.VerifyCodeMessageEvent, new VerifyCodeMessageParser() },
+            #endregion
+
             #region GroupForums
+            { MessageEvent.GetForumsListMessageEvent, new GetForumsListMessageParser() },
+            { MessageEvent.GetForumStatsMessageEvent, new GetForumStatsMessageParser() },
+            { MessageEvent.GetMessagesMessageEvent, new GetMessagesMessageParser() },
+            { MessageEvent.GetThreadMessageEvent, new GetThreadMessageParser() },
+            { MessageEvent.GetThreadsMessageEvent, new GetThreadsMessageParser() },
             {
                 MessageEvent.GetUnreadForumsCountMessageEvent,
                 new GetUnreadForumsCountMessageParser()
             },
+            { MessageEvent.ModerateMessageMessageEvent, new ModerateMessageMessageParser() },
+            { MessageEvent.ModerateThreadMessageEvent, new ModerateThreadMessageParser() },
+            { MessageEvent.PostMessageMessageEvent, new PostMessageMessageParser() },
+            {
+                MessageEvent.UpdateForumReadMarkerMessageEvent,
+                new UpdateForumReadMarkerMessageParser()
+            },
+            {
+                MessageEvent.UpdateForumSettingsMessageEvent,
+                new UpdateForumSettingsMessageParser()
+            },
+            { MessageEvent.UpdateThreadMessageEvent, new UpdateThreadMessageParser() },
             #endregion
 
             #region Handshake
@@ -196,143 +478,806 @@ public class Revision20240709 : IRevision
             #endregion
 
             #region Help
-            { MessageEvent.GetCfhStatusMessageEvent, new GetCfhStatusParser() },
+            {
+                MessageEvent.CallForHelpFromForumMessageMessageEvent,
+                new CallForHelpFromForumMessageMessageParser()
+            },
+            {
+                MessageEvent.CallForHelpFromForumThreadMessageEvent,
+                new CallForHelpFromForumThreadMessageParser()
+            },
+            { MessageEvent.CallForHelpFromIMMessageEvent, new CallForHelpFromIMMessageParser() },
+            {
+                MessageEvent.CallForHelpFromPhotoMessageEvent,
+                new CallForHelpFromPhotoMessageParser()
+            },
+            {
+                MessageEvent.CallForHelpFromSelfieMessageEvent,
+                new CallForHelpFromSelfieMessageParser()
+            },
+            { MessageEvent.CallForHelpMessageEvent, new CallForHelpMessageParser() },
+            {
+                MessageEvent.ChatReviewGuideDecidesOnOfferMessageEvent,
+                new ChatReviewGuideDecidesOnOfferMessageParser()
+            },
+            {
+                MessageEvent.ChatReviewGuideDetachedMessageEvent,
+                new ChatReviewGuideDetachedMessageParser()
+            },
+            {
+                MessageEvent.ChatReviewGuideVoteMessageEvent,
+                new ChatReviewGuideVoteMessageParser()
+            },
+            {
+                MessageEvent.ChatReviewSessionCreateMessageEvent,
+                new ChatReviewSessionCreateMessageParser()
+            },
+            {
+                MessageEvent.DeletePendingCallsForHelpMessageEvent,
+                new DeletePendingCallsForHelpMessageParser()
+            },
+            { MessageEvent.GetCfhStatusMessageEvent, new GetCfhStatusMessageParser() },
+            {
+                MessageEvent.GetGuideReportingStatusMessageEvent,
+                new GetGuideReportingStatusMessageParser()
+            },
+            {
+                MessageEvent.GetPendingCallsForHelpMessageEvent,
+                new GetPendingCallsForHelpMessageParser()
+            },
+            { MessageEvent.GetQuizQuestionsEvent, new GetQuizQuestionsMessageParser() },
+            { MessageEvent.GuideSessionCreateMessageEvent, new GuideSessionCreateMessageParser() },
+            {
+                MessageEvent.GuideSessionFeedbackMessageEvent,
+                new GuideSessionFeedbackMessageParser()
+            },
+            {
+                MessageEvent.GuideSessionGetRequesterRoomMessageEvent,
+                new GuideSessionGetRequesterRoomMessageParser()
+            },
+            {
+                MessageEvent.GuideSessionGuideDecidesMessageEvent,
+                new GuideSessionGuideDecidesMessageParser()
+            },
+            {
+                MessageEvent.GuideSessionInviteRequesterMessageEvent,
+                new GuideSessionInviteRequesterMessageParser()
+            },
+            {
+                MessageEvent.GuideSessionIsTypingMessageEvent,
+                new GuideSessionIsTypingMessageParser()
+            },
+            {
+                MessageEvent.GuideSessionMessageMessageEvent,
+                new GuideSessionMessageMessageParser()
+            },
+            {
+                MessageEvent.GuideSessionOnDutyUpdateMessageEvent,
+                new GuideSessionOnDutyUpdateMessageParser()
+            },
+            { MessageEvent.GuideSessionReportMessageEvent, new GuideSessionReportMessageParser() },
+            {
+                MessageEvent.GuideSessionRequesterCancelsMessageEvent,
+                new GuideSessionRequesterCancelsMessageParser()
+            },
+            {
+                MessageEvent.GuideSessionResolvedMessageEvent,
+                new GuideSessionResolvedMessageParser()
+            },
+            { MessageEvent.PostQuizAnswersEvent, new PostQuizAnswersMessageParser() },
+            #endregion
+
+            #region Hotlooks
+            { MessageEvent.GetHotLooksMessageEvent, new GetHotLooksMessageParser() },
             #endregion
 
             #region Inventory
-            { MessageEvent.GetCreditsInfoEvent, new GetCreditsInfoParser() },
-            #region Badges
+            { MessageEvent.AcceptTradingEvent, new AcceptTradingMessageParser() },
+            { MessageEvent.AddItemsToTradeEvent, new AddItemsToTradeMessageParser() },
+            { MessageEvent.AddItemToTradeEvent, new AddItemToTradeMessageParser() },
+            { MessageEvent.AvatarEffectActivatedEvent, new AvatarEffectActivatedMessageParser() },
+            { MessageEvent.AvatarEffectSelectedEvent, new AvatarEffectSelectedMessageParser() },
+            { MessageEvent.CancelPetBreedingEvent, new CancelPetBreedingMessageParser() },
+            { MessageEvent.CloseTradingEvent, new CloseTradingMessageParser() },
+            { MessageEvent.ConfirmAcceptTradingEvent, new ConfirmAcceptTradingMessageParser() },
+            { MessageEvent.ConfirmDeclineTradingEvent, new ConfirmDeclineTradingMessageParser() },
+            { MessageEvent.ConfirmPetBreedingEvent, new ConfirmPetBreedingMessageParser() },
+            { MessageEvent.GetAchievementsEvent, new GetAchievementsMessageParser() },
             { MessageEvent.GetBadgePointLimitsEvent, new GetBadgePointLimitsMessageParser() },
             { MessageEvent.GetBadgesEvent, new GetBadgesMessageParser() },
+            { MessageEvent.GetBotInventoryEvent, new GetBotInventoryMessageParser() },
+            { MessageEvent.GetCreditsInfoEvent, new GetCreditsInfoMessageParser() },
+            {
+                MessageEvent.GetIsBadgeRequestFulfilledEvent,
+                new GetIsBadgeRequestFulfilledMessageParser()
+            },
+            { MessageEvent.GetPetInventoryEvent, new GetPetInventoryMessageParser() },
+            { MessageEvent.OpenTradingEvent, new OpenTradingMessageParser() },
+            { MessageEvent.RemoveItemFromTradeEvent, new RemoveItemFromTradeMessageParser() },
+            { MessageEvent.RequestABadgeEvent, new RequestABadgeMessageParser() },
+            { MessageEvent.RequestFurniInventoryEvent, new RequestFurniInventoryMessageParser() },
+            {
+                MessageEvent.RequestFurniInventoryWhenNotInRoomEvent,
+                new RequestFurniInventoryWhenNotInRoomMessageParser()
+            },
+            { MessageEvent.RequestRoomPropertySet, new RequestRoomPropertySetMessageParser() },
+            { MessageEvent.SetActivatedBadgesEvent, new SetActivatedBadgesMessageParser() },
+            { MessageEvent.SilverFeeMessageEvent, new SilverFeeMessageParser() },
+            { MessageEvent.UnacceptTradingEvent, new UnacceptTradingMessageParser() },
             #endregion
 
+            #region Landingview
+            { MessageEvent.CommunityGoalVoteMessageEvent, new CommunityGoalVoteMessageParser() },
+            { MessageEvent.GetPromoArticlesMessageEvent, new GetPromoArticlesMessageParser() },
+            #endregion
+
+            #region Marketplace
+            {
+                MessageEvent.BuyMarketplaceOfferMessageEvent,
+                new BuyMarketplaceOfferMessageParser()
+            },
+            {
+                MessageEvent.BuyMarketplaceTokensMessageEvent,
+                new BuyMarketplaceTokensMessageParser()
+            },
+            {
+                MessageEvent.CancelMarketplaceOfferMessageEvent,
+                new CancelMarketplaceOfferMessageParser()
+            },
+            {
+                MessageEvent.GetMarketplaceCanMakeOfferMessageEvent,
+                new GetMarketplaceCanMakeOfferMessageParser()
+            },
+            {
+                MessageEvent.GetMarketplaceConfigurationMessageEvent,
+                new GetMarketplaceConfigurationMessageParser()
+            },
+            {
+                MessageEvent.GetMarketplaceItemStatsEvent,
+                new GetMarketplaceItemStatsMessageParser()
+            },
+            {
+                MessageEvent.GetMarketplaceOffersMessageEvent,
+                new GetMarketplaceOffersMessageParser()
+            },
+            {
+                MessageEvent.GetMarketplaceOwnOffersMessageEvent,
+                new GetMarketplaceOwnOffersMessageParser()
+            },
+            { MessageEvent.MakeOfferMessageEvent, new MakeOfferMessageParser() },
+            {
+                MessageEvent.RedeemMarketplaceOfferCreditsMessageEvent,
+                new RedeemMarketplaceOfferCreditsMessageParser()
+            },
+            #endregion
+
+            #region Moderator
+            {
+                MessageEvent.CloseIssueDefaultActionMessageEvent,
+                new CloseIssueDefaultActionMessageParser()
+            },
+            { MessageEvent.CloseIssuesMessageEvent, new CloseIssuesMessageParser() },
+            { MessageEvent.DefaultSanctionMessageEvent, new DefaultSanctionMessageParser() },
+            { MessageEvent.GetCfhChatlogMessageEvent, new GetCfhChatlogMessageParser() },
+            {
+                MessageEvent.GetModeratorRoomInfoMessageEvent,
+                new GetModeratorRoomInfoMessageParser()
+            },
+            {
+                MessageEvent.GetModeratorUserInfoMessageEvent,
+                new GetModeratorUserInfoMessageParser()
+            },
+            { MessageEvent.GetRoomChatlogMessageEvent, new GetRoomChatlogMessageParser() },
+            { MessageEvent.GetRoomVisitsMessageEvent, new GetRoomVisitsMessageParser() },
+            { MessageEvent.GetUserChatlogMessageEvent, new GetUserChatlogMessageParser() },
+            { MessageEvent.ModAlertMessageEvent, new ModAlertMessageParser() },
+            { MessageEvent.ModBanMessageEvent, new ModBanMessageParser() },
+            { MessageEvent.ModerateRoomMessageEvent, new ModerateRoomMessageParser() },
+            { MessageEvent.ModeratorActionMessageEvent, new ModeratorActionMessageParser() },
+            { MessageEvent.ModKickMessageEvent, new ModKickMessageParser() },
+            { MessageEvent.ModMessageMessageEvent, new ModMessageMessageParser() },
+            { MessageEvent.ModMuteMessageEvent, new ModMuteMessageParser() },
+            { MessageEvent.ModToolPreferencesEvent, new ModToolPreferencesMessageParser() },
+            { MessageEvent.ModToolSanctionEvent, new ModToolSanctionMessageParser() },
+            { MessageEvent.ModTradingLockMessageEvent, new ModTradingLockMessageParser() },
+            { MessageEvent.PickIssuesMessageEvent, new PickIssuesMessageParser() },
+            { MessageEvent.ReleaseIssuesMessageEvent, new ReleaseIssuesMessageParser() },
+            #endregion
+
+            #region Mysterybox
+            {
+                MessageEvent.MysteryBoxWaitingCanceledMessageEvent,
+                new MysteryBoxWaitingCanceledMessageParser()
+            },
             #endregion
 
             #region Navigator
-            { MessageEvent.AddFavouriteRoomMessageEvent, new AddFavouriteRoomParser() },
-            { MessageEvent.CancelEventMessageEvent, new CancelEventParser() },
-            { MessageEvent.CanCreateRoomMessageEvent, new CanCreateRoomParser() },
-            { MessageEvent.CompetitionRoomsSearchMessageEvent, new CompetitionRoomsSearchParser() },
-            { MessageEvent.ConvertGlobalRoomIdMessageEvent, new ConvertGlobalRoomIdParser() },
-            { MessageEvent.CreateFlatMessageEvent, new CreateFlatParser() },
-            { MessageEvent.DeleteFavouriteRoomMessageEvent, new DeleteFavouriteRoomParser() },
-            { MessageEvent.EditEventMessageEvent, new EditEventParser() },
+            { MessageEvent.AddFavouriteRoomMessageEvent, new AddFavouriteRoomMessageParser() },
+            { MessageEvent.CancelEventMessageEvent, new CancelEventMessageParser() },
+            { MessageEvent.CanCreateRoomMessageEvent, new CanCreateRoomMessageParser() },
+            {
+                MessageEvent.CompetitionRoomsSearchMessageEvent,
+                new CompetitionRoomsSearchMessageParser()
+            },
+            {
+                MessageEvent.ConvertGlobalRoomIdMessageEvent,
+                new ConvertGlobalRoomIdMessageParser()
+            },
+            { MessageEvent.CreateFlatMessageEvent, new CreateFlatMessageParser() },
+            {
+                MessageEvent.DeleteFavouriteRoomMessageEvent,
+                new DeleteFavouriteRoomMessageParser()
+            },
+            { MessageEvent.EditEventMessageEvent, new EditEventMessageParser() },
             {
                 MessageEvent.ForwardToARandomPromotedRoomMessageEvent,
-                new ForwardToARandomPromotedRoomParser()
+                new ForwardToARandomPromotedRoomMessageParser()
             },
-            { MessageEvent.ForwardToSomeRoomMessageEvent, new ForwardToSomeRoomParser() },
-            { MessageEvent.GetGuestRoomMessageEvent, new GetGuestRoomParser() },
-            { MessageEvent.GetOfficialRoomsMessageEvent, new GetOfficialRoomsParser() },
-            { MessageEvent.GetPopularRoomTagsMessageEvent, new GetPopularRoomTagsParser() },
-            { MessageEvent.GetUserEventCatsMessageEvent, new GetUserEventCatsParser() },
-            { MessageEvent.GetUserFlatCatsMessageEvent, new GetUserFlatCatsParser() },
-            { MessageEvent.GuildBaseSearchMessageEvent, new GuildBaseSearchParser() },
-            { MessageEvent.MyFavouriteRoomsSearchMessageEvent, new MyFavouriteRoomsSearchParser() },
+            { MessageEvent.ForwardToSomeRoomMessageEvent, new ForwardToSomeRoomMessageParser() },
+            { MessageEvent.GetGuestRoomMessageEvent, new GetGuestRoomMessageParser() },
+            { MessageEvent.GetOfficialRoomsMessageEvent, new GetOfficialRoomsMessageParser() },
+            { MessageEvent.GetPopularRoomTagsMessageEvent, new GetPopularRoomTagsMessageParser() },
+            { MessageEvent.GetUserEventCatsMessageEvent, new GetUserEventCatsMessageParser() },
+            { MessageEvent.GetUserFlatCatsMessageEvent, new GetUserFlatCatsMessageParser() },
+            { MessageEvent.GuildBaseSearchMessageEvent, new GuildBaseSearchMessageParser() },
+            {
+                MessageEvent.MyFavouriteRoomsSearchMessageEvent,
+                new MyFavouriteRoomsSearchMessageParser()
+            },
             {
                 MessageEvent.MyFrequentRoomHistorySearchMessageEvent,
-                new MyFrequentRoomHistorySearchParser()
+                new MyFrequentRoomHistorySearchMessageParser()
             },
-            { MessageEvent.MyFriendsRoomsSearchMessageEvent, new MyFriendsRoomsSearchParser() },
-            { MessageEvent.MyGuildBasesSearchMessageEvent, new MyGuildBasesSearchParser() },
-            { MessageEvent.MyRecommendedRoomsMessageEvent, new MyRecommendedRoomsParser() },
-            { MessageEvent.MyRoomHistorySearchMessageEvent, new MyRoomHistorySearchParser() },
-            { MessageEvent.MyRoomRightsSearchMessageEvent, new MyRoomRightsSearchParser() },
-            { MessageEvent.MyRoomsSearchMessageEvent, new MyRoomsSearchParser() },
-            { MessageEvent.PopularRoomsSearchMessageEvent, new PopularRoomsSearchParser() },
-            { MessageEvent.RateFlatMessageEvent, new RateFlatParser() },
+            {
+                MessageEvent.MyFriendsRoomsSearchMessageEvent,
+                new MyFriendsRoomsSearchMessageParser()
+            },
+            { MessageEvent.MyGuildBasesSearchMessageEvent, new MyGuildBasesSearchMessageParser() },
+            { MessageEvent.MyRecommendedRoomsMessageEvent, new MyRecommendedRoomsMessageParser() },
+            {
+                MessageEvent.MyRoomHistorySearchMessageEvent,
+                new MyRoomHistorySearchMessageParser()
+            },
+            { MessageEvent.MyRoomRightsSearchMessageEvent, new MyRoomRightsSearchMessageParser() },
+            { MessageEvent.MyRoomsSearchMessageEvent, new MyRoomsSearchMessageParser() },
+            { MessageEvent.PopularRoomsSearchMessageEvent, new PopularRoomsSearchMessageParser() },
+            { MessageEvent.RateFlatMessageEvent, new RateFlatMessageParser() },
             {
                 MessageEvent.RemoveOwnRoomRightsRoomMessageEvent,
-                new RemoveOwnRoomRightsRoomParser()
+                new RemoveOwnRoomRightsRoomMessageParser()
             },
-            { MessageEvent.RoomAdEventTabAdClickedEvent, new RoomAdEventTabAdClickedParser() },
-            { MessageEvent.RoomAdEventTabViewedEvent, new RoomAdEventTabViewedParser() },
-            { MessageEvent.RoomAdSearchMessageEvent, new RoomAdSearchParser() },
+            {
+                MessageEvent.RoomAdEventTabAdClickedEvent,
+                new RoomAdEventTabAdClickedMessageParser()
+            },
+            { MessageEvent.RoomAdEventTabViewedEvent, new RoomAdEventTabViewedMessageParser() },
+            { MessageEvent.RoomAdSearchMessageEvent, new RoomAdSearchMessageParser() },
             {
                 MessageEvent.RoomsWhereMyFriendsAreSearchMessageEvent,
-                new RoomsWhereMyFriendsAreSearchParser()
+                new RoomsWhereMyFriendsAreSearchMessageParser()
             },
             {
                 MessageEvent.RoomsWithHighestScoreSearchMessageEvent,
-                new RoomsWithHighestScoreSearchParser()
+                new RoomsWithHighestScoreSearchMessageParser()
             },
-            { MessageEvent.RoomTextSearchMessageEvent, new RoomTextSearchParser() },
-            { MessageEvent.SetRoomSessionTagsMessageEvent, new SetRoomSessionTagsParser() },
-            { MessageEvent.ToggleStaffPickMessageEvent, new ToggleStaffPickParser() },
-            { MessageEvent.UpdateHomeRoomMessageEvent, new UpdateHomeRoomParser() },
+            { MessageEvent.RoomTextSearchMessageEvent, new RoomTextSearchMessageParser() },
+            { MessageEvent.SetRoomSessionTagsMessageEvent, new SetRoomSessionTagsMessageParser() },
+            { MessageEvent.ToggleStaffPickMessageEvent, new ToggleStaffPickMessageParser() },
+            { MessageEvent.UpdateHomeRoomMessageEvent, new UpdateHomeRoomMessageParser() },
             #endregion
 
             #region NewNavigator
             {
                 MessageEvent.NavigatorAddCollapsedCategoryMessageEvent,
-                new NavigatorAddCollapsedCategoryParser()
+                new NavigatorAddCollapsedCategoryMessageParser()
             },
-            { MessageEvent.NavigatorAddSavedSearchEvent, new NavigatorAddSavedSearchParser() },
+            {
+                MessageEvent.NavigatorAddSavedSearchEvent,
+                new NavigatorAddSavedSearchMessageParser()
+            },
             {
                 MessageEvent.NavigatorDeleteSavedSearchEvent,
-                new NavigatorDeleteSavedSearchParser()
+                new NavigatorDeleteSavedSearchMessageParser()
             },
             {
                 MessageEvent.NavigatorRemoveCollapsedCategoryMessageEvent,
-                new NavigatorRemoveCollapsedCategoryParser()
+                new NavigatorRemoveCollapsedCategoryMessageParser()
             },
             {
                 MessageEvent.NavigatorSetSearchCodeViewModeMessageEvent,
-                new NavigatorSetSearchCodeViewModeParser()
+                new NavigatorSetSearchCodeViewModeMessageParser()
             },
-            { MessageEvent.NewNavigatorInitEvent, new NewNavigatorInitParser() },
-            { MessageEvent.NewNavigatorSearchEvent, new NewNavigatorSearchParser() },
+            { MessageEvent.NewNavigatorInitEvent, new NewNavigatorInitMessageParser() },
+            { MessageEvent.NewNavigatorSearchEvent, new NewNavigatorSearchMessageParser() },
             #endregion
 
             #region Nft
             { MessageEvent.GetNftCreditsMessageEvent, new GetNftCreditsMessageParser() },
+            {
+                MessageEvent.GetSelectedNftWardrobeOutfitMessageEvent,
+                new GetSelectedNftWardrobeOutfitMessageParser()
+            },
             { MessageEvent.GetSilverMessageEvent, new GetSilverMessageParser() },
+            { MessageEvent.GetUserNftWardrobeMessageEvent, new GetUserNftWardrobeMessageParser() },
+            {
+                MessageEvent.SaveUserNftWardrobeMessageEvent,
+                new SaveUserNftWardrobeMessageParser()
+            },
+            #endregion
+
+            #region Notifications
+            { MessageEvent.ResetUnseenItemIdsEvent, new ResetUnseenItemIdsMessageParser() },
+            { MessageEvent.ResetUnseenItemsEvent, new ResetUnseenItemsMessageParser() },
+            #endregion
+
+            #region Nux
+            {
+                MessageEvent.NewUserExperienceGetGiftsMessageEvent,
+                new NewUserExperienceGetGiftsMessageParser()
+            },
+            {
+                MessageEvent.NewUserExperienceScriptProceedEvent,
+                new NewUserExperienceScriptProceedMessageParser()
+            },
+            { MessageEvent.SelectInitialRoomEvent, new SelectInitialRoomMessageParser() },
+            #endregion
+
+            #region Poll
+            { MessageEvent.PollAnswerEvent, new PollAnswerMessageParser() },
+            { MessageEvent.PollRejectEvent, new PollRejectMessageParser() },
+            { MessageEvent.PollStartEvent, new PollStartMessageParser() },
             #endregion
 
             #region Preferences
+            { MessageEvent.SetChatPreferencesMessageEvent, new SetChatPreferencesMessageParser() },
+            { MessageEvent.SetChatStylePreferenceEvent, new SetChatStylePreferenceMessageParser() },
+            {
+                MessageEvent.SetIgnoreRoomInvitesMessageEvent,
+                new SetIgnoreRoomInvitesMessageParser()
+            },
             {
                 MessageEvent.SetNewNavigatorWindowPreferencesMessageEvent,
-                new SetNewNavigatorWindowPreferencesParser()
+                new SetNewNavigatorWindowPreferencesMessageParser()
             },
+            {
+                MessageEvent.SetRoomCameraPreferencesMessageEvent,
+                new SetRoomCameraPreferencesMessageParser()
+            },
+            { MessageEvent.SetSoundSettingsEvent, new SetSoundSettingsMessageParser() },
+            { MessageEvent.SetUIFlagsMessageEvent, new SetUIFlagsMessageParser() },
+            #endregion
+
+            #region Quest
+            { MessageEvent.AcceptQuestMessageEvent, new AcceptQuestMessageParser() },
+            { MessageEvent.ActivateQuestMessageEvent, new ActivateQuestMessageParser() },
+            { MessageEvent.CancelQuestMessageEvent, new CancelQuestMessageParser() },
+            {
+                MessageEvent.FriendRequestQuestCompleteMessageEvent,
+                new FriendRequestQuestCompleteMessageParser()
+            },
+            {
+                MessageEvent.GetCommunityGoalHallOfFameMessageEvent,
+                new GetCommunityGoalHallOfFameMessageParser()
+            },
+            {
+                MessageEvent.GetCommunityGoalProgressMessageEvent,
+                new GetCommunityGoalProgressMessageParser()
+            },
+            {
+                MessageEvent.GetConcurrentUsersGoalProgressMessageEvent,
+                new GetConcurrentUsersGoalProgressMessageParser()
+            },
+            {
+                MessageEvent.GetConcurrentUsersRewardMessageEvent,
+                new GetConcurrentUsersRewardMessageParser()
+            },
+            { MessageEvent.GetDailyQuestMessageEvent, new GetDailyQuestMessageParser() },
+            { MessageEvent.GetQuestsMessageEvent, new GetQuestsMessageParser() },
+            {
+                MessageEvent.GetSeasonalQuestsOnlyMessageEvent,
+                new GetSeasonalQuestsOnlyMessageParser()
+            },
+            { MessageEvent.OpenQuestTrackerMessageEvent, new OpenQuestTrackerMessageParser() },
+            { MessageEvent.RejectQuestMessageEvent, new RejectQuestMessageParser() },
+            { MessageEvent.StartCampaignMessageEvent, new StartCampaignMessageParser() },
+            #endregion
+
+            #region Register
+            { MessageEvent.UpdateFigureDataMessageEvent, new UpdateFigureDataMessageParser() },
             #endregion
 
             #region Room
-            { MessageEvent.GetFurnitureAliasesMessageEvent, new GetFurnitureAliasesParser() },
-            { MessageEvent.GetHeightMapMessageEvent, new GetHeightMapParser() },
-            { MessageEvent.OpenFlatConnectionMessageEvent, new OpenFlatConnectionParser() },
+            { MessageEvent.AddSpamWallPostItMessageEvent, new AddSpamWallPostItMessageParser() },
+            { MessageEvent.AmbassadorAlertMessageEvent, new AmbassadorAlertMessageParser() },
+            { MessageEvent.AssignRightsMessageEvent, new AssignRightsMessageParser() },
+            { MessageEvent.AvatarExpressionMessageEvent, new AvatarExpressionMessageParser() },
+            {
+                MessageEvent.BanUserWithDurationMessageEvent,
+                new BanUserWithDurationMessageParser()
+            },
+            { MessageEvent.BreedPetsMessageEvent, new BreedPetsMessageParser() },
+            { MessageEvent.CancelTypingMessageEvent, new CancelTypingMessageParser() },
+            { MessageEvent.ChangeMottoMessageEvent, new ChangeMottoMessageParser() },
+            { MessageEvent.ChangePostureMessageEvent, new ChangePostureMessageParser() },
+            { MessageEvent.ChangeQueueMessageEvent, new ChangeQueueMessageParser() },
+            { MessageEvent.ChatMessageEvent, new ChatMessageParser() },
+            { MessageEvent.ClickFurniMessageEvent, new ClickFurniMessageParser() },
+            { MessageEvent.CommandBotEvent, new CommandBotMessageParser() },
+            {
+                MessageEvent.ControlYoutubeDisplayPlaybackMessageEvent,
+                new ControlYoutubeDisplayPlaybackMessageParser()
+            },
+            { MessageEvent.CreditFurniRedeemMessageEvent, new CreditFurniRedeemMessageParser() },
+            {
+                MessageEvent.CustomizeAvatarWithFurniMessageEvent,
+                new CustomizeAvatarWithFurniMessageParser()
+            },
+            { MessageEvent.CustomizePetWithFurniEvent, new CustomizePetWithFurniMessageParser() },
+            { MessageEvent.DanceMessageEvent, new DanceMessageParser() },
+            { MessageEvent.DiceOffMessageEvent, new DiceOffMessageParser() },
+            { MessageEvent.DropCarryItemMessageEvent, new DropCarryItemMessageParser() },
+            { MessageEvent.EnterOneWayDoorMessageEvent, new EnterOneWayDoorMessageParser() },
+            {
+                MessageEvent.ExtendRentOrBuyoutFurniMessageEvent,
+                new ExtendRentOrBuyoutFurniMessageParser()
+            },
+            {
+                MessageEvent.ExtendRentOrBuyoutStripItemMessageEvent,
+                new ExtendRentOrBuyoutStripItemMessageParser()
+            },
+            {
+                MessageEvent.GetBotCommandConfigurationDataEvent,
+                new GetBotCommandConfigurationDataMessageParser()
+            },
+            {
+                MessageEvent.GetFurnitureAliasesMessageEvent,
+                new GetFurnitureAliasesMessageParser()
+            },
+            {
+                MessageEvent.GetGuildFurniContextMenuInfoMessageEvent,
+                new GetGuildFurniContextMenuInfoMessageParser()
+            },
+            { MessageEvent.GetHeightMapMessageEvent, new GetHeightMapMessageParser() },
+            { MessageEvent.GetItemDataMessageEvent, new GetItemDataMessageParser() },
+            { MessageEvent.GetOccupiedTilesMessageEvent, new GetOccupiedTilesMessageParser() },
+            { MessageEvent.GetPetCommandsMessageEvent, new GetPetCommandsMessageParser() },
+            { MessageEvent.GetPetInfoMessageEvent, new GetPetInfoMessageParser() },
+            {
+                MessageEvent.GetRentOrBuyoutOfferMessageEvent,
+                new GetRentOrBuyoutOfferMessageParser()
+            },
+            { MessageEvent.GetRoomEntryTileMessageEvent, new GetRoomEntryTileMessageParser() },
+            {
+                MessageEvent.GetYoutubeDisplayStatusMessageEvent,
+                new GetYoutubeDisplayStatusMessageParser()
+            },
+            {
+                MessageEvent.GiveSupplementToPetMessageEvent,
+                new GiveSupplementToPetMessageParser()
+            },
+            { MessageEvent.KickUserMessageEvent, new KickUserMessageParser() },
+            { MessageEvent.LetUserInMessageEvent, new LetUserInMessageParser() },
+            { MessageEvent.LookToMessageEvent, new LookToMessageParser() },
+            { MessageEvent.MountPetMessageEvent, new MountPetMessageParser() },
+            { MessageEvent.MoveAvatarMessageEvent, new MoveAvatarMessageParser() },
+            { MessageEvent.MoveObjectMessageEvent, new MoveObjectMessageParser() },
+            { MessageEvent.MovePetMessageEvent, new MovePetMessageParser() },
+            { MessageEvent.MoveWallItemMessageEvent, new MoveWallItemMessageParser() },
+            { MessageEvent.MuteAllInRoomEvent, new MuteAllInRoomMessageParser() },
+            { MessageEvent.MuteUserMessageEvent, new MuteUserMessageParser() },
+            { MessageEvent.OpenFlatConnectionMessageEvent, new OpenFlatConnectionMessageParser() },
+            { MessageEvent.OpenMysteryTrophyMessageEvent, new OpenMysteryTrophyMessageParser() },
+            { MessageEvent.OpenPetPackageMessageEvent, new OpenPetPackageMessageParser() },
+            { MessageEvent.PassCarryItemMessageEvent, new PassCarryItemMessageParser() },
+            { MessageEvent.PassCarryItemToPetMessageEvent, new PassCarryItemToPetMessageParser() },
+            { MessageEvent.PetSelectedMessageEvent, new PetSelectedMessageParser() },
+            { MessageEvent.PickupObjectMessageEvent, new PickupObjectMessageParser() },
+            { MessageEvent.PlaceBotMessageEvent, new PlaceBotMessageParser() },
+            { MessageEvent.PlaceObjectMessageEvent, new PlaceObjectMessageParser() },
+            { MessageEvent.PlacePetMessageEvent, new PlacePetMessageParser() },
+            { MessageEvent.PlacePostItMessageEvent, new PlacePostItMessageParser() },
+            { MessageEvent.PresentOpenMessageEvent, new PresentOpenMessageParser() },
+            { MessageEvent.QuitMessageEvent, new QuitMessageParser() },
+            { MessageEvent.RemoveAllRightsMessageEvent, new RemoveAllRightsMessageParser() },
+            { MessageEvent.RemoveBotFromFlatMessageEvent, new RemoveBotFromFlatMessageParser() },
+            { MessageEvent.RemoveItemMessageEvent, new RemoveItemMessageParser() },
+            { MessageEvent.RemovePetFromFlatMessageEvent, new RemovePetFromFlatMessageParser() },
+            { MessageEvent.RemoveRightsMessageEvent, new RemoveRightsMessageParser() },
+            {
+                MessageEvent.RemoveSaddleFromPetMessageEvent,
+                new RemoveSaddleFromPetMessageParser()
+            },
+            {
+                MessageEvent.RentableSpaceCancelRentMessageEvent,
+                new RentableSpaceCancelRentMessageParser()
+            },
+            { MessageEvent.RentableSpaceRentMessageEvent, new RentableSpaceRentMessageParser() },
+            {
+                MessageEvent.RentableSpaceStatusMessageEvent,
+                new RentableSpaceStatusMessageParser()
+            },
+            { MessageEvent.RespectPetMessageEvent, new RespectPetMessageParser() },
+            {
+                MessageEvent.RoomDimmerChangeStateMessageEvent,
+                new RoomDimmerChangeStateMessageParser()
+            },
+            {
+                MessageEvent.RoomDimmerGetPresetsMessageEvent,
+                new RoomDimmerGetPresetsMessageParser()
+            },
+            {
+                MessageEvent.RoomDimmerSavePresetMessageEvent,
+                new RoomDimmerSavePresetMessageParser()
+            },
+            { MessageEvent.SetAreaHideDataEvent, new SetAreaHideDataMessageParser() },
+            {
+                MessageEvent.SetClothingChangeDataMessageEvent,
+                new SetClothingChangeDataMessageParser()
+            },
+            {
+                MessageEvent.SetCustomStackingHeightEvent,
+                new SetCustomStackingHeightMessageParser()
+            },
+            { MessageEvent.SetItemDataMessageEvent, new SetItemDataMessageParser() },
+            { MessageEvent.SetMannequinFigureEvent, new SetMannequinFigureMessageParser() },
+            { MessageEvent.SetMannequinNameEvent, new SetMannequinNameMessageParser() },
+            { MessageEvent.SetObjectDataMessageEvent, new SetObjectDataMessageParser() },
+            { MessageEvent.SetRandomStateMessageEvent, new SetRandomStateMessageParser() },
+            {
+                MessageEvent.SetRoomBackgroundColorDataEvent,
+                new SetRoomBackgroundColorDataMessageParser()
+            },
+            {
+                MessageEvent.SetYoutubeDisplayPlaylistMessageEvent,
+                new SetYoutubeDisplayPlaylistMessageParser()
+            },
+            { MessageEvent.ShoutMessageEvent, new ShoutMessageParser() },
+            { MessageEvent.SignMessageEvent, new SignMessageParser() },
+            { MessageEvent.SpinWheelOfFortuneMessageEvent, new SpinWheelOfFortuneMessageParser() },
+            { MessageEvent.StartTypingMessageEvent, new StartTypingMessageParser() },
+            { MessageEvent.ThrowDiceMessageEvent, new ThrowDiceMessageParser() },
+            {
+                MessageEvent.TogglePetBreedingPermissionMessageEvent,
+                new TogglePetBreedingPermissionMessageParser()
+            },
+            {
+                MessageEvent.TogglePetRidingPermissionMessageEvent,
+                new TogglePetRidingPermissionMessageParser()
+            },
+            { MessageEvent.UnbanUserFromRoomMessageEvent, new UnbanUserFromRoomMessageParser() },
+            { MessageEvent.UnmuteUserMessageEvent, new UnmuteUserMessageParser() },
+            {
+                MessageEvent.UpdateFloorPropertiesMessageEvent,
+                new UpdateFloorPropertiesMessageParser()
+            },
+            { MessageEvent.UseFurnitureMessageEvent, new UseFurnitureMessageParser() },
+            { MessageEvent.UseWallItemMessageEvent, new UseWallItemMessageParser() },
+            { MessageEvent.WhisperMessageEvent, new WhisperMessageParser() },
+            #endregion
+
+            #region Roomdirectory
+            {
+                MessageEvent.RoomNetworkOpenConnectionMessageEvent,
+                new RoomNetworkOpenConnectionMessageParser()
+            },
             #endregion
 
             #region RoomSettings
-            { MessageEvent.DeleteRoomMessageEvent, new DeleteRoomParser() },
-            { MessageEvent.GetBannedUsersFromRoomMessageEvent, new GetBannedUsersFromRoomParser() },
-            { MessageEvent.GetCustomRoomFilterMessageEvent, new GetCustomRoomFilterParser() },
-            { MessageEvent.GetFlatControllersMessageEvent, new GetFlatControllersParser() },
-            { MessageEvent.GetRoomSettingsMessageEvent, new GetRoomSettingsParser() },
-            { MessageEvent.SaveRoomSettingsMessageEvent, new SaveRoomSettingsParser() },
+            { MessageEvent.DeleteRoomMessageEvent, new DeleteRoomMessageParser() },
+            {
+                MessageEvent.GetBannedUsersFromRoomMessageEvent,
+                new GetBannedUsersFromRoomMessageParser()
+            },
+            {
+                MessageEvent.GetCustomRoomFilterMessageEvent,
+                new GetCustomRoomFilterMessageParser()
+            },
+            { MessageEvent.GetFlatControllersMessageEvent, new GetFlatControllersMessageParser() },
+            { MessageEvent.GetRoomSettingsMessageEvent, new GetRoomSettingsMessageParser() },
+            { MessageEvent.SaveRoomSettingsMessageEvent, new SaveRoomSettingsMessageParser() },
             {
                 MessageEvent.UpdateRoomCategoryAndTradeSettingsEvent,
-                new UpdateRoomCategoryAndTradeSettingsParser()
+                new UpdateRoomCategoryAndTradeSettingsMessageParser()
             },
-            { MessageEvent.UpdateRoomFilterMessageEvent, new UpdateRoomFilterParser() },
+            { MessageEvent.UpdateRoomFilterMessageEvent, new UpdateRoomFilterMessageParser() },
             #endregion
 
             #region Sound
+            { MessageEvent.AddJukeboxDiskEvent, new AddJukeboxDiskMessageParser() },
+            { MessageEvent.GetJukeboxPlayListMessageEvent, new GetJukeboxPlayListMessageParser() },
+            { MessageEvent.GetNowPlayingMessageEvent, new GetNowPlayingMessageParser() },
+            { MessageEvent.GetOfficialSongIdMessageEvent, new GetOfficialSongIdMessageParser() },
+            { MessageEvent.GetSongInfoMessageEvent, new GetSongInfoMessageParser() },
+            {
+                MessageEvent.GetSoundMachinePlayListMessageEvent,
+                new GetSoundMachinePlayListMessageParser()
+            },
             { MessageEvent.GetSoundSettingsEvent, new GetSoundSettingsMessageParser() },
+            { MessageEvent.GetUserSongDisksMessageEvent, new GetUserSongDisksMessageParser() },
+            { MessageEvent.RemoveJukeboxDiskEvent, new RemoveJukeboxDiskMessageParser() },
+            #endregion
+
+            #region Talent
+            {
+                MessageEvent.GetTalentTrackLevelMessageEvent,
+                new GetTalentTrackLevelMessageParser()
+            },
+            { MessageEvent.GetTalentTrackMessageEvent, new GetTalentTrackMessageParser() },
+            {
+                MessageEvent.GuideAdvertisementReadMessageEvent,
+                new GuideAdvertisementReadMessageParser()
+            },
             #endregion
 
             #region Tracking
-            { MessageEvent.EventLogMessageEvent, new EventLogParser() },
-            { MessageEvent.LagWarningReportMessageEvent, new LagWarningReportParser() },
-            { MessageEvent.LatencyPingReportMessageEvent, new LatencyPingReportParser() },
-            { MessageEvent.LatencyPingRequestMessageEvent, new LatencyPingRequestParser() },
-            { MessageEvent.PerformanceLogMessageEvent, new PerformanceLogParser() },
+            { MessageEvent.EventLogMessageEvent, new EventLogMessageParser() },
+            { MessageEvent.LagWarningReportMessageEvent, new LagWarningReportMessageParser() },
+            { MessageEvent.LatencyPingReportMessageEvent, new LatencyPingReportMessageParser() },
+            { MessageEvent.LatencyPingRequestMessageEvent, new LatencyPingRequestMessageParser() },
+            { MessageEvent.PerformanceLogMessageEvent, new PerformanceLogMessageParser() },
+            #endregion
+
+            #region Userclassification
+            {
+                MessageEvent.PeerUsersClassificationMessageEvent,
+                new PeerUsersClassificationMessageParser()
+            },
+            {
+                MessageEvent.RoomUsersClassificationMessageEvent,
+                new RoomUsersClassificationMessageParser()
+            },
+            #endregion
+
+            #region Userdefinedroomevents
+            { MessageEvent.ApplySnapshotMessageEvent, new ApplySnapshotMessageParser() },
+            { MessageEvent.OpenMessageEvent, new OpenMessageParser() },
+            { MessageEvent.UpdateActionMessageEvent, new UpdateActionMessageParser() },
+            { MessageEvent.UpdateAddonMessageEvent, new UpdateAddonMessageParser() },
+            { MessageEvent.UpdateConditionMessageEvent, new UpdateConditionMessageParser() },
+            { MessageEvent.UpdateSelectorMessageEvent, new UpdateSelectorMessageParser() },
+            { MessageEvent.UpdateTriggerMessageEvent, new UpdateTriggerMessageParser() },
+            { MessageEvent.UpdateVariableMessageEvent, new UpdateVariableMessageParser() },
+            {
+                MessageEvent.WiredClearErrorLogsMessageEvent,
+                new WiredClearErrorLogsMessageParser()
+            },
+            {
+                MessageEvent.WiredGetAllVariableHoldersMessageEvent,
+                new WiredGetAllVariableHoldersMessageParser()
+            },
+            {
+                MessageEvent.WiredGetAllVariablesDiffsMessageEvent,
+                new WiredGetAllVariablesDiffsMessageParser()
+            },
+            {
+                MessageEvent.WiredGetAllVariablesHashMessageEvent,
+                new WiredGetAllVariablesHashMessageParser()
+            },
+            { MessageEvent.WiredGetErrorLogsMessageEvent, new WiredGetErrorLogsMessageParser() },
+            {
+                MessageEvent.WiredGetRoomSettingsMessageEvent,
+                new WiredGetRoomSettingsMessageParser()
+            },
+            { MessageEvent.WiredGetRoomStatsMessageEvent, new WiredGetRoomStatsMessageParser() },
+            {
+                MessageEvent.WiredGetVariablesForObjectMessageEvent,
+                new WiredGetVariablesForObjectMessageParser()
+            },
+            {
+                MessageEvent.WiredSetObjectVariableValueMessageEvent,
+                new WiredSetObjectVariableValueMessageParser()
+            },
+            {
+                MessageEvent.WiredSetPreferencesMessageEvent,
+                new WiredSetPreferencesMessageParser()
+            },
+            {
+                MessageEvent.WiredSetRoomSettingsMessageEvent,
+                new WiredSetRoomSettingsMessageParser()
+            },
             #endregion
 
             #region Users
-            { MessageEvent.GetIgnoredUsersMessageEvent, new GetIgnoredUsersParser() },
-            { MessageEvent.GetMOTDMessageEvent, new GetMOTDParser() },
-            { MessageEvent.GetUserNftChatStylesMessageEvent, new GetUserNftChatStylesParser() },
+            {
+                MessageEvent.AddAdminRightsToMemberMessageEvent,
+                new AddAdminRightsToMemberMessageParser()
+            },
+            {
+                MessageEvent.ApproveAllMembershipRequestsMessageEvent,
+                new ApproveAllMembershipRequestsMessageParser()
+            },
+            {
+                MessageEvent.ApproveMembershipRequestMessageEvent,
+                new ApproveMembershipRequestMessageParser()
+            },
+            { MessageEvent.ApproveNameMessageEvent, new ApproveNameMessageParser() },
+            { MessageEvent.ChangeEmailEvent, new ChangeEmailMessageParser() },
+            { MessageEvent.CreateGuildMessageEvent, new CreateGuildMessageParser() },
+            { MessageEvent.DeactivateGuildMessageEvent, new DeactivateGuildMessageParser() },
+            {
+                MessageEvent.DeselectFavouriteHabboGroupMessageEvent,
+                new DeselectFavouriteHabboGroupMessageParser()
+            },
+            { MessageEvent.GetEmailStatusEvent, new GetEmailStatusMessageParser() },
+            {
+                MessageEvent.GetExtendedProfileByNameMessageEvent,
+                new GetExtendedProfileByNameMessageParser()
+            },
+            { MessageEvent.GetExtendedProfileMessageEvent, new GetExtendedProfileMessageParser() },
+            {
+                MessageEvent.GetGuildCreationInfoMessageEvent,
+                new GetGuildCreationInfoMessageParser()
+            },
+            { MessageEvent.GetGuildEditInfoMessageEvent, new GetGuildEditInfoMessageParser() },
+            { MessageEvent.GetGuildEditorDataMessageEvent, new GetGuildEditorDataMessageParser() },
+            {
+                MessageEvent.GetGuildMembershipsMessageEvent,
+                new GetGuildMembershipsMessageParser()
+            },
+            { MessageEvent.GetGuildMembersMessageEvent, new GetGuildMembersMessageParser() },
+            {
+                MessageEvent.GetHabboGroupBadgesMessageEvent,
+                new GetHabboGroupBadgesMessageParser()
+            },
+            {
+                MessageEvent.GetHabboGroupDetailsMessageEvent,
+                new GetHabboGroupDetailsMessageParser()
+            },
+            { MessageEvent.GetIgnoredUsersMessageEvent, new GetIgnoredUsersMessageParser() },
+            {
+                MessageEvent.GetMemberGuildItemCountMessageEvent,
+                new GetMemberGuildItemCountMessageParser()
+            },
+            { MessageEvent.GetMOTDMessageEvent, new GetMOTDMessageParser() },
+            {
+                MessageEvent.GetRelationshipStatusInfoMessageEvent,
+                new GetRelationshipStatusInfoMessageParser()
+            },
+            { MessageEvent.GetSelectedBadgesMessageEvent, new GetSelectedBadgesMessageParser() },
+            {
+                MessageEvent.GetUserNftChatStylesMessageEvent,
+                new GetUserNftChatStylesMessageParser()
+            },
+            { MessageEvent.GiveStarGemToUserMessageEvent, new GiveStarGemToUserMessageParser() },
+            { MessageEvent.IgnoreUserMessageEvent, new IgnoreUserMessageParser() },
+            { MessageEvent.JoinHabboGroupMessageEvent, new JoinHabboGroupMessageParser() },
+            { MessageEvent.KickMemberMessageEvent, new KickMemberMessageParser() },
+            {
+                MessageEvent.RejectMembershipRequestMessageEvent,
+                new RejectMembershipRequestMessageParser()
+            },
+            {
+                MessageEvent.RemoveAdminRightsFromMemberMessageEvent,
+                new RemoveAdminRightsFromMemberMessageParser()
+            },
+            { MessageEvent.ScrGetKickbackInfoMessageEvent, new ScrGetKickbackInfoMessageParser() },
             { MessageEvent.ScrGetUserInfoMessageEvent, new ScrGetUserInfoMessageParser() },
+            {
+                MessageEvent.SelectFavouriteHabboGroupMessageEvent,
+                new SelectFavouriteHabboGroupMessageParser()
+            },
+            { MessageEvent.UnblockGroupMemberMessageEvent, new UnblockGroupMemberMessageParser() },
+            { MessageEvent.UnignoreUserMessageEvent, new UnignoreUserMessageParser() },
+            { MessageEvent.UpdateGuildBadgeMessageEvent, new UpdateGuildBadgeMessageParser() },
+            { MessageEvent.UpdateGuildColorsMessageEvent, new UpdateGuildColorsMessageParser() },
+            {
+                MessageEvent.UpdateGuildIdentityMessageEvent,
+                new UpdateGuildIdentityMessageParser()
+            },
+            {
+                MessageEvent.UpdateGuildSettingsMessageEvent,
+                new UpdateGuildSettingsMessageParser()
+            },
+            #endregion
+
+            #region Vault
+            { MessageEvent.CreditVaultStatusMessageEvent, new CreditVaultStatusMessageParser() },
+            { MessageEvent.IncomeRewardClaimMessageEvent, new IncomeRewardClaimMessageParser() },
+            { MessageEvent.IncomeRewardStatusMessageEvent, new IncomeRewardStatusMessageParser() },
+            {
+                MessageEvent.WithdrawCreditVaultMessageEvent,
+                new WithdrawCreditVaultMessageParser()
+            },
             #endregion
         };
     #endregion
@@ -666,7 +1611,7 @@ public class Revision20240709 : IRevision
                 )
             },
             {
-                typeof(FriendListUpdateMessage),
+                typeof(FriendListUpdateMessageComposer),
                 new FriendListUpdateMessageSerializer(MessageComposer.FriendListUpdateComposer)
             },
             {

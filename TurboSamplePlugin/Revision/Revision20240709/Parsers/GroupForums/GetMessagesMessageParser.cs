@@ -1,8 +1,8 @@
 ﻿using Turbo.Contracts.Abstractions;
 using Turbo.Packets.Abstractions;
-using Turbo.Primitives.Messages.Incoming.GroupForums;
+using Turbo.Primitives.Messages.Incoming.Groupforums;
 
-namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.GroupForums;
+namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Groupforums;
 
 internal class GetMessagesMessageParser : IParser
 {

@@ -4,7 +4,7 @@ using Turbo.Primitives.Messages.Incoming.Catalog;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Catalog;
 
-internal class PurchaseRoomAdMessageMessageParser : IParser
+internal class PurchaseRoomAdMessageParser : IParser
 {
     public IMessageEvent Parse(IClientPacket packet) =>
         new PurchaseRoomAdMessageMessage
