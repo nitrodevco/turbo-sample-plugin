@@ -1,6 +1,6 @@
 using Turbo.Contracts.Enums.Rooms.Furniture.Data;
 using Turbo.Packets.Abstractions;
-using Turbo.Primitives.Snapshots.Rooms.StuffData;
+using Turbo.Primitives.Orleans.Snapshots.Rooms.StuffData;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Engine.Data;
 
