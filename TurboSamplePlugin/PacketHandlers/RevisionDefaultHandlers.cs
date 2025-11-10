@@ -16,7 +16,7 @@ public class RevisionDefaultHandlers : IMessageHandler<ClientHelloMessage>
     {
         if (message.Production is null)
         {
-            await ctx.Session.CloseAsync(CloseReason.Rejected);
+            await ctx.Session.CloseSessionAsync().ConfigureAwait(false);
 
             return;
         }
