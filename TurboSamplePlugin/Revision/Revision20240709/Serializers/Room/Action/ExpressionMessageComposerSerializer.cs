@@ -8,6 +8,6 @@ internal class ExpressionMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, ExpressionMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.UserId).WriteInteger(message.ExpressionType);
     }
 }

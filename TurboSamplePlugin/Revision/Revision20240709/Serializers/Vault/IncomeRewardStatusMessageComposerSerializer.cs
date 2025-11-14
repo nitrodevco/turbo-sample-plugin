@@ -11,6 +11,15 @@ internal class IncomeRewardStatusMessageComposerSerializer(int header)
         IncomeRewardStatusMessageComposer message
     )
     {
-        //
+        packet.WriteInteger(message.IncomeRewards.Count);
+
+        foreach (var reward in message.IncomeRewards)
+        {
+            packet
+                .WriteByte((byte)reward.RewardCategory)
+                .WriteByte((byte)reward.RewardType)
+                .WriteInteger(reward.Amount)
+                .WriteString(reward.ProductCode);
+        }
     }
 }

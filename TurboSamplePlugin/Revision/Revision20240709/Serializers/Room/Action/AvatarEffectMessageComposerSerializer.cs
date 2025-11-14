@@ -8,6 +8,9 @@ internal class AvatarEffectMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, AvatarEffectMessageComposer message)
     {
-        //
+        packet
+            .WriteInteger(message.UserId)
+            .WriteInteger(message.EffectId)
+            .WriteInteger(message.DelayMilliseconds);
     }
 }

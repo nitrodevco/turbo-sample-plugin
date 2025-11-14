@@ -8,6 +8,6 @@ internal class DanceMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, DanceMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.UserId).WriteInteger(message.DanceStyle);
     }
 }

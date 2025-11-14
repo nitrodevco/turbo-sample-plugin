@@ -8,6 +8,6 @@ internal class UseObjectMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, UseObjectMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.UserId).WriteInteger(message.ItemType);
     }
 }

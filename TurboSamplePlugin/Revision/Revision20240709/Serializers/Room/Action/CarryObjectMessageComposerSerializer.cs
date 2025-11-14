@@ -8,6 +8,6 @@ internal class CarryObjectMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, CarryObjectMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.UserId).WriteInteger(message.ItemType);
     }
 }

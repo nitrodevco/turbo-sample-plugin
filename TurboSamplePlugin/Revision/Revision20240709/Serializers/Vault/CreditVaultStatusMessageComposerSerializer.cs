@@ -11,6 +11,9 @@ internal class CreditVaultStatusMessageComposerSerializer(int header)
         CreditVaultStatusMessageComposer message
     )
     {
-        //
+        packet
+            .WriteBoolean(message.IsUnlocked)
+            .WriteInteger(message.TotalBalance)
+            .WriteInteger(message.WithdrawBalance);
     }
 }
