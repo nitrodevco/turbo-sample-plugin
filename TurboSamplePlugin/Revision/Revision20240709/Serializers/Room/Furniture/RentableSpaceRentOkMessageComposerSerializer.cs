@@ -11,6 +11,6 @@ internal class RentableSpaceRentOkMessageComposerSerializer(int header)
         RentableSpaceRentOkMessageComposer message
     )
     {
-        //
+        packet.WriteInteger(message.ExpiryTime);
     }
 }

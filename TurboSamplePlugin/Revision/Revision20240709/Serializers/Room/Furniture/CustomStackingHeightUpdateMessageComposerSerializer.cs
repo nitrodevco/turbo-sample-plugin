@@ -11,6 +11,6 @@ internal class CustomStackingHeightUpdateMessageComposerSerializer(int header)
         CustomStackingHeightUpdateMessageComposer message
     )
     {
-        //
+        packet.WriteInteger(message.FurniId).WriteInteger(message.Height);
     }
 }

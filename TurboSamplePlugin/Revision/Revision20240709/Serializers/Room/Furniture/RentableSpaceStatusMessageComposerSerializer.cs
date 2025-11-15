@@ -11,6 +11,12 @@ internal class RentableSpaceStatusMessageComposerSerializer(int header)
         RentableSpaceStatusMessageComposer message
     )
     {
-        //
+        packet
+            .WriteBoolean(message.Rented)
+            .WriteInteger((int)message.CanRentErrorCode)
+            .WriteInteger(message.RenterId)
+            .WriteString(message.RenterName)
+            .WriteInteger(message.TimeRemaining)
+            .WriteInteger(message.Price);
     }
 }

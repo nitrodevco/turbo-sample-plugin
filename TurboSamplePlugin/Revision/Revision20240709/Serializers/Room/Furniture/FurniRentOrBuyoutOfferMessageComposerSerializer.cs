@@ -11,6 +11,12 @@ internal class FurniRentOrBuyoutOfferMessageComposerSerializer(int header)
         FurniRentOrBuyoutOfferMessageComposer message
     )
     {
-        //
+        packet
+            .WriteBoolean(message.IsWallItem)
+            .WriteString(message.FurniTypeName)
+            .WriteBoolean(message.Buyout)
+            .WriteInteger(message.PriceInCredits)
+            .WriteInteger(message.PriceInActivityPoints)
+            .WriteInteger(message.ActivityPointType);
     }
 }

@@ -11,6 +11,6 @@ internal class RequestSpamWallPostItMessageComposerSerializer(int header)
         RequestSpamWallPostItMessageComposer message
     )
     {
-        //
+        packet.WriteInteger(message.ItemId).WriteString(message.Location);
     }
 }

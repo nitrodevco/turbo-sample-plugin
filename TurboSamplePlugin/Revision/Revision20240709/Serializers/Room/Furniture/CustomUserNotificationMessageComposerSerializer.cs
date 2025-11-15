@@ -11,6 +11,6 @@ internal class CustomUserNotificationMessageComposerSerializer(int header)
         CustomUserNotificationMessageComposer message
     )
     {
-        //
+        packet.WriteInteger((int)message.Code);
     }
 }

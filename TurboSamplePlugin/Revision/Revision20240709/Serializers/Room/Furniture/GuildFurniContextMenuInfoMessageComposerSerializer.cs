@@ -11,6 +11,12 @@ internal class GuildFurniContextMenuInfoMessageComposerSerializer(int header)
         GuildFurniContextMenuInfoMessageComposer message
     )
     {
-        //
+        packet
+            .WriteInteger(message.ObjectId)
+            .WriteInteger(message.GuildId)
+            .WriteString(message.GuildName)
+            .WriteInteger(message.GuildHomeRoomId)
+            .WriteBoolean(message.UserIsMember)
+            .WriteBoolean(message.GuildHasReadableForum);
     }
 }

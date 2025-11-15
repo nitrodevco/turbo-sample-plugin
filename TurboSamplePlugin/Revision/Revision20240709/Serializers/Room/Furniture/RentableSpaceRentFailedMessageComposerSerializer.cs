@@ -11,6 +11,6 @@ internal class RentableSpaceRentFailedMessageComposerSerializer(int header)
         RentableSpaceRentFailedMessageComposer message
     )
     {
-        //
+        packet.WriteInteger((int)message.Reason);
     }
 }

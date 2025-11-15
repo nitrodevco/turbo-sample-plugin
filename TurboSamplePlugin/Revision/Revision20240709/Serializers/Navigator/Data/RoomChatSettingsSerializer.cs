@@ -1,5 +1,5 @@
 using Turbo.Packets.Abstractions;
-using Turbo.Primitives.Orleans.Snapshots.Rooms.Settings;
+using Turbo.Primitives.Orleans.Snapshots.Room.Settings;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Navigator.Data;
 

@@ -8,6 +8,6 @@ internal class DiceValueMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, DiceValueMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.FurniId).WriteInteger(message.Value);
     }
 }

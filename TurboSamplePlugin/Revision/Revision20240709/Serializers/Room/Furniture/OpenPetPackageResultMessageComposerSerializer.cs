@@ -11,6 +11,9 @@ internal class OpenPetPackageResultMessageComposerSerializer(int header)
         OpenPetPackageResultMessageComposer message
     )
     {
-        //
+        packet
+            .WriteInteger(message.ObjectId)
+            .WriteInteger(message.NameValidationStatus)
+            .WriteString(message.NameValidationInfo);
     }
 }
