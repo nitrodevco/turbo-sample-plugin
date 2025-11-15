@@ -1,6 +1,6 @@
 using Turbo.Primitives.Messages.Outgoing.NewNavigator;
 using Turbo.Primitives.Packets;
-using TurboSamplePlugin.Revision.Revision20240709.Serializers.NewNavigator.Snapshots;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.NewNavigator.Data;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.NewNavigator;
 
@@ -9,12 +9,12 @@ internal class NavigatorMetaDataMessageSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, NavigatorMetaDataMessage message)
     {
-        packet.WriteInteger(message.TopLevelContexts.Count);
+        packet.WriteInteger(message.TopLevelContexts.Length);
 
         foreach (var context in message.TopLevelContexts)
         {
             packet.WriteString(context.SearchCode);
-            packet.WriteInteger(context.QuickLinks.Count);
+            packet.WriteInteger(context.QuickLinks.Length);
 
             foreach (var quickLink in context.QuickLinks)
             {

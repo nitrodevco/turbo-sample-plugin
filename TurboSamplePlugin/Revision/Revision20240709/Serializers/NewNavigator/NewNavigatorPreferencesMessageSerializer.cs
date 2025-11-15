@@ -4,9 +4,12 @@ using Turbo.Primitives.Packets;
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.NewNavigator;
 
 internal class NewNavigatorPreferencesMessageSerializer(int header)
-    : AbstractSerializer<NewNavigatorPreferencesMessage>(header)
+    : AbstractSerializer<NewNavigatorPreferencesMessageComposer>(header)
 {
-    protected override void Serialize(IServerPacket packet, NewNavigatorPreferencesMessage message)
+    protected override void Serialize(
+        IServerPacket packet,
+        NewNavigatorPreferencesMessageComposer message
+    )
     {
         packet.WriteInteger(message.WindowX);
         packet.WriteInteger(message.WindowY);

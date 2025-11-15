@@ -1849,13 +1849,13 @@ public class Revision20240709 : IRevision
                 )
             },
             {
-                typeof(NavigatorSearchResultBlocksMessage),
+                typeof(NavigatorSearchResultBlocksMessageComposer),
                 new NavigatorSearchResultBlocksMessageSerializer(
                     MessageComposer.NavigatorSearchResultBlocksComposer
                 )
             },
             {
-                typeof(NewNavigatorPreferencesMessage),
+                typeof(NewNavigatorPreferencesMessageComposer),
                 new NewNavigatorPreferencesMessageSerializer(
                     MessageComposer.NewNavigatorPreferencesComposer
                 )

@@ -11,6 +11,6 @@ internal class NavigatorSetSearchCodeViewModeMessageParser : IParser
         new NavigatorSetSearchCodeViewModeMessage
         {
             CategoryName = packet.PopString(),
-            ViewMode = (NavigatorResultsMode)packet.PopInt(),
+            ViewMode = (NavigatorViewModeType)packet.PopInt(),
         };
 }

@@ -15,6 +15,6 @@ internal class SetNewNavigatorWindowPreferencesMessageParser : IParser
             Width = packet.PopInt(),
             Height = packet.PopInt(),
             OpenSavedSearches = packet.PopBoolean(),
-            ResultsMode = (NavigatorResultsMode)packet.PopInt(),
+            ResultsMode = (NavigatorViewModeType)packet.PopInt(),
         };
 }
