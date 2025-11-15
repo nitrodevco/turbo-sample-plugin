@@ -1,5 +1,5 @@
-using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Messages.Outgoing.FriendList;
+using Turbo.Primitives.Packets;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList.Snapshots;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;

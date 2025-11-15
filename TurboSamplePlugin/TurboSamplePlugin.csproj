@@ -42,16 +42,6 @@
       ExcludeAssets="runtime"
     />
     <ProjectReference
-      Include="..\..\turbo-cloud\Turbo.Networking.Abstractions\Turbo.Networking.Abstractions.csproj"
-      Private="false"
-      ExcludeAssets="runtime"
-    />
-    <ProjectReference
-      Include="..\..\turbo-cloud\Turbo.Packets.Abstractions\Turbo.Packets.Abstractions.csproj"
-      Private="false"
-      ExcludeAssets="runtime"
-    />
-    <ProjectReference
       Include="..\..\turbo-cloud\Turbo.Primitives\Turbo.Primitives.csproj"
       Private="false"
       ExcludeAssets="runtime"

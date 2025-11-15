@@ -1,6 +1,5 @@
 using System.Threading;
 using System.Threading.Tasks;
-using SuperSocket.Connection;
 using Turbo.Messages.Registry;
 using Turbo.Primitives.Messages.Incoming.Handshake;
 

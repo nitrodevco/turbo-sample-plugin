@@ -1,5 +1,5 @@
-using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Messages.Outgoing.NewNavigator;
+using Turbo.Primitives.Packets;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.NewNavigator.Snapshots;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.NewNavigator;

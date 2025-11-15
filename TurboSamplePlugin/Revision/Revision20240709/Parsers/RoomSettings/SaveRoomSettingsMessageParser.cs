@@ -3,8 +3,8 @@ using Turbo.Contracts.Abstractions;
 using Turbo.Contracts.Enums.Navigator;
 using Turbo.Contracts.Enums.Navigator.Chat;
 using Turbo.Contracts.Enums.Rooms;
-using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Messages.Incoming.RoomSettings;
+using Turbo.Primitives.Packets;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.RoomSettings;
 

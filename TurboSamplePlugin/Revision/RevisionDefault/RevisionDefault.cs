@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Turbo.Networking.Abstractions.Revisions;
-using Turbo.Packets.Abstractions;
+using Turbo.Primitives.Networking.Revisions;
+using Turbo.Primitives.Packets;
 using TurboSamplePlugin.Revision.RevisionDefault.Parsers.Handshake;
 
 namespace TurboSamplePlugin.Revision.RevisionDefault;

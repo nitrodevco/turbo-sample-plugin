@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Turbo.Contracts.Plugins;
-using Turbo.Networking.Abstractions.Revisions;
+using Turbo.Primitives.Networking.Revisions;
 using TurboSamplePlugin.Revision.Revision20240709;
 using TurboSamplePlugin.Revision.RevisionDefault;
 

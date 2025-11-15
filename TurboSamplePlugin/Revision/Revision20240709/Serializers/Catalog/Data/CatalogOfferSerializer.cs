@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Turbo.Packets.Abstractions;
+using Turbo.Primitives.Packets;
 using Turbo.Primitives.Snapshots.Catalog;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Catalog.Data;

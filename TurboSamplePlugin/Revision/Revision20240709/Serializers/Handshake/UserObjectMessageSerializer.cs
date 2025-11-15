@@ -1,6 +1,6 @@
 using Turbo.Contracts.Enums.Rooms.Object;
-using Turbo.Packets.Abstractions;
 using Turbo.Primitives.Messages.Outgoing.Handshake;
+using Turbo.Primitives.Packets;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Handshake;
 
