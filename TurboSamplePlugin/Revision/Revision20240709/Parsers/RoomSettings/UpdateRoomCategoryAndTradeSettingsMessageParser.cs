@@ -1,5 +1,5 @@
 using Turbo.Contracts.Abstractions;
-using Turbo.Contracts.Enums.Navigator;
+using Turbo.Contracts.Enums.Rooms;
 using Turbo.Primitives.Messages.Incoming.RoomSettings;
 using Turbo.Primitives.Packets;
 
@@ -12,6 +12,6 @@ internal class UpdateRoomCategoryAndTradeSettingsMessageParser : IParser
         {
             RoomId = packet.PopInt(),
             CategoryId = packet.PopInt(),
-            TradeType = (TradeModeType)packet.PopInt(),
+            TradeType = (RoomTradeModeType)packet.PopInt(),
         };
 }

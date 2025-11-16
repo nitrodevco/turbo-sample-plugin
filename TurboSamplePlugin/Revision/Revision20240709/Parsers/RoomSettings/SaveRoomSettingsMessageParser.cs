@@ -21,7 +21,7 @@ internal class SaveRoomSettingsMessageParser : IParser
             MaxVisitors = packet.PopInt(),
             CategoryId = packet.PopInt(),
             Tags = ParseTags(packet),
-            TradeMode = (TradeModeType)packet.PopInt(),
+            TradeMode = (RoomTradeModeType)packet.PopInt(),
             AllowPets = packet.PopBoolean(),
             AllowFoodConsume = packet.PopBoolean(),
             AllowWalkThrough = packet.PopBoolean(),

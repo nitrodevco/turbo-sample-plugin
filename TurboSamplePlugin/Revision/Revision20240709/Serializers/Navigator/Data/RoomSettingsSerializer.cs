@@ -1,4 +1,4 @@
-using Turbo.Contracts.Enums.Navigator;
+using Turbo.Contracts.Enums.Rooms;
 using Turbo.Primitives.Orleans.Snapshots.Room;
 using Turbo.Primitives.Packets;
 
@@ -10,17 +10,17 @@ internal class RoomSettingsSerializer
     {
         packet
             .WriteInteger((int)message.RoomId)
-            .WriteString(message.RoomName)
+            .WriteString(message.Name)
             .WriteInteger((int)message.OwnerId)
             .WriteString(message.OwnerName)
             .WriteInteger((int)message.DoorMode)
-            .WriteInteger(message.UserCount)
+            .WriteInteger(message.Population)
             .WriteInteger(message.PlayersMax)
             .WriteString(message.Description)
-            .WriteInteger((int)message.TradeMode)
+            .WriteInteger((int)message.TradeType)
             .WriteInteger(message.Score)
             .WriteInteger(message.Ranking)
-            .WriteInteger(message.CategoryId ?? -1)
+            .WriteInteger(message.CategoryId)
             .WriteInteger(message.Tags.Length);
 
         foreach (var tag in message.Tags)
