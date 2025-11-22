@@ -8,6 +8,6 @@ internal class ItemDataUpdateMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, ItemDataUpdateMessageComposer message)
     {
-        //
+        packet.WriteString(message.ObjectId.ToString()).WriteString(message.State);
     }
 }

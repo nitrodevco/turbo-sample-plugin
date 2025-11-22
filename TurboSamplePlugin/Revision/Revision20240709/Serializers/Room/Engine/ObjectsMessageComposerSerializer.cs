@@ -13,11 +13,11 @@ internal class ObjectsMessageComposerSerializer(int header)
 
         foreach (var (ownerId, ownerName) in message.OwnerNames)
         {
-            packet.WriteInteger(ownerId);
+            packet.WriteInteger((int)ownerId);
             packet.WriteString(ownerName);
         }
 
-        packet.WriteInteger(message.FloorItems.Count);
+        packet.WriteInteger(message.FloorItems.Length);
 
         foreach (var item in message.FloorItems)
         {

@@ -11,6 +11,23 @@ internal class SlideObjectBundleMessageComposerSerializer(int header)
         SlideObjectBundleMessageComposer message
     )
     {
-        //
+        packet
+            .WriteInteger(message.OldX)
+            .WriteInteger(message.OldY)
+            .WriteInteger(message.NewX)
+            .WriteInteger(message.NewY)
+            .WriteInteger(message.FloorHeights.Length);
+
+        foreach (var (objectId, prev, next) in message.FloorHeights)
+        {
+            packet
+                .WriteInteger((int)objectId)
+                .WriteString(string.Format("{0:N3}", prev))
+                .WriteString(string.Format("{0:N3}", next));
+        }
+
+        packet.WriteInteger(message.RollerItemId);
+
+        // avatar int moveType, total, prev, next height single
     }
 }

@@ -12,8 +12,7 @@ internal class FurnitureAliasesMessageComposerSerializer(int header)
 
         foreach (var (alias, original) in message.Aliases)
         {
-            packet.WriteString(alias);
-            packet.WriteString(original);
+            packet.WriteString(alias).WriteString(original);
         }
     }
 }

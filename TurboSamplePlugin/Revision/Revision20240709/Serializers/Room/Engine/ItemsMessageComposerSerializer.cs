@@ -1,5 +1,6 @@
 using Turbo.Primitives.Messages.Outgoing.Room.Engine;
 using Turbo.Primitives.Packets;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Engine.Data;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Engine;
 
@@ -8,6 +9,19 @@ internal class ItemsMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, ItemsMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.OwnerNames.Count);
+
+        foreach (var (ownerId, ownerName) in message.OwnerNames)
+        {
+            packet.WriteInteger((int)ownerId);
+            packet.WriteString(ownerName);
+        }
+
+        packet.WriteInteger(message.WallItems.Length);
+
+        foreach (var item in message.WallItems)
+        {
+            WallItemSerializer.Serialize(packet, item);
+        }
     }
 }

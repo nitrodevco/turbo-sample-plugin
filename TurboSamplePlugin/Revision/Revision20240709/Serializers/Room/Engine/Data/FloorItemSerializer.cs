@@ -22,8 +22,8 @@ internal class FloorItemSerializer
 
         packet
             .WriteInteger(-1) // expiration
-            .WriteInteger((int)FurniUsagePolicy.Everybody)
-            .WriteInteger(-1); // owner id
+            .WriteInteger((int)item.UsagePolicy)
+            .WriteInteger((int)item.OwnerId);
 
         // if no sprite id, WriteString(staticClass)
     }

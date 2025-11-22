@@ -11,6 +11,6 @@ internal class ObjectAddMessageComposerSerializer(int header)
     {
         FloorItemSerializer.Serialize(packet, message.FloorItem);
 
-        packet.WriteString(message.OwnerName);
+        packet.WriteString(message.FloorItem.OwnerName);
     }
 }

@@ -6,5 +6,6 @@ namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Engine;
 
 internal class UseFurnitureMessageParser : IParser
 {
-    public IMessageEvent Parse(IClientPacket packet) => new UseFurnitureMessage();
+    public IMessageEvent Parse(IClientPacket packet) =>
+        new UseFurnitureMessage { ObjectId = packet.PopInt(), Param = packet.PopInt() };
 }

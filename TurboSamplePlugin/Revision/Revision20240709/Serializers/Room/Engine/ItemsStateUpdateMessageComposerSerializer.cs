@@ -8,6 +8,9 @@ internal class ItemsStateUpdateMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, ItemsStateUpdateMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.ObjectStates.Count);
+
+        foreach (var (objectId, state) in message.ObjectStates)
+            packet.WriteInteger((int)objectId).WriteString(state);
     }
 }

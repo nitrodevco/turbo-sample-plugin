@@ -11,7 +11,7 @@ internal class ObjectRemoveMessageComposerSerializer(int header)
         packet
             .WriteString(message.ObjectId.ToString())
             .WriteBoolean(message.IsExpired)
-            .WriteInteger(message.PickerId)
+            .WriteInteger((int)message.PickerId)
             .WriteInteger(message.Delay);
     }
 }
