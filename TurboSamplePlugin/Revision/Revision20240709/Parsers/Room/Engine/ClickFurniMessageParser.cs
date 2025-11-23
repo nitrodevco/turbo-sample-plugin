@@ -6,5 +6,6 @@ namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Engine;
 
 internal class ClickFurniMessageParser : IParser
 {
-    public IMessageEvent Parse(IClientPacket packet) => new ClickFurniMessage();
+    public IMessageEvent Parse(IClientPacket packet) =>
+        new ClickFurniMessage { ObjectId = packet.PopInt(), Param = packet.PopInt() };
 }

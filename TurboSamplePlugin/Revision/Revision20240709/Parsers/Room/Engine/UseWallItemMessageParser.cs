@@ -6,5 +6,6 @@ namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Engine;
 
 internal class UseWallItemMessageParser : IParser
 {
-    public IMessageEvent Parse(IClientPacket packet) => new UseWallItemMessage();
+    public IMessageEvent Parse(IClientPacket packet) =>
+        new UseWallItemMessage { ObjectId = packet.PopInt(), Param = packet.PopInt() };
 }
