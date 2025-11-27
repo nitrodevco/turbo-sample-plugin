@@ -10,11 +10,8 @@ internal class WallItemSerializer
         packet
             .WriteString(item.Id.ToString())
             .WriteInteger(item.SpriteId)
-            .WriteString(item.WallLocation);
-
-        StuffDataSnapshotSerializer.SerializeLegacyString(packet, item.StuffData);
-
-        packet
+            .WriteString(item.WallLocation)
+            .WriteString(item.StuffData)
             .WriteInteger(-1) // expiration
             .WriteInteger((int)item.UsagePolicy)
             .WriteInteger((int)item.OwnerId);
