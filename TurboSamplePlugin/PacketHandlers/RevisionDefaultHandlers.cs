@@ -15,11 +15,11 @@ public class RevisionDefaultHandlers : IMessageHandler<ClientHelloMessage>
     {
         if (message.Production is null)
         {
-            await ctx.Session.CloseSessionAsync().ConfigureAwait(false);
+            await ctx.CloseSessionAsync().ConfigureAwait(false);
 
             return;
         }
 
-        ctx.Session.SetRevisionId(message.Production);
+        ctx.SetRevisionId(message.Production);
     }
 }

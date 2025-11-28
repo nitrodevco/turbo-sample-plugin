@@ -1,4 +1,3 @@
-using Turbo.Contracts.Enums.Furniture;
 using Turbo.Primitives.Packets;
 using Turbo.Primitives.Rooms.Snapshots;
 

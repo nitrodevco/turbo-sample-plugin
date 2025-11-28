@@ -8,6 +8,6 @@ internal class OpenConnectionMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, OpenConnectionMessageComposer message)
     {
-        packet.WriteInteger(message.RoomId);
+        packet.WriteInteger((int)message.RoomId.Value);
     }
 }
