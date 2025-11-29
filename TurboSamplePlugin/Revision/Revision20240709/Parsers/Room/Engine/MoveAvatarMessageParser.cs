@@ -6,5 +6,6 @@ namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Engine;
 
 internal class MoveAvatarMessageParser : IParser
 {
-    public IMessageEvent Parse(IClientPacket packet) => new MoveAvatarMessage();
+    public IMessageEvent Parse(IClientPacket packet) =>
+        new MoveAvatarMessage { TargetX = packet.PopInt(), TargetY = packet.PopInt() };
 }

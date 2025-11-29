@@ -8,6 +8,18 @@ internal class UserUpdateMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, UserUpdateMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.Avatars.Length);
+
+        foreach (var avatar in message.Avatars)
+        {
+            packet
+                .WriteInteger(avatar.ObjectId.Value)
+                .WriteInteger(avatar.X)
+                .WriteInteger(avatar.Y)
+                .WriteString(string.Format("{0:N3}", avatar.Z))
+                .WriteInteger((int)avatar.HeadRotation)
+                .WriteInteger((int)avatar.Rotation)
+                .WriteString(avatar.Status);
+        }
     }
 }
