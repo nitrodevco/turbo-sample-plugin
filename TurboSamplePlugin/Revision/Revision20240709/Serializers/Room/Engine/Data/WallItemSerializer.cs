@@ -8,7 +8,7 @@ internal class WallItemSerializer
     public static void Serialize(IServerPacket packet, RoomWallItemSnapshot item)
     {
         packet
-            .WriteString(item.Id.ToString())
+            .WriteString(item.ObjectId.ToString())
             .WriteInteger(item.SpriteId)
             .WriteString(item.WallLocation)
             .WriteString(item.StuffData)

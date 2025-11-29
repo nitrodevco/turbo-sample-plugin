@@ -1,5 +1,5 @@
 using Turbo.Primitives.Packets;
-using Turbo.Primitives.Rooms.Furniture.StuffData;
+using Turbo.Primitives.Rooms.Object.Furniture.StuffData;
 using Turbo.Primitives.Rooms.Snapshots.StuffData;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Engine.Data;
