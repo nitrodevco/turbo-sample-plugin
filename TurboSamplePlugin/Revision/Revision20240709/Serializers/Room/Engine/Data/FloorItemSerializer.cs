@@ -13,8 +13,8 @@ internal class FloorItemSerializer
             .WriteInteger(item.X)
             .WriteInteger(item.Y)
             .WriteInteger((int)item.Rotation)
-            .WriteString(string.Format("{0:N3}", item.Z))
-            .WriteString(string.Format("{0:N3}", item.StackHeight))
+            .WriteString(item.Z.ToString())
+            .WriteString(item.StackHeight.ToString())
             .WriteInteger(0); // extra
 
         StuffDataSnapshotSerializer.Serialize(packet, item.StuffData);

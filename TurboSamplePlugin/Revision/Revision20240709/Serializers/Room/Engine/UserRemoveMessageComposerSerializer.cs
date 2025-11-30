@@ -8,6 +8,6 @@ internal class UserRemoveMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, UserRemoveMessageComposer message)
     {
-        //
+        packet.WriteString(message.ObjectId.ToString());
     }
 }

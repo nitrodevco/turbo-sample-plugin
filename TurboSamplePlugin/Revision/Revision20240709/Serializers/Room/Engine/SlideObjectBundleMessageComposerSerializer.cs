@@ -22,8 +22,8 @@ internal class SlideObjectBundleMessageComposerSerializer(int header)
         {
             packet
                 .WriteInteger((int)objectId)
-                .WriteString(string.Format("{0:N3}", prev))
-                .WriteString(string.Format("{0:N3}", next));
+                .WriteString(prev.ToString())
+                .WriteString(next.ToString());
         }
 
         packet.WriteInteger(message.RollerItemId);

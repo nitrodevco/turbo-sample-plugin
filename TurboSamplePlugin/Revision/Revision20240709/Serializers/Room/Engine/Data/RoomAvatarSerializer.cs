@@ -17,7 +17,7 @@ internal class RoomAvatarSerializer
             .WriteInteger(item.ObjectId.Value)
             .WriteInteger(item.X)
             .WriteInteger(item.Y)
-            .WriteString(string.Format("{0:N3}", item.Z))
+            .WriteString(item.Z.ToString())
             .WriteInteger((int)item.Rotation);
 
         if (item is RoomPlayerAvatarSnapshot player)
