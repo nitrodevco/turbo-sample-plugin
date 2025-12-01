@@ -11,6 +11,18 @@ internal class AccountPreferencesEventMessageComposerSerializer(int header)
         AccountPreferencesEventMessageComposer message
     )
     {
-        //
+        packet
+            .WriteInteger(message.UIVolume)
+            .WriteInteger(message.FurniVolume)
+            .WriteInteger(message.TraxVolume)
+            .WriteBoolean(message.FreeFlowChatDisabled)
+            .WriteBoolean(message.RoomInvitesIgnored)
+            .WriteBoolean(message.RoomCameraFollowDisabled)
+            .WriteInteger((int)message.UIFlags)
+            .WriteInteger(message.PreferedChatStyle)
+            .WriteBoolean(message.WiredMenuButton)
+            .WriteBoolean(message.WiredInspectButton)
+            .WriteBoolean(message.PlayTestMode)
+            .WriteInteger(message.VariableSyntaxMode);
     }
 }

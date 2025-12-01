@@ -4,20 +4,21 @@ using Turbo.Primitives.Packets;
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Users;
 
 internal class ScrSendUserInfoMessageSerializer(int header)
-    : AbstractSerializer<ScrSendUserInfoMessage>(header)
+    : AbstractSerializer<ScrSendUserInfoMessageComposer>(header)
 {
-    protected override void Serialize(IServerPacket packet, ScrSendUserInfoMessage message)
+    protected override void Serialize(IServerPacket packet, ScrSendUserInfoMessageComposer message)
     {
-        packet.WriteString("club_habbo");
-        packet.WriteInteger(0);
-        packet.WriteInteger(0);
-        packet.WriteInteger(0);
-        packet.WriteInteger(2);
-        packet.WriteBoolean(false);
-        packet.WriteBoolean(false);
-        packet.WriteInteger(0);
-        packet.WriteInteger(0);
-        packet.WriteInteger(0);
-        packet.WriteInteger(-1);
+        packet
+            .WriteString(message.ProductName)
+            .WriteInteger(message.DaysToPeriodEnd)
+            .WriteInteger(message.MemberPeriods)
+            .WriteInteger(message.PeriodsSubscribedAhead)
+            .WriteInteger(message.ResponseType)
+            .WriteBoolean(message.HasEverBeenMember)
+            .WriteBoolean(message.IsVIP)
+            .WriteInteger(message.PastClubDays)
+            .WriteInteger(message.PastVipDays)
+            .WriteInteger(message.MinutesUntilExpiration)
+            .WriteInteger(message.MinutesSinceLastModified);
     }
 }

@@ -11,6 +11,7 @@ using Turbo.Primitives.Messages.Outgoing.FriendList;
 using Turbo.Primitives.Messages.Outgoing.Handshake;
 using Turbo.Primitives.Messages.Outgoing.Navigator;
 using Turbo.Primitives.Messages.Outgoing.NewNavigator;
+using Turbo.Primitives.Messages.Outgoing.Preferences;
 using Turbo.Primitives.Messages.Outgoing.Room.Action;
 using Turbo.Primitives.Messages.Outgoing.Room.Bots;
 using Turbo.Primitives.Messages.Outgoing.Room.Chat;
@@ -96,6 +97,7 @@ using TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Handshake;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Navigator;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.NewNavigator;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Preferences;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Action;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Bots;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Chat;
@@ -1862,6 +1864,15 @@ public class Revision20240709 : IRevision
             },
             #endregion
 
+            #region Preferences
+            {
+                typeof(AccountPreferencesEventMessageComposer),
+                new AccountPreferencesEventMessageComposerSerializer(
+                    MessageComposer.AccountPreferencesComposer
+                )
+            },
+            #endregion
+
             #region Room
 
             #region Room Action
@@ -2398,7 +2409,7 @@ public class Revision20240709 : IRevision
 
             #region Users
             {
-                typeof(ScrSendUserInfoMessage),
+                typeof(ScrSendUserInfoMessageComposer),
                 new ScrSendUserInfoMessageSerializer(MessageComposer.ScrSendUserInfoComposer)
             },
             #endregion
