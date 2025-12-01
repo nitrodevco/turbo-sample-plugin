@@ -9,6 +9,7 @@ using Turbo.Primitives.Messages.Outgoing.Campaign;
 using Turbo.Primitives.Messages.Outgoing.Catalog;
 using Turbo.Primitives.Messages.Outgoing.FriendList;
 using Turbo.Primitives.Messages.Outgoing.Handshake;
+using Turbo.Primitives.Messages.Outgoing.Inventory.Furni;
 using Turbo.Primitives.Messages.Outgoing.Navigator;
 using Turbo.Primitives.Messages.Outgoing.NewNavigator;
 using Turbo.Primitives.Messages.Outgoing.Preferences;
@@ -95,6 +96,7 @@ using TurboSamplePlugin.Revision.Revision20240709.Serializers.Campaign;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Catalog;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Handshake;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Inventory.Furni;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Navigator;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.NewNavigator;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Preferences;
@@ -1668,6 +1670,39 @@ public class Revision20240709 : IRevision
                 typeof(RoomInviteMessage),
                 new RoomInviteMessageSerializer(MessageComposer.RoomInviteComposer)
             },
+            #endregion
+
+            #region Inventory
+
+            #region Inventory Furni
+            {
+                typeof(FurniListAddOrUpdateEventMessageComposer),
+                new FurniListAddOrUpdateEventMessageComposerSerializer(
+                    MessageComposer.FurniListAddOrUpdateComposer
+                )
+            },
+            {
+                typeof(FurniListEventMessageComposer),
+                new FurniListEventMessageComposerSerializer(MessageComposer.FurniListComposer)
+            },
+            {
+                typeof(FurniListInvalidateEventMessageComposer),
+                new FurniListInvalidateEventMessageComposerSerializer(
+                    MessageComposer.FurniListInvalidateComposer
+                )
+            },
+            {
+                typeof(FurniListRemoveEventMessageComposer),
+                new FurniListRemoveEventMessageComposerSerializer(
+                    MessageComposer.FurniListRemoveComposer
+                )
+            },
+            {
+                typeof(PostItPlacedEventMessageComposer),
+                new PostItPlacedEventMessageComposerSerializer(MessageComposer.PostItPlacedComposer)
+            },
+            #endregion
+
             #endregion
 
             #region Handshake

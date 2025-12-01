@@ -11,6 +11,6 @@ internal class FurniListRemoveEventMessageComposerSerializer(int header)
         FurniListRemoveEventMessageComposer message
     )
     {
-        //
+        packet.WriteInteger(message.ItemId);
     }
 }
