@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using Turbo.Contracts.Abstractions;
-using Turbo.Contracts.Enums.Navigator;
-using Turbo.Contracts.Enums.Navigator.Chat;
 using Turbo.Primitives.Messages.Incoming.RoomSettings;
+using Turbo.Primitives.Navigator.Enums;
 using Turbo.Primitives.Packets;
 using Turbo.Primitives.Rooms.Enums;
 

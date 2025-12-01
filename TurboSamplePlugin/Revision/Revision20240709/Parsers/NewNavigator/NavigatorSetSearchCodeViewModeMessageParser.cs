@@ -1,6 +1,6 @@
 using Turbo.Contracts.Abstractions;
-using Turbo.Contracts.Enums.Navigator;
 using Turbo.Primitives.Messages.Incoming.NewNavigator;
+using Turbo.Primitives.Navigator.Enums;
 using Turbo.Primitives.Packets;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.NewNavigator;
