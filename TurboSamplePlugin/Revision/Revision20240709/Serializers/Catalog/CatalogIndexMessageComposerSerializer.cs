@@ -1,5 +1,5 @@
 using System.Linq;
-using Turbo.Contracts.Enums.Catalog;
+using Turbo.Primitives.Catalog.Enums;
 using Turbo.Primitives.Messages.Outgoing.Catalog;
 using Turbo.Primitives.Packets;
 using Turbo.Primitives.Snapshots.Catalog;

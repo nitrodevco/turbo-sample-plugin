@@ -1,4 +1,4 @@
-using Turbo.Contracts.Enums.FriendList;
+using Turbo.Primitives.FriendList.Enums;
 using Turbo.Primitives.Messages.Outgoing.FriendList;
 using Turbo.Primitives.Packets;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList.Snapshots;
@@ -23,7 +23,7 @@ internal class FriendListUpdateMessageSerializer(int header)
         {
             packet.WriteInteger((int)update.ActionType);
 
-            if (update.ActionType is FriendListUpdateActionEnum.Removed)
+            if (update.ActionType is FriendListUpdateActionType.Removed)
             {
                 packet.WriteInteger((int)update.FriendId);
 

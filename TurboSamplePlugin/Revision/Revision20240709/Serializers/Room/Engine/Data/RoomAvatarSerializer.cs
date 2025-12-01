@@ -23,7 +23,7 @@ internal class RoomAvatarSerializer
         {
             packet
                 .WriteInteger((int)RoomObjectType.Player)
-                .WriteString(AvatarGenderEnumExtensions.ToLegacyString(player.Gender))
+                .WriteString(AvatarGenderTypeExtensions.ToLegacyString(player.Gender))
                 .WriteInteger(player.GroupId)
                 .WriteInteger(player.GroupStatus)
                 .WriteString(player.GroupName)

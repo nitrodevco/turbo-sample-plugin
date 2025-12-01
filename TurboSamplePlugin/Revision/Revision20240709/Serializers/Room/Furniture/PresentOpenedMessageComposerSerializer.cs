@@ -1,4 +1,4 @@
-using Turbo.Contracts.Enums.Furniture;
+using Turbo.Primitives.Furniture.Enums;
 using Turbo.Primitives.Messages.Outgoing.Room.Furniture;
 using Turbo.Primitives.Packets;
 

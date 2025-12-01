@@ -1,5 +1,5 @@
 using Turbo.Contracts.Abstractions;
-using Turbo.Contracts.Enums.Catalog;
+using Turbo.Primitives.Catalog.Enums;
 using Turbo.Primitives.Messages.Incoming.Catalog;
 using Turbo.Primitives.Packets;
 
@@ -10,6 +10,6 @@ internal class GetCatalogIndexMessageParser : IParser
     public IMessageEvent Parse(IClientPacket packet) =>
         new GetCatalogIndexMessage
         {
-            CatalogType = CatalogTypeEnumExtensions.FromLegacyString(packet.PopString()),
+            CatalogType = CatalogTypeExtensions.FromLegacyString(packet.PopString()),
         };
 }

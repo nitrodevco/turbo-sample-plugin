@@ -1,4 +1,4 @@
-using Turbo.Contracts.Enums.Furniture;
+using Turbo.Primitives.Furniture.Enums;
 using Turbo.Primitives.Packets;
 using Turbo.Primitives.Snapshots.Catalog;
 
@@ -10,7 +10,7 @@ internal class CatalogProductSerializer
     {
         packet.WriteString(product.ProductType.ToLegacyString());
 
-        if (product.ProductType is not ProductTypeEnum.Badge)
+        if (product.ProductType is not ProductType.Badge)
         {
             packet
                 .WriteInteger(product.SpriteId)

@@ -1,4 +1,4 @@
-using Turbo.Contracts.Enums.Catalog;
+using Turbo.Primitives.Catalog.Enums;
 using Turbo.Primitives.Packets;
 using Turbo.Primitives.Snapshots.Catalog;
 
@@ -16,13 +16,13 @@ internal class CatalogFrontPageItemSerializer
 
         switch (message.Type)
         {
-            case CatalogFrontPageItemTypeEnum.Default:
+            case CatalogFrontPageItemType.Default:
                 packet.WriteString(message.CatalogPageLocation ?? string.Empty);
                 break;
-            case CatalogFrontPageItemTypeEnum.One:
+            case CatalogFrontPageItemType.One:
                 packet.WriteInteger(message.ProductOfferId ?? 0);
                 break;
-            case CatalogFrontPageItemTypeEnum.Two:
+            case CatalogFrontPageItemType.Two:
                 packet.WriteString(message.ProductCode ?? string.Empty);
                 break;
         }
