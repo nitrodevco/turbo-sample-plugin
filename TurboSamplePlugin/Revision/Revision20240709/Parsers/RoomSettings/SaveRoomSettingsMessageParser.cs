@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using Turbo.Contracts.Abstractions;
 using Turbo.Contracts.Enums.Navigator;
 using Turbo.Contracts.Enums.Navigator.Chat;
-using Turbo.Contracts.Enums.Rooms;
 using Turbo.Primitives.Messages.Incoming.RoomSettings;
 using Turbo.Primitives.Packets;
+using Turbo.Primitives.Rooms.Enums;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.RoomSettings;
 

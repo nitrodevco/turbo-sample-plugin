@@ -1,6 +1,6 @@
-using Turbo.Contracts.Enums.Rooms;
 using Turbo.Primitives.Orleans.Snapshots.Room;
 using Turbo.Primitives.Packets;
+using Turbo.Primitives.Rooms.Enums;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Navigator.Data;
 
@@ -26,18 +26,18 @@ internal class RoomSettingsSerializer
         foreach (var tag in message.Tags)
             packet.WriteString(tag);
 
-        var bitmask = RoomBitmask.None;
+        var bitmask = RoomBitmaskFlags.None;
 
-        bitmask |= RoomBitmask.ShowOwner;
+        bitmask |= RoomBitmaskFlags.ShowOwner;
 
         packet.WriteInteger((int)bitmask);
 
-        if (bitmask.HasFlag(RoomBitmask.Thumbnail))
+        if (bitmask.HasFlag(RoomBitmaskFlags.Thumbnail))
         {
             packet.WriteString(string.Empty); // officialRoomPicRef
         }
 
-        if (bitmask.HasFlag(RoomBitmask.GroupData))
+        if (bitmask.HasFlag(RoomBitmaskFlags.GroupData))
         {
             packet
                 .WriteInteger(0) // groupId
@@ -45,7 +45,7 @@ internal class RoomSettingsSerializer
                 .WriteString(string.Empty); // groupBadgeCode
         }
 
-        if (bitmask.HasFlag(RoomBitmask.RoomAd))
+        if (bitmask.HasFlag(RoomBitmaskFlags.RoomAd))
         {
             packet
                 .WriteString(string.Empty) // adName

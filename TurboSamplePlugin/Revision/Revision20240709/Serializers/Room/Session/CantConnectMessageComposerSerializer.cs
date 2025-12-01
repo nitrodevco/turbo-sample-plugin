@@ -1,6 +1,6 @@
-using Turbo.Contracts.Enums.Rooms;
 using Turbo.Primitives.Messages.Outgoing.Room.Session;
 using Turbo.Primitives.Packets;
+using Turbo.Primitives.Rooms.Enums;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Session;
 
