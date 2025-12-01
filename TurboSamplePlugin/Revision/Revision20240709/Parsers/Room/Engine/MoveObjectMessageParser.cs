@@ -1,7 +1,7 @@
 using Turbo.Contracts.Abstractions;
-using Turbo.Contracts.Enums.Rooms.Object;
 using Turbo.Primitives.Messages.Incoming.Room.Engine;
 using Turbo.Primitives.Packets;
+using Turbo.Primitives.Rooms.Enums;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Engine;
 
