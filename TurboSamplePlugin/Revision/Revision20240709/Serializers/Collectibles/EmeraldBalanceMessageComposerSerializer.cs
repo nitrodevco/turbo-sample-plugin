@@ -8,6 +8,6 @@ internal class EmeraldBalanceMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, EmeraldBalanceMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.EmeraldBalance);
     }
 }

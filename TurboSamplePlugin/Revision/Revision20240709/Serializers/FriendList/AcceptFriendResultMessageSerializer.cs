@@ -4,9 +4,12 @@ using Turbo.Primitives.Packets;
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;
 
 internal class AcceptFriendResultMessageSerializer(int header)
-    : AbstractSerializer<AcceptFriendResultMessage>(header)
+    : AbstractSerializer<AcceptFriendResultMessageComposer>(header)
 {
-    protected override void Serialize(IServerPacket packet, AcceptFriendResultMessage message)
+    protected override void Serialize(
+        IServerPacket packet,
+        AcceptFriendResultMessageComposer message
+    )
     {
         packet.WriteInteger(message.Failures.Count);
 

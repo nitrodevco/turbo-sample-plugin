@@ -7,12 +7,18 @@ using Turbo.Primitives.Messages.Outgoing.Callforhelp;
 using Turbo.Primitives.Messages.Outgoing.Camera;
 using Turbo.Primitives.Messages.Outgoing.Campaign;
 using Turbo.Primitives.Messages.Outgoing.Catalog;
+using Turbo.Primitives.Messages.Outgoing.Collectibles;
 using Turbo.Primitives.Messages.Outgoing.FriendList;
 using Turbo.Primitives.Messages.Outgoing.Handshake;
 using Turbo.Primitives.Messages.Outgoing.Inventory.Achievements;
 using Turbo.Primitives.Messages.Outgoing.Inventory.Avatareffect;
+using Turbo.Primitives.Messages.Outgoing.Inventory.Badges;
+using Turbo.Primitives.Messages.Outgoing.Inventory.Bots;
 using Turbo.Primitives.Messages.Outgoing.Inventory.Clothing;
 using Turbo.Primitives.Messages.Outgoing.Inventory.Furni;
+using Turbo.Primitives.Messages.Outgoing.Inventory.Pets;
+using Turbo.Primitives.Messages.Outgoing.Inventory.Purse;
+using Turbo.Primitives.Messages.Outgoing.Inventory.Trading;
 using Turbo.Primitives.Messages.Outgoing.Mysterybox;
 using Turbo.Primitives.Messages.Outgoing.Navigator;
 using Turbo.Primitives.Messages.Outgoing.NewNavigator;
@@ -28,6 +34,7 @@ using Turbo.Primitives.Messages.Outgoing.Room.Permissions;
 using Turbo.Primitives.Messages.Outgoing.Room.Pets;
 using Turbo.Primitives.Messages.Outgoing.Room.Session;
 using Turbo.Primitives.Messages.Outgoing.Tracking;
+using Turbo.Primitives.Messages.Outgoing.Userdefinedroomevents.Wiredmenu;
 using Turbo.Primitives.Messages.Outgoing.Users;
 using Turbo.Primitives.Messages.Outgoing.Vault;
 using Turbo.Primitives.Networking.Revisions;
@@ -100,12 +107,18 @@ using TurboSamplePlugin.Revision.Revision20240709.Serializers.Callforhelp;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Camera;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Campaign;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Catalog;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Collectibles;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Handshake;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Inventory.Achievements;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Inventory.Avatareffect;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Inventory.Badges;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Inventory.Bots;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Inventory.Clothing;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Inventory.Furni;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Inventory.Pets;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Inventory.Purse;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Inventory.Trading;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Mysterybox;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Navigator;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.NewNavigator;
@@ -121,6 +134,7 @@ using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Permissions;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Pets;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Session;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Tracking;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Userdefinedroomevents.Wiredmenu;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Users;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Vault;
 
@@ -1681,24 +1695,109 @@ public class Revision20240709 : IRevision
             #endregion
 
             #region Collectibles
+            {
+                typeof(CollectableMintableItemTypesMessageComposer),
+                new CollectableMintableItemTypesMessageComposerSerializer(
+                    MessageComposer.CollectableMintableItemTypesMessageComposer
+                )
+            },
+            {
+                typeof(CollectibleMintableItemResultMessageComposer),
+                new CollectibleMintableItemResultMessageComposerSerializer(
+                    MessageComposer.CollectibleMintableItemResultMessageComposer
+                )
+            },
+            {
+                typeof(CollectibleMintingEnabledMessageComposer),
+                new CollectibleMintingEnabledMessageComposerSerializer(
+                    MessageComposer.CollectibleMintingEnabledMessageComposer
+                )
+            },
+            {
+                typeof(CollectibleMintTokenCountMessageComposer),
+                new CollectibleMintTokenCountMessageComposerSerializer(
+                    MessageComposer.CollectibleMintTokenCountMessageComposer
+                )
+            },
+            {
+                typeof(CollectibleMintTokenOffersMessageComposer),
+                new CollectibleMintTokenOffersMessageComposerSerializer(
+                    MessageComposer.CollectibleMintTokenOffersMessageComposer
+                )
+            },
+            {
+                typeof(CollectibleWalletAddressesMessageComposer),
+                new CollectibleWalletAddressesMessageComposerSerializer(
+                    MessageComposer.CollectibleWalletAddressesMessageComposer
+                )
+            },
+            {
+                typeof(EmeraldBalanceMessageComposer),
+                new EmeraldBalanceMessageComposerSerializer(
+                    MessageComposer.EmeraldBalanceMessageComposer
+                )
+            },
+            {
+                typeof(NftBonusItemClaimResultMessageComposer),
+                new NftBonusItemClaimResultMessageComposerSerializer(
+                    MessageComposer.NftBonusItemClaimResultMessageComposer
+                )
+            },
+            {
+                typeof(NftCollectionsMessageComposer),
+                new NftCollectionsMessageComposerSerializer(
+                    MessageComposer.NftCollectionsMessageComposer
+                )
+            },
+            {
+                typeof(NftCollectionsScoreMessageComposer),
+                new NftCollectionsScoreMessageComposerSerializer(
+                    MessageComposer.NftCollectionsScoreMessageComposer
+                )
+            },
+            {
+                typeof(NftRewardItemClaimResultMessageComposer),
+                new NftRewardItemClaimResultMessageComposerSerializer(
+                    MessageComposer.NftRewardItemClaimResultMessageComposer
+                )
+            },
+            {
+                typeof(NftTransferAssetsResultMessageComposer),
+                new NftTransferAssetsResultMessageComposerSerializer(
+                    MessageComposer.NftTransferAssetsResultMessageComposer
+                )
+            },
+            {
+                typeof(NftTransferFeeMessageComposer),
+                new NftTransferFeeMessageComposerSerializer(
+                    MessageComposer.NftTransferFeeMessageComposer
+                )
+            },
+            {
+                typeof(SilverBalanceMessageComposer),
+                new SilverBalanceMessageComposerSerializer(
+                    MessageComposer.SilverBalanceMessageComposer
+                )
+            },
             #endregion
+
             #region FriendList
             {
-                typeof(AcceptFriendResultMessage),
+                typeof(AcceptFriendResultMessageComposer),
                 new AcceptFriendResultMessageSerializer(MessageComposer.AcceptFriendResultComposer)
             },
             {
-                typeof(ConsoleMessageHistoryMessage),
+                typeof(ConsoleMessageHistoryMessageComposer),
                 new ConsoleMessageHistoryMessageSerializer(
                     MessageComposer.ConsoleMessageHistoryComposer
                 )
             },
             {
-                typeof(FollowFriendFailedMessage),
+                typeof(FollowFriendFailedMessageComposer),
                 new FollowFriendFailedMessageSerializer(MessageComposer.FollowFriendFailedComposer)
             },
             {
-                typeof(FriendListFragmentMessage),
+                typeof(FriendListFragmentMessageComposer),
                 new FriendListFragmentMessageSerializer(
                     MessageComposer.FriendListFragmentMessageComposer
                 )
@@ -1708,25 +1807,25 @@ public class Revision20240709 : IRevision
                 new FriendListUpdateMessageSerializer(MessageComposer.FriendListUpdateComposer)
             },
             {
-                typeof(FriendNotificationMessage),
+                typeof(FriendNotificationMessageComposer),
                 new FriendNotificationMessageSerializer(MessageComposer.FriendNotificationComposer)
             },
             {
-                typeof(FriendRequestsMessage),
+                typeof(FriendRequestsMessageComposer),
                 new FriendRequestsMessageSerializer(MessageComposer.FriendRequestsComposer)
             },
             {
-                typeof(HabboSearchResultMessage),
+                typeof(HabboSearchResultMessageComposer),
                 new HabboSearchResultMessageSerializer(MessageComposer.HabboSearchResultComposer)
             },
             {
-                typeof(InstantMessageErrorMessage),
+                typeof(InstantMessageErrorMessageComposer),
                 new InstantMessageErrorMessageSerializer(
                     MessageComposer.InstantMessageErrorComposer
                 )
             },
             {
-                typeof(MessengerErrorMessage),
+                typeof(MessengerErrorMessageComposer),
                 new MessengerErrorMessageSerializer(MessageComposer.MessengerErrorComposer)
             },
             {
@@ -1734,29 +1833,29 @@ public class Revision20240709 : IRevision
                 new MessengerInitMessageSerializer(MessageComposer.MessengerInitComposer)
             },
             {
-                typeof(MiniMailNewMessage),
+                typeof(MiniMailNewMessageComposer),
                 new MiniMailNewMessageSerializer(MessageComposer.MiniMailNewMessageComposer)
             },
             {
-                typeof(MiniMailUnreadCountMessage),
+                typeof(MiniMailUnreadCountMessageComposer),
                 new MiniMailUnreadCountMessageSerializer(
                     MessageComposer.MiniMailUnreadCountComposer
                 )
             },
             {
-                typeof(NewConsoleMessageMessage),
+                typeof(NewConsoleMessageMessageComposer),
                 new NewConsoleMessageMessageSerializer(MessageComposer.NewConsoleMessageComposer)
             },
             {
-                typeof(NewFriendRequestMessage),
+                typeof(NewFriendRequestMessageComposer),
                 new NewFriendRequestMessageSerializer(MessageComposer.NewFriendRequestComposer)
             },
             {
-                typeof(RoomInviteErrorMessage),
+                typeof(RoomInviteErrorMessageComposer),
                 new RoomInviteErrorMessageSerializer(MessageComposer.RoomInviteErrorComposer)
             },
             {
-                typeof(RoomInviteMessage),
+                typeof(RoomInviteMessageComposer),
                 new RoomInviteMessageSerializer(MessageComposer.RoomInviteComposer)
             },
             #endregion
@@ -1813,6 +1912,51 @@ public class Revision20240709 : IRevision
             },
             #endregion
 
+            #region Inventory Badges
+            {
+                typeof(BadgePointLimitsEventMessageComposer),
+                new BadgePointLimitsEventMessageComposerSerializer(
+                    MessageComposer.BadgePointLimitsComposer
+                )
+            },
+            {
+                typeof(BadgeReceivedEventMessageComposer),
+                new BadgeReceivedEventMessageComposerSerializer(
+                    MessageComposer.BadgeReceivedComposer
+                )
+            },
+            {
+                typeof(BadgesEventMessageComposer),
+                new BadgesEventMessageComposerSerializer(MessageComposer.BadgesComposer)
+            },
+            {
+                typeof(IsBadgeRequestFulfilledEventMessageComposer),
+                new IsBadgeRequestFulfilledEventMessageComposerSerializer(
+                    MessageComposer.IsBadgeRequestFulfilledComposer
+                )
+            },
+            #endregion
+
+            #region Inventory Bots
+            {
+                typeof(BotAddedToInventoryEventMessageComposer),
+                new BotAddedToInventoryEventMessageComposerSerializer(
+                    MessageComposer.BotAddedToInventoryComposer
+                )
+            },
+            {
+                typeof(BotInventoryEventMessageComposer),
+                new BotInventoryEventMessageComposerSerializer(MessageComposer.BotInventoryComposer)
+            },
+            {
+                typeof(BotRemovedFromInventoryEventMessageComposer),
+                new BotRemovedFromInventoryEventMessageComposerSerializer(
+                    MessageComposer.BotRemovedFromInventoryComposer
+                )
+            },
+            #endregion
+
+
             #region Inventory Clothing
             {
                 typeof(FigureSetIdsEventMessageComposer),
@@ -1846,6 +1990,137 @@ public class Revision20240709 : IRevision
             {
                 typeof(PostItPlacedEventMessageComposer),
                 new PostItPlacedEventMessageComposerSerializer(MessageComposer.PostItPlacedComposer)
+            },
+            #endregion
+
+            #region Inventory Pets
+            {
+                typeof(ConfirmBreedingRequestEventMessageComposer),
+                new ConfirmBreedingRequestEventMessageComposerSerializer(
+                    MessageComposer.ConfirmBreedingRequestComposer
+                )
+            },
+            {
+                typeof(ConfirmBreedingResultEventMessageComposer),
+                new ConfirmBreedingResultEventMessageComposerSerializer(
+                    MessageComposer.ConfirmBreedingResultComposer
+                )
+            },
+            {
+                typeof(GoToBreedingNestFailureEventMessageComposer),
+                new GoToBreedingNestFailureEventMessageComposerSerializer(
+                    MessageComposer.GoToBreedingNestFailureComposer
+                )
+            },
+            {
+                typeof(NestBreedingSuccessEventMessageComposer),
+                new NestBreedingSuccessEventMessageComposerSerializer(
+                    MessageComposer.NestBreedingSuccessComposer
+                )
+            },
+            {
+                typeof(PetAddedToInventoryEventMessageComposer),
+                new PetAddedToInventoryEventMessageComposerSerializer(
+                    MessageComposer.PetAddedToInventoryComposer
+                )
+            },
+            {
+                typeof(PetBreedingEventMessageComposer),
+                new PetBreedingEventMessageComposerSerializer(MessageComposer.PetBreedingComposer)
+            },
+            {
+                typeof(PetInventoryEventMessageComposer),
+                new PetInventoryEventMessageComposerSerializer(MessageComposer.PetInventoryComposer)
+            },
+            {
+                typeof(PetReceivedMessageComposer),
+                new PetReceivedMessageComposerSerializer(MessageComposer.PetReceivedMessageComposer)
+            },
+            {
+                typeof(PetRemovedFromInventoryEventMessageComposer),
+                new PetRemovedFromInventoryEventMessageComposerSerializer(
+                    MessageComposer.PetRemovedFromInventoryComposer
+                )
+            },
+            #endregion
+
+            #region Inventory Purse
+            {
+                typeof(CreditBalanceEventMessageComposer),
+                new CreditBalanceEventMessageComposerSerializer(
+                    MessageComposer.CreditBalanceComposer
+                )
+            },
+            #endregion
+
+            #region Inventory Trading
+            {
+                typeof(TradeOpenFailedEventPaserMessageComposer),
+                new TradeOpenFailedEventPaserMessageComposerSerializer(
+                    MessageComposer.TradeOpenFailedComposer
+                )
+            },
+            {
+                typeof(TradeSilverFeeMessageComposer),
+                new TradeSilverFeeMessageComposerSerializer(
+                    MessageComposer.TradeSilverFeeMessageComposer
+                )
+            },
+            {
+                typeof(TradeSilverSetMessageComposer),
+                new TradeSilverSetMessageComposerSerializer(
+                    MessageComposer.TradeSilverSetMessageComposer
+                )
+            },
+            {
+                typeof(TradingAcceptEventMessageComposer),
+                new TradingAcceptEventMessageComposerSerializer(
+                    MessageComposer.TradingAcceptComposer
+                )
+            },
+            {
+                typeof(TradingCloseEventMessageComposer),
+                new TradingCloseEventMessageComposerSerializer(MessageComposer.TradingCloseComposer)
+            },
+            {
+                typeof(TradingCompletedEventMessageComposer),
+                new TradingCompletedEventMessageComposerSerializer(
+                    MessageComposer.TradingCompletedComposer
+                )
+            },
+            {
+                typeof(TradingConfirmationEventMessageComposer),
+                new TradingConfirmationEventMessageComposerSerializer(
+                    MessageComposer.TradingConfirmationComposer
+                )
+            },
+            {
+                typeof(TradingItemListEventMessageComposer),
+                new TradingItemListEventMessageComposerSerializer(
+                    MessageComposer.TradingItemListComposer
+                )
+            },
+            {
+                typeof(TradingNotOpenEventMessageComposer),
+                new TradingNotOpenEventMessageComposerSerializer(
+                    MessageComposer.TradingNotOpenComposer
+                )
+            },
+            {
+                typeof(TradingOpenEventMessageComposer),
+                new TradingOpenEventMessageComposerSerializer(MessageComposer.TradingOpenComposer)
+            },
+            {
+                typeof(TradingOtherNotAllowedEventMessageComposer),
+                new TradingOtherNotAllowedEventMessageComposerSerializer(
+                    MessageComposer.TradingOtherNotAllowedComposer
+                )
+            },
+            {
+                typeof(TradingYouAreNotAllowedEventMessageComposer),
+                new TradingYouAreNotAllowedEventMessageComposerSerializer(
+                    MessageComposer.TradingYouAreNotAllowedComposer
+                )
             },
             #endregion
 
@@ -2750,6 +3025,19 @@ public class Revision20240709 : IRevision
                     MessageComposer.IncomeRewardStatusMessageComposer
                 )
             },
+            #endregion
+
+            #region Userdefinedroomevents
+
+            #region Userdefinedroomevents Wiredmenu
+            {
+                typeof(WiredPermissionsEventMessageComposer),
+                new WiredPermissionsEventMessageComposerSerializer(
+                    MessageComposer.WiredPermissionsComposer
+                )
+            },
+            #endregion
+
             #endregion
         };
     #endregion

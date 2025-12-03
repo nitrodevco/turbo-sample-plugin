@@ -4,9 +4,9 @@ using Turbo.Primitives.Packets;
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;
 
 internal class RoomInviteErrorMessageSerializer(int header)
-    : AbstractSerializer<RoomInviteErrorMessage>(header)
+    : AbstractSerializer<RoomInviteErrorMessageComposer>(header)
 {
-    protected override void Serialize(IServerPacket packet, RoomInviteErrorMessage message)
+    protected override void Serialize(IServerPacket packet, RoomInviteErrorMessageComposer message)
     {
         packet.WriteInteger(message.ErrorCode);
 

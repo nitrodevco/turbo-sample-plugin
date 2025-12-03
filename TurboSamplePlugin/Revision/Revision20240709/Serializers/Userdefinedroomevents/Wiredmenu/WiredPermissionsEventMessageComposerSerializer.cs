@@ -11,6 +11,6 @@ internal class WiredPermissionsEventMessageComposerSerializer(int header)
         WiredPermissionsEventMessageComposer message
     )
     {
-        //
+        packet.WriteBoolean(message.CanModify).WriteBoolean(message.CanRead);
     }
 }

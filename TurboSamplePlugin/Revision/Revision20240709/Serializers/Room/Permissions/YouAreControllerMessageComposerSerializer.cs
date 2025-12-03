@@ -8,6 +8,6 @@ internal class YouAreControllerMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, YouAreControllerMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.RoomId).WriteInteger((int)message.ControllerLevel);
     }
 }

@@ -4,9 +4,12 @@ using Turbo.Primitives.Packets;
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;
 
 internal class MiniMailUnreadCountMessageSerializer(int header)
-    : AbstractSerializer<MiniMailUnreadCountMessage>(header)
+    : AbstractSerializer<MiniMailUnreadCountMessageComposer>(header)
 {
-    protected override void Serialize(IServerPacket packet, MiniMailUnreadCountMessage message)
+    protected override void Serialize(
+        IServerPacket packet,
+        MiniMailUnreadCountMessageComposer message
+    )
     {
         packet.WriteInteger(message.UnreadCount);
     }

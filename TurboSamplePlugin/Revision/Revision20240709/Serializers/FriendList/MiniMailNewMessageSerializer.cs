@@ -4,9 +4,9 @@ using Turbo.Primitives.Packets;
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;
 
 internal class MiniMailNewMessageSerializer(int header)
-    : AbstractSerializer<MiniMailNewMessage>(header)
+    : AbstractSerializer<MiniMailNewMessageComposer>(header)
 {
-    protected override void Serialize(IServerPacket packet, MiniMailNewMessage message)
+    protected override void Serialize(IServerPacket packet, MiniMailNewMessageComposer message)
     {
         //
     }

@@ -5,9 +5,12 @@ using TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList.Snapsho
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;
 
 internal class FriendListFragmentMessageSerializer(int header)
-    : AbstractSerializer<FriendListFragmentMessage>(header)
+    : AbstractSerializer<FriendListFragmentMessageComposer>(header)
 {
-    protected override void Serialize(IServerPacket packet, FriendListFragmentMessage message)
+    protected override void Serialize(
+        IServerPacket packet,
+        FriendListFragmentMessageComposer message
+    )
     {
         packet.WriteInteger(message.TotalFragments);
         packet.WriteInteger(message.FragmentIndex);

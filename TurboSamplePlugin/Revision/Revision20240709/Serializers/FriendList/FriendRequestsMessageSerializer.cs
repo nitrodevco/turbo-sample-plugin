@@ -5,9 +5,9 @@ using TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList.Snapsho
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;
 
 internal class FriendRequestsMessageSerializer(int header)
-    : AbstractSerializer<FriendRequestsMessage>(header)
+    : AbstractSerializer<FriendRequestsMessageComposer>(header)
 {
-    protected override void Serialize(IServerPacket packet, FriendRequestsMessage message)
+    protected override void Serialize(IServerPacket packet, FriendRequestsMessageComposer message)
     {
         int totalRequests = message.Requests.Count;
 

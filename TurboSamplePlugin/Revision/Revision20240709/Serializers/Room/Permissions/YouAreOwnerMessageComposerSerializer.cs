@@ -8,6 +8,6 @@ internal class YouAreOwnerMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, YouAreOwnerMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.RoomId);
     }
 }

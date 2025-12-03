@@ -4,9 +4,12 @@ using Turbo.Primitives.Packets;
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;
 
 internal class ConsoleMessageHistoryMessageSerializer(int header)
-    : AbstractSerializer<ConsoleMessageHistoryMessage>(header)
+    : AbstractSerializer<ConsoleMessageHistoryMessageComposer>(header)
 {
-    protected override void Serialize(IServerPacket packet, ConsoleMessageHistoryMessage message)
+    protected override void Serialize(
+        IServerPacket packet,
+        ConsoleMessageHistoryMessageComposer message
+    )
     {
         packet.WriteInteger(message.ChatId);
         packet.WriteInteger(message.Messages.Count);

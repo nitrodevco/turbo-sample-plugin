@@ -11,6 +11,6 @@ internal class CreditBalanceEventMessageComposerSerializer(int header)
         CreditBalanceEventMessageComposer message
     )
     {
-        //
+        packet.WriteString(message.Balance);
     }
 }

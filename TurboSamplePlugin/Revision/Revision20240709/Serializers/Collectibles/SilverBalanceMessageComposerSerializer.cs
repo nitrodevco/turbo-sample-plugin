@@ -8,6 +8,6 @@ internal class SilverBalanceMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, SilverBalanceMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.SilverBalance);
     }
 }
