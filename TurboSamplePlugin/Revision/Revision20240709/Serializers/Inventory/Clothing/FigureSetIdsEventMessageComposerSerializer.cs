@@ -11,6 +11,14 @@ internal class FigureSetIdsEventMessageComposerSerializer(int header)
         FigureSetIdsEventMessageComposer message
     )
     {
-        //
+        packet.WriteInteger(message.FigureSetIds.Length);
+
+        foreach (var figureSetId in message.FigureSetIds)
+            packet.WriteInteger(figureSetId);
+
+        packet.WriteInteger(message.BoundFurnitureNames.Length);
+
+        foreach (var boundFurnitureName in message.BoundFurnitureNames)
+            packet.WriteString(boundFurnitureName);
     }
 }

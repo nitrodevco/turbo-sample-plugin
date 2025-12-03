@@ -12,23 +12,22 @@ internal class FurnitureFloorItemSerializer
     {
         packet
             .WriteInteger(-Math.Abs(item.ItemId))
-            .WriteString(item.ProductType.ToLegacyString().ToUpper()) // item type
+            .WriteString(ProductType.Floor.ToLegacyString().ToUpper())
             .WriteInteger(item.ItemId)
             .WriteInteger(item.SpriteId)
-            .WriteInteger((int)item.FurniCategory);
+            .WriteInteger((int)item.Definition.FurniCategory);
 
         StuffDataSnapshotSerializer.Serialize(packet, item.StuffData);
 
         packet
-            .WriteBoolean(item.CanRecycle)
-            .WriteBoolean(item.CanTrade)
-            .WriteBoolean(item.CanGroup)
-            .WriteBoolean(item.CanSell)
+            .WriteBoolean(item.Definition.CanRecycle)
+            .WriteBoolean(item.Definition.CanTrade)
+            .WriteBoolean(item.Definition.CanGroup)
+            .WriteBoolean(item.Definition.CanSell)
             .WriteInteger(item.SecondsToExpiration)
             .WriteBoolean(item.HasRentPeriodStarted)
-            .WriteInteger(item.RoomId);
-
-        if (item.ProductType == ProductType.Floor)
-            packet.WriteString(string.Empty).WriteInteger(0);
+            .WriteInteger(item.RoomId)
+            .WriteString(item.SlotId)
+            .WriteInteger(item.Extra);
     }
 }

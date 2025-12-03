@@ -8,6 +8,6 @@ internal class InfoFeedEnableMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, InfoFeedEnableMessageComposer message)
     {
-        //
+        packet.WriteBoolean(message.Enabled);
     }
 }

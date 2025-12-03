@@ -9,9 +9,14 @@ using Turbo.Primitives.Messages.Outgoing.Campaign;
 using Turbo.Primitives.Messages.Outgoing.Catalog;
 using Turbo.Primitives.Messages.Outgoing.FriendList;
 using Turbo.Primitives.Messages.Outgoing.Handshake;
+using Turbo.Primitives.Messages.Outgoing.Inventory.Achievements;
+using Turbo.Primitives.Messages.Outgoing.Inventory.Avatareffect;
+using Turbo.Primitives.Messages.Outgoing.Inventory.Clothing;
 using Turbo.Primitives.Messages.Outgoing.Inventory.Furni;
+using Turbo.Primitives.Messages.Outgoing.Mysterybox;
 using Turbo.Primitives.Messages.Outgoing.Navigator;
 using Turbo.Primitives.Messages.Outgoing.NewNavigator;
+using Turbo.Primitives.Messages.Outgoing.Notifications;
 using Turbo.Primitives.Messages.Outgoing.Preferences;
 using Turbo.Primitives.Messages.Outgoing.Room.Action;
 using Turbo.Primitives.Messages.Outgoing.Room.Bots;
@@ -24,6 +29,7 @@ using Turbo.Primitives.Messages.Outgoing.Room.Pets;
 using Turbo.Primitives.Messages.Outgoing.Room.Session;
 using Turbo.Primitives.Messages.Outgoing.Tracking;
 using Turbo.Primitives.Messages.Outgoing.Users;
+using Turbo.Primitives.Messages.Outgoing.Vault;
 using Turbo.Primitives.Networking.Revisions;
 using Turbo.Primitives.Packets;
 using TurboSamplePlugin.Revision.Revision20240709.Parsers.Advertisement;
@@ -96,9 +102,14 @@ using TurboSamplePlugin.Revision.Revision20240709.Serializers.Campaign;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Catalog;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.FriendList;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Handshake;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Inventory.Achievements;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Inventory.Avatareffect;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Inventory.Clothing;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Inventory.Furni;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Mysterybox;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Navigator;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.NewNavigator;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Notifications;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Preferences;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Action;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Bots;
@@ -111,6 +122,7 @@ using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Pets;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Session;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Tracking;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Users;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Vault;
 
 namespace TurboSamplePlugin.Revision.Revision20240709;
 
@@ -343,16 +355,63 @@ public class Revision20240709 : IRevision
             #endregion
 
             #region Game
+
+            #region Game Arena
+            { MessageEvent.Game2ExitGameMessageEvent, new Game2ExitGameMessageParser() },
+            { MessageEvent.Game2GameChatMessageEvent, new Game2GameChatMessageParser() },
+            {
+                MessageEvent.Game2LoadStageReadyMessageEvent,
+                new Game2LoadStageReadyMessageParser()
+            },
+            { MessageEvent.Game2PlayAgainMessageEvent, new Game2PlayAgainMessageParser() },
+            #endregion
+
+            #region Game Directory
             {
                 MessageEvent.Game2CheckGameDirectoryStatusMessageEvent,
                 new Game2CheckGameDirectoryStatusMessageParser()
             },
-            { MessageEvent.Game2ExitGameMessageEvent, new Game2ExitGameMessageParser() },
-            { MessageEvent.Game2GameChatMessageEvent, new Game2GameChatMessageParser() },
             {
                 MessageEvent.Game2GetAccountGameStatusMessageEvent,
                 new Game2GetAccountGameStatusMessageParser()
             },
+            { MessageEvent.Game2LeaveGameMessageEvent, new Game2LeaveGameMessageParser() },
+            { MessageEvent.Game2QuickJoinGameMessageEvent, new Game2QuickJoinGameMessageParser() },
+            { MessageEvent.Game2StartSnowWarMessageEvent, new Game2StartSnowWarMessageParser() },
+            #endregion
+
+            #region Game Ingame
+            { MessageEvent.Game2MakeSnowballMessageEvent, new Game2MakeSnowballMessageParser() },
+            {
+                MessageEvent.Game2RequestFullStatusUpdateMessageEvent,
+                new Game2RequestFullStatusUpdateMessageParser()
+            },
+            {
+                MessageEvent.Game2SetUserMoveTargetMessageEvent,
+                new Game2SetUserMoveTargetMessageParser()
+            },
+            {
+                MessageEvent.Game2ThrowSnowballAtHumanMessageEvent,
+                new Game2ThrowSnowballAtHumanMessageParser()
+            },
+            {
+                MessageEvent.Game2ThrowSnowballAtPositionMessageEvent,
+                new Game2ThrowSnowballAtPositionMessageParser()
+            },
+            #endregion
+
+            #region Game Lobby
+            {
+                MessageEvent.GetResolutionAchievementsMessageEvent,
+                new GetResolutionAchievementsMessageParser()
+            },
+            /* {
+                MessageEvent.GetUserGameAchievementsMessageEvent,
+                new GetUserGameAchievementsMessageParser()
+            }, */
+            #endregion
+
+            #region Game Score
             {
                 MessageEvent.Game2GetFriendsLeaderboardEvent,
                 new Game2GetFriendsLeaderboardMessageParser()
@@ -377,44 +436,12 @@ public class Revision20240709 : IRevision
                 MessageEvent.Game2GetWeeklyLeaderboardEvent,
                 new Game2GetWeeklyLeaderboardMessageParser()
             },
-            { MessageEvent.Game2LeaveGameMessageEvent, new Game2LeaveGameMessageParser() },
-            {
-                MessageEvent.Game2LoadStageReadyMessageEvent,
-                new Game2LoadStageReadyMessageParser()
-            },
-            { MessageEvent.Game2MakeSnowballMessageEvent, new Game2MakeSnowballMessageParser() },
-            { MessageEvent.Game2PlayAgainMessageEvent, new Game2PlayAgainMessageParser() },
-            { MessageEvent.Game2QuickJoinGameMessageEvent, new Game2QuickJoinGameMessageParser() },
-            {
-                MessageEvent.Game2RequestFullStatusUpdateMessageEvent,
-                new Game2RequestFullStatusUpdateMessageParser()
-            },
-            {
-                MessageEvent.Game2SetUserMoveTargetMessageEvent,
-                new Game2SetUserMoveTargetMessageParser()
-            },
-            { MessageEvent.Game2StartSnowWarMessageEvent, new Game2StartSnowWarMessageParser() },
-            {
-                MessageEvent.Game2ThrowSnowballAtHumanMessageEvent,
-                new Game2ThrowSnowballAtHumanMessageParser()
-            },
-            {
-                MessageEvent.Game2ThrowSnowballAtPositionMessageEvent,
-                new Game2ThrowSnowballAtPositionMessageParser()
-            },
             /* {
                 MessageEvent.GetFriendsWeeklyCompetitiveLeaderboardMessageEvent,
                 new GetFriendsWeeklyCompetitiveLeaderboardMessageParser()
             }, */
-            {
-                MessageEvent.GetResolutionAchievementsMessageEvent,
-                new GetResolutionAchievementsMessageParser()
-            },
+
             /* {
-                MessageEvent.GetUserGameAchievementsMessageEvent,
-                new GetUserGameAchievementsMessageParser()
-            },
-            {
                 MessageEvent.GetWeeklyCompetitiveLeaderboardMessageEvent,
                 new GetWeeklyCompetitiveLeaderboardMessageParser()
             },
@@ -426,6 +453,8 @@ public class Revision20240709 : IRevision
                 MessageEvent.GetWeeklyGameRewardWinnersMessageEvent,
                 new GetWeeklyGameRewardWinnersMessageParser()
             }, */
+            #endregion
+
             #endregion
 
             #region Gifts
@@ -476,6 +505,7 @@ public class Revision20240709 : IRevision
                 MessageEvent.InitDiffieHandshakeMessageEvent,
                 new InitDiffieHandshakeMessageParser()
             },
+            { MessageEvent.PongMessageEvent, new PongMessageParser() },
             { MessageEvent.SSOTicketMessageEvent, new SSOTicketMessageParser() },
             { MessageEvent.UniqueIDMessageEvent, new UniqueIdMessageParser() },
             { MessageEvent.VersionCheckMessageEvent, new VersionCheckMessageParser() },
@@ -576,38 +606,63 @@ public class Revision20240709 : IRevision
             #endregion
 
             #region Inventory
-            { MessageEvent.AcceptTradingEvent, new AcceptTradingMessageParser() },
-            { MessageEvent.AddItemsToTradeEvent, new AddItemsToTradeMessageParser() },
-            { MessageEvent.AddItemToTradeEvent, new AddItemToTradeMessageParser() },
+
+            #region Inventory Achievements
+            { MessageEvent.GetAchievementsEvent, new GetAchievementsMessageParser() },
+            #endregion
+
+            #region Inventory Avatar Effects
             { MessageEvent.AvatarEffectActivatedEvent, new AvatarEffectActivatedMessageParser() },
             { MessageEvent.AvatarEffectSelectedEvent, new AvatarEffectSelectedMessageParser() },
-            { MessageEvent.CancelPetBreedingEvent, new CancelPetBreedingMessageParser() },
-            { MessageEvent.CloseTradingEvent, new CloseTradingMessageParser() },
-            { MessageEvent.ConfirmAcceptTradingEvent, new ConfirmAcceptTradingMessageParser() },
-            { MessageEvent.ConfirmDeclineTradingEvent, new ConfirmDeclineTradingMessageParser() },
-            { MessageEvent.ConfirmPetBreedingEvent, new ConfirmPetBreedingMessageParser() },
-            { MessageEvent.GetAchievementsEvent, new GetAchievementsMessageParser() },
+            #endregion
+
+            #region Inventory Badges
             { MessageEvent.GetBadgePointLimitsEvent, new GetBadgePointLimitsMessageParser() },
             { MessageEvent.GetBadgesEvent, new GetBadgesMessageParser() },
-            { MessageEvent.GetBotInventoryEvent, new GetBotInventoryMessageParser() },
-            { MessageEvent.GetCreditsInfoEvent, new GetCreditsInfoMessageParser() },
             {
                 MessageEvent.GetIsBadgeRequestFulfilledEvent,
                 new GetIsBadgeRequestFulfilledMessageParser()
             },
-            { MessageEvent.GetPetInventoryEvent, new GetPetInventoryMessageParser() },
-            { MessageEvent.OpenTradingEvent, new OpenTradingMessageParser() },
-            { MessageEvent.RemoveItemFromTradeEvent, new RemoveItemFromTradeMessageParser() },
             { MessageEvent.RequestABadgeEvent, new RequestABadgeMessageParser() },
+            { MessageEvent.SetActivatedBadgesEvent, new SetActivatedBadgesMessageParser() },
+            #endregion
+
+            #region Inventory Bots
+            { MessageEvent.GetBotInventoryEvent, new GetBotInventoryMessageParser() },
+            #endregion
+
+            #region Inventory Furni
             { MessageEvent.RequestFurniInventoryEvent, new RequestFurniInventoryMessageParser() },
             {
                 MessageEvent.RequestFurniInventoryWhenNotInRoomEvent,
                 new RequestFurniInventoryWhenNotInRoomMessageParser()
             },
             { MessageEvent.RequestRoomPropertySet, new RequestRoomPropertySetMessageParser() },
-            { MessageEvent.SetActivatedBadgesEvent, new SetActivatedBadgesMessageParser() },
+            #endregion
+
+            #region Inventory Pets
+            { MessageEvent.CancelPetBreedingEvent, new CancelPetBreedingMessageParser() },
+            { MessageEvent.ConfirmPetBreedingEvent, new ConfirmPetBreedingMessageParser() },
+            { MessageEvent.GetPetInventoryEvent, new GetPetInventoryMessageParser() },
+            #endregion
+
+            #region Inventory Purse
+            { MessageEvent.GetCreditsInfoEvent, new GetCreditsInfoMessageParser() },
+            #endregion
+
+            #region Inventory Trading
+            { MessageEvent.AcceptTradingEvent, new AcceptTradingMessageParser() },
+            { MessageEvent.AddItemsToTradeEvent, new AddItemsToTradeMessageParser() },
+            { MessageEvent.AddItemToTradeEvent, new AddItemToTradeMessageParser() },
+            { MessageEvent.CloseTradingEvent, new CloseTradingMessageParser() },
+            { MessageEvent.ConfirmAcceptTradingEvent, new ConfirmAcceptTradingMessageParser() },
+            { MessageEvent.ConfirmDeclineTradingEvent, new ConfirmDeclineTradingMessageParser() },
+            { MessageEvent.OpenTradingEvent, new OpenTradingMessageParser() },
+            { MessageEvent.RemoveItemFromTradeEvent, new RemoveItemFromTradeMessageParser() },
             { MessageEvent.SilverFeeMessageEvent, new SilverFeeMessageParser() },
             { MessageEvent.UnacceptTradingEvent, new UnacceptTradingMessageParser() },
+            #endregion
+
             #endregion
 
             #region Landingview
@@ -891,35 +946,111 @@ public class Revision20240709 : IRevision
             #endregion
 
             #region Room
-            { MessageEvent.AddSpamWallPostItMessageEvent, new AddSpamWallPostItMessageParser() },
+
+            #region Room Action
             { MessageEvent.AmbassadorAlertMessageEvent, new AmbassadorAlertMessageParser() },
             { MessageEvent.AssignRightsMessageEvent, new AssignRightsMessageParser() },
-            { MessageEvent.AvatarExpressionMessageEvent, new AvatarExpressionMessageParser() },
             {
                 MessageEvent.BanUserWithDurationMessageEvent,
                 new BanUserWithDurationMessageParser()
             },
-            { MessageEvent.BreedPetsMessageEvent, new BreedPetsMessageParser() },
-            { MessageEvent.CancelTypingMessageEvent, new CancelTypingMessageParser() },
+            { MessageEvent.KickUserMessageEvent, new KickUserMessageParser() },
+            { MessageEvent.LetUserInMessageEvent, new LetUserInMessageParser() },
+            { MessageEvent.MuteAllInRoomEvent, new MuteAllInRoomMessageParser() },
+            { MessageEvent.MuteUserMessageEvent, new MuteUserMessageParser() },
+            { MessageEvent.RemoveAllRightsMessageEvent, new RemoveAllRightsMessageParser() },
+            { MessageEvent.RemoveRightsMessageEvent, new RemoveRightsMessageParser() },
+            { MessageEvent.UnbanUserFromRoomMessageEvent, new UnbanUserFromRoomMessageParser() },
+            { MessageEvent.UnmuteUserMessageEvent, new UnmuteUserMessageParser() },
+            #endregion
+
+            #region Room Avatar
+            { MessageEvent.AvatarExpressionMessageEvent, new AvatarExpressionMessageParser() },
             { MessageEvent.ChangeMottoMessageEvent, new ChangeMottoMessageParser() },
             { MessageEvent.ChangePostureMessageEvent, new ChangePostureMessageParser() },
-            { MessageEvent.ChangeQueueMessageEvent, new ChangeQueueMessageParser() },
-            { MessageEvent.ChatMessageEvent, new ChatMessageParser() },
-            { MessageEvent.ClickFurniMessageEvent, new ClickFurniMessageParser() },
+            {
+                MessageEvent.CustomizeAvatarWithFurniMessageEvent,
+                new CustomizeAvatarWithFurniMessageParser()
+            },
+            { MessageEvent.DanceMessageEvent, new DanceMessageParser() },
+            { MessageEvent.DropCarryItemMessageEvent, new DropCarryItemMessageParser() },
+            { MessageEvent.LookToMessageEvent, new LookToMessageParser() },
+            { MessageEvent.PassCarryItemMessageEvent, new PassCarryItemMessageParser() },
+            { MessageEvent.PassCarryItemToPetMessageEvent, new PassCarryItemToPetMessageParser() },
+            { MessageEvent.SignMessageEvent, new SignMessageParser() },
+            #endregion
+
+            #region Room Bots
             { MessageEvent.CommandBotEvent, new CommandBotMessageParser() },
+            {
+                MessageEvent.GetBotCommandConfigurationDataEvent,
+                new GetBotCommandConfigurationDataMessageParser()
+            },
+            #endregion
+
+            #region Room Chat
+            { MessageEvent.CancelTypingMessageEvent, new CancelTypingMessageParser() },
+            { MessageEvent.ChatMessageEvent, new ChatMessageParser() },
+            { MessageEvent.ShoutMessageEvent, new ShoutMessageParser() },
+            { MessageEvent.StartTypingMessageEvent, new StartTypingMessageParser() },
+            { MessageEvent.WhisperMessageEvent, new WhisperMessageParser() },
+            #endregion
+
+            #region Room Engine
+            { MessageEvent.ClickFurniMessageEvent, new ClickFurniMessageParser() },
+            {
+                MessageEvent.GetFurnitureAliasesMessageEvent,
+                new GetFurnitureAliasesMessageParser()
+            },
+            { MessageEvent.GetHeightMapMessageEvent, new GetHeightMapMessageParser() },
+            { MessageEvent.GetItemDataMessageEvent, new GetItemDataMessageParser() },
+            { MessageEvent.GetPetCommandsMessageEvent, new GetPetCommandsMessageParser() },
+            {
+                MessageEvent.GiveSupplementToPetMessageEvent,
+                new GiveSupplementToPetMessageParser()
+            },
+            { MessageEvent.MountPetMessageEvent, new MountPetMessageParser() },
+            { MessageEvent.MoveAvatarMessageEvent, new MoveAvatarMessageParser() },
+            { MessageEvent.MoveObjectMessageEvent, new MoveObjectMessageParser() },
+            { MessageEvent.MovePetMessageEvent, new MovePetMessageParser() },
+            { MessageEvent.MoveWallItemMessageEvent, new MoveWallItemMessageParser() },
+            { MessageEvent.PickupObjectMessageEvent, new PickupObjectMessageParser() },
+            { MessageEvent.PlaceBotMessageEvent, new PlaceBotMessageParser() },
+            { MessageEvent.PlaceObjectMessageEvent, new PlaceObjectMessageParser() },
+            { MessageEvent.PlacePetMessageEvent, new PlacePetMessageParser() },
+            { MessageEvent.RemoveBotFromFlatMessageEvent, new RemoveBotFromFlatMessageParser() },
+            { MessageEvent.RemoveItemMessageEvent, new RemoveItemMessageParser() },
+            { MessageEvent.RemovePetFromFlatMessageEvent, new RemovePetFromFlatMessageParser() },
+            {
+                MessageEvent.RemoveSaddleFromPetMessageEvent,
+                new RemoveSaddleFromPetMessageParser()
+            },
+            {
+                MessageEvent.SetClothingChangeDataMessageEvent,
+                new SetClothingChangeDataMessageParser()
+            },
+            { MessageEvent.SetItemDataMessageEvent, new SetItemDataMessageParser() },
+            { MessageEvent.SetObjectDataMessageEvent, new SetObjectDataMessageParser() },
+            {
+                MessageEvent.TogglePetBreedingPermissionMessageEvent,
+                new TogglePetBreedingPermissionMessageParser()
+            },
+            {
+                MessageEvent.TogglePetRidingPermissionMessageEvent,
+                new TogglePetRidingPermissionMessageParser()
+            },
+            { MessageEvent.UseFurnitureMessageEvent, new UseFurnitureMessageParser() },
+            { MessageEvent.UseWallItemMessageEvent, new UseWallItemMessageParser() },
+            #endregion
+
+            #region Room Furniture
+            { MessageEvent.AddSpamWallPostItMessageEvent, new AddSpamWallPostItMessageParser() },
             {
                 MessageEvent.ControlYoutubeDisplayPlaybackMessageEvent,
                 new ControlYoutubeDisplayPlaybackMessageParser()
             },
             { MessageEvent.CreditFurniRedeemMessageEvent, new CreditFurniRedeemMessageParser() },
-            {
-                MessageEvent.CustomizeAvatarWithFurniMessageEvent,
-                new CustomizeAvatarWithFurniMessageParser()
-            },
-            { MessageEvent.CustomizePetWithFurniEvent, new CustomizePetWithFurniMessageParser() },
-            { MessageEvent.DanceMessageEvent, new DanceMessageParser() },
             { MessageEvent.DiceOffMessageEvent, new DiceOffMessageParser() },
-            { MessageEvent.DropCarryItemMessageEvent, new DropCarryItemMessageParser() },
             { MessageEvent.EnterOneWayDoorMessageEvent, new EnterOneWayDoorMessageParser() },
             {
                 MessageEvent.ExtendRentOrBuyoutFurniMessageEvent,
@@ -930,67 +1061,21 @@ public class Revision20240709 : IRevision
                 new ExtendRentOrBuyoutStripItemMessageParser()
             },
             {
-                MessageEvent.GetBotCommandConfigurationDataEvent,
-                new GetBotCommandConfigurationDataMessageParser()
-            },
-            {
-                MessageEvent.GetFurnitureAliasesMessageEvent,
-                new GetFurnitureAliasesMessageParser()
-            },
-            {
                 MessageEvent.GetGuildFurniContextMenuInfoMessageEvent,
                 new GetGuildFurniContextMenuInfoMessageParser()
             },
-            { MessageEvent.GetHeightMapMessageEvent, new GetHeightMapMessageParser() },
-            { MessageEvent.GetItemDataMessageEvent, new GetItemDataMessageParser() },
-            { MessageEvent.GetOccupiedTilesMessageEvent, new GetOccupiedTilesMessageParser() },
-            { MessageEvent.GetPetCommandsMessageEvent, new GetPetCommandsMessageParser() },
-            { MessageEvent.GetPetInfoMessageEvent, new GetPetInfoMessageParser() },
             {
                 MessageEvent.GetRentOrBuyoutOfferMessageEvent,
                 new GetRentOrBuyoutOfferMessageParser()
             },
-            { MessageEvent.GetRoomEntryTileMessageEvent, new GetRoomEntryTileMessageParser() },
             {
                 MessageEvent.GetYoutubeDisplayStatusMessageEvent,
                 new GetYoutubeDisplayStatusMessageParser()
             },
-            {
-                MessageEvent.GiveSupplementToPetMessageEvent,
-                new GiveSupplementToPetMessageParser()
-            },
-            { MessageEvent.KickUserMessageEvent, new KickUserMessageParser() },
-            { MessageEvent.LetUserInMessageEvent, new LetUserInMessageParser() },
-            { MessageEvent.LookToMessageEvent, new LookToMessageParser() },
-            { MessageEvent.MountPetMessageEvent, new MountPetMessageParser() },
-            { MessageEvent.MoveAvatarMessageEvent, new MoveAvatarMessageParser() },
-            { MessageEvent.MoveObjectMessageEvent, new MoveObjectMessageParser() },
-            { MessageEvent.MovePetMessageEvent, new MovePetMessageParser() },
-            { MessageEvent.MoveWallItemMessageEvent, new MoveWallItemMessageParser() },
-            { MessageEvent.MuteAllInRoomEvent, new MuteAllInRoomMessageParser() },
-            { MessageEvent.MuteUserMessageEvent, new MuteUserMessageParser() },
-            { MessageEvent.OpenFlatConnectionMessageEvent, new OpenFlatConnectionMessageParser() },
             { MessageEvent.OpenMysteryTrophyMessageEvent, new OpenMysteryTrophyMessageParser() },
             { MessageEvent.OpenPetPackageMessageEvent, new OpenPetPackageMessageParser() },
-            { MessageEvent.PassCarryItemMessageEvent, new PassCarryItemMessageParser() },
-            { MessageEvent.PassCarryItemToPetMessageEvent, new PassCarryItemToPetMessageParser() },
-            { MessageEvent.PetSelectedMessageEvent, new PetSelectedMessageParser() },
-            { MessageEvent.PickupObjectMessageEvent, new PickupObjectMessageParser() },
-            { MessageEvent.PlaceBotMessageEvent, new PlaceBotMessageParser() },
-            { MessageEvent.PlaceObjectMessageEvent, new PlaceObjectMessageParser() },
-            { MessageEvent.PlacePetMessageEvent, new PlacePetMessageParser() },
             { MessageEvent.PlacePostItMessageEvent, new PlacePostItMessageParser() },
             { MessageEvent.PresentOpenMessageEvent, new PresentOpenMessageParser() },
-            { MessageEvent.QuitMessageEvent, new QuitMessageParser() },
-            { MessageEvent.RemoveAllRightsMessageEvent, new RemoveAllRightsMessageParser() },
-            { MessageEvent.RemoveBotFromFlatMessageEvent, new RemoveBotFromFlatMessageParser() },
-            { MessageEvent.RemoveItemMessageEvent, new RemoveItemMessageParser() },
-            { MessageEvent.RemovePetFromFlatMessageEvent, new RemovePetFromFlatMessageParser() },
-            { MessageEvent.RemoveRightsMessageEvent, new RemoveRightsMessageParser() },
-            {
-                MessageEvent.RemoveSaddleFromPetMessageEvent,
-                new RemoveSaddleFromPetMessageParser()
-            },
             {
                 MessageEvent.RentableSpaceCancelRentMessageEvent,
                 new RentableSpaceCancelRentMessageParser()
@@ -1000,7 +1085,6 @@ public class Revision20240709 : IRevision
                 MessageEvent.RentableSpaceStatusMessageEvent,
                 new RentableSpaceStatusMessageParser()
             },
-            { MessageEvent.RespectPetMessageEvent, new RespectPetMessageParser() },
             {
                 MessageEvent.RoomDimmerChangeStateMessageEvent,
                 new RoomDimmerChangeStateMessageParser()
@@ -1015,17 +1099,11 @@ public class Revision20240709 : IRevision
             },
             { MessageEvent.SetAreaHideDataEvent, new SetAreaHideDataMessageParser() },
             {
-                MessageEvent.SetClothingChangeDataMessageEvent,
-                new SetClothingChangeDataMessageParser()
-            },
-            {
                 MessageEvent.SetCustomStackingHeightEvent,
                 new SetCustomStackingHeightMessageParser()
             },
-            { MessageEvent.SetItemDataMessageEvent, new SetItemDataMessageParser() },
             { MessageEvent.SetMannequinFigureEvent, new SetMannequinFigureMessageParser() },
             { MessageEvent.SetMannequinNameEvent, new SetMannequinNameMessageParser() },
-            { MessageEvent.SetObjectDataMessageEvent, new SetObjectDataMessageParser() },
             { MessageEvent.SetRandomStateMessageEvent, new SetRandomStateMessageParser() },
             {
                 MessageEvent.SetRoomBackgroundColorDataEvent,
@@ -1035,28 +1113,33 @@ public class Revision20240709 : IRevision
                 MessageEvent.SetYoutubeDisplayPlaylistMessageEvent,
                 new SetYoutubeDisplayPlaylistMessageParser()
             },
-            { MessageEvent.ShoutMessageEvent, new ShoutMessageParser() },
-            { MessageEvent.SignMessageEvent, new SignMessageParser() },
             { MessageEvent.SpinWheelOfFortuneMessageEvent, new SpinWheelOfFortuneMessageParser() },
-            { MessageEvent.StartTypingMessageEvent, new StartTypingMessageParser() },
             { MessageEvent.ThrowDiceMessageEvent, new ThrowDiceMessageParser() },
-            {
-                MessageEvent.TogglePetBreedingPermissionMessageEvent,
-                new TogglePetBreedingPermissionMessageParser()
-            },
-            {
-                MessageEvent.TogglePetRidingPermissionMessageEvent,
-                new TogglePetRidingPermissionMessageParser()
-            },
-            { MessageEvent.UnbanUserFromRoomMessageEvent, new UnbanUserFromRoomMessageParser() },
-            { MessageEvent.UnmuteUserMessageEvent, new UnmuteUserMessageParser() },
+            #endregion
+
+            #region Room Layout
+            { MessageEvent.GetOccupiedTilesMessageEvent, new GetOccupiedTilesMessageParser() },
+            { MessageEvent.GetRoomEntryTileMessageEvent, new GetRoomEntryTileMessageParser() },
             {
                 MessageEvent.UpdateFloorPropertiesMessageEvent,
                 new UpdateFloorPropertiesMessageParser()
             },
-            { MessageEvent.UseFurnitureMessageEvent, new UseFurnitureMessageParser() },
-            { MessageEvent.UseWallItemMessageEvent, new UseWallItemMessageParser() },
-            { MessageEvent.WhisperMessageEvent, new WhisperMessageParser() },
+            #endregion
+
+            #region Room Pets
+            { MessageEvent.BreedPetsMessageEvent, new BreedPetsMessageParser() },
+            { MessageEvent.CustomizePetWithFurniEvent, new CustomizePetWithFurniMessageParser() },
+            { MessageEvent.GetPetInfoMessageEvent, new GetPetInfoMessageParser() },
+            { MessageEvent.PetSelectedMessageEvent, new PetSelectedMessageParser() },
+            { MessageEvent.RespectPetMessageEvent, new RespectPetMessageParser() },
+            #endregion
+
+            #region Room Session
+            { MessageEvent.ChangeQueueMessageEvent, new ChangeQueueMessageParser() },
+            { MessageEvent.OpenFlatConnectionMessageEvent, new OpenFlatConnectionMessageParser() },
+            { MessageEvent.QuitMessageEvent, new QuitMessageParser() },
+            #endregion
+
             #endregion
 
             #region Roomdirectory
@@ -1133,6 +1216,7 @@ public class Revision20240709 : IRevision
             #endregion
 
             #region Userdefinedroomevents
+
             { MessageEvent.ApplySnapshotMessageEvent, new ApplySnapshotMessageParser() },
             { MessageEvent.OpenMessageEvent, new OpenMessageParser() },
             { MessageEvent.UpdateActionMessageEvent, new UpdateActionMessageParser() },
@@ -1141,6 +1225,7 @@ public class Revision20240709 : IRevision
             { MessageEvent.UpdateSelectorMessageEvent, new UpdateSelectorMessageParser() },
             { MessageEvent.UpdateTriggerMessageEvent, new UpdateTriggerMessageParser() },
             { MessageEvent.UpdateVariableMessageEvent, new UpdateVariableMessageParser() },
+            #region Userdefinedroomevents Wiredmenu
             {
                 MessageEvent.WiredClearErrorLogsMessageEvent,
                 new WiredClearErrorLogsMessageParser()
@@ -1179,6 +1264,8 @@ public class Revision20240709 : IRevision
                 MessageEvent.WiredSetRoomSettingsMessageEvent,
                 new WiredSetRoomSettingsMessageParser()
             },
+            #endregion
+
             #endregion
 
             #region Users
@@ -1593,6 +1680,8 @@ public class Revision20240709 : IRevision
             },
             #endregion
 
+            #region Collectibles
+            #endregion
             #region FriendList
             {
                 typeof(AcceptFriendResultMessage),
@@ -1674,6 +1763,63 @@ public class Revision20240709 : IRevision
 
             #region Inventory
 
+            #region Inventory Achievements
+            {
+                typeof(AchievementEventMessageComposer),
+                new AchievementEventMessageComposerSerializer(MessageComposer.AchievementComposer)
+            },
+            {
+                typeof(AchievementsEventMessageComposer),
+                new AchievementsEventMessageComposerSerializer(MessageComposer.AchievementsComposer)
+            },
+            {
+                typeof(AchievementsScoreEventMessageComposer),
+                new AchievementsScoreEventMessageComposerSerializer(
+                    MessageComposer.AchievementsScoreComposer
+                )
+            },
+            #endregion
+
+            #region Inventory Avatareffect
+            {
+                typeof(AvatarEffectActivatedMessageComposer),
+                new AvatarEffectActivatedMessageComposerSerializer(
+                    MessageComposer.AvatarEffectActivatedMessageComposer
+                )
+            },
+            {
+                typeof(AvatarEffectAddedMessageComposer),
+                new AvatarEffectAddedMessageComposerSerializer(
+                    MessageComposer.AvatarEffectAddedMessageComposer
+                )
+            },
+            {
+                typeof(AvatarEffectExpiredMessageComposer),
+                new AvatarEffectExpiredMessageComposerSerializer(
+                    MessageComposer.AvatarEffectExpiredMessageComposer
+                )
+            },
+            {
+                typeof(AvatarEffectSelectedMessageComposer),
+                new AvatarEffectSelectedMessageComposerSerializer(
+                    MessageComposer.AvatarEffectSelectedMessageComposer
+                )
+            },
+            {
+                typeof(AvatarEffectsMessageComposer),
+                new AvatarEffectsMessageComposerSerializer(
+                    MessageComposer.AvatarEffectsMessageComposer
+                )
+            },
+            #endregion
+
+            #region Inventory Clothing
+            {
+                typeof(FigureSetIdsEventMessageComposer),
+                new FigureSetIdsEventMessageComposerSerializer(MessageComposer.FigureSetIdsComposer)
+            },
+            #endregion
+
             #region Inventory Furni
             {
                 typeof(FurniListAddOrUpdateEventMessageComposer),
@@ -1751,6 +1897,33 @@ public class Revision20240709 : IRevision
             },
             #endregion
 
+            #region Mysterybox
+            {
+                typeof(CancelMysteryBoxWaitMessageComposer),
+                new CancelMysteryBoxWaitMessageComposerSerializer(
+                    MessageComposer.CancelMysteryBoxWaitMessageComposer
+                )
+            },
+            {
+                typeof(GotMysteryBoxPrizeMessageComposer),
+                new GotMysteryBoxPrizeMessageComposerSerializer(
+                    MessageComposer.GotMysteryBoxPrizeMessageComposer
+                )
+            },
+            {
+                typeof(MysteryBoxKeysMessageComposer),
+                new MysteryBoxKeysMessageComposerSerializer(
+                    MessageComposer.MysteryBoxKeysMessageComposer
+                )
+            },
+            {
+                typeof(ShowMysteryBoxWaitMessageComposer),
+                new ShowMysteryBoxWaitMessageComposerSerializer(
+                    MessageComposer.ShowMysteryBoxWaitMessageComposer
+                )
+            },
+            #endregion
+
             #region Navigator
             {
                 typeof(CanCreateRoomEventMessageComposer),
@@ -1791,7 +1964,7 @@ public class Revision20240709 : IRevision
                 )
             },
             {
-                typeof(FavouritesMessage),
+                typeof(FavouritesMessageComposer),
                 new FavouritesMessageSerializer(MessageComposer.FavouritesComposer)
             },
             {
@@ -1895,6 +2068,87 @@ public class Revision20240709 : IRevision
                 typeof(NewNavigatorPreferencesMessageComposer),
                 new NewNavigatorPreferencesMessageSerializer(
                     MessageComposer.NewNavigatorPreferencesComposer
+                )
+            },
+            #endregion
+
+            #region Notifications
+            {
+                typeof(ActivityPointsMessageComposer),
+                new ActivityPointsMessageComposerSerializer(
+                    MessageComposer.ActivityPointsMessageComposer
+                )
+            },
+            {
+                typeof(ClubGiftNotificationEventMessageComposer),
+                new ClubGiftNotificationEventMessageComposerSerializer(
+                    MessageComposer.ClubGiftNotificationComposer
+                )
+            },
+            {
+                typeof(ElementPointerMessageComposer),
+                new ElementPointerMessageComposerSerializer(
+                    MessageComposer.ElementPointerMessageComposer
+                )
+            },
+            {
+                typeof(HabboAchievementNotificationMessageComposer),
+                new HabboAchievementNotificationMessageComposerSerializer(
+                    MessageComposer.HabboAchievementNotificationMessageComposer
+                )
+            },
+            {
+                typeof(HabboActivityPointNotificationMessageComposer),
+                new HabboActivityPointNotificationMessageComposerSerializer(
+                    MessageComposer.HabboAchievementNotificationMessageComposer
+                )
+            },
+            {
+                typeof(HabboBroadcastMessageComposer),
+                new HabboBroadcastMessageComposerSerializer(
+                    MessageComposer.HabboBroadcastMessageComposer
+                )
+            },
+            {
+                typeof(InfoFeedEnableMessageComposer),
+                new InfoFeedEnableMessageComposerSerializer(
+                    MessageComposer.InfoFeedEnableMessageComposer
+                )
+            },
+            {
+                typeof(MOTDNotificationEventMessageComposer),
+                new MOTDNotificationEventMessageComposerSerializer(
+                    MessageComposer.MOTDNotificationComposer
+                )
+            },
+            {
+                typeof(NotificationDialogMessageComposer),
+                new NotificationDialogMessageComposerSerializer(
+                    MessageComposer.NotificationDialogMessageComposer
+                )
+            },
+            {
+                typeof(OfferRewardDeliveredMessageComposer),
+                new OfferRewardDeliveredMessageComposerSerializer(
+                    MessageComposer.OfferRewardDeliveredMessageComposer
+                )
+            },
+            {
+                typeof(PetLevelNotificationEventMessageComposer),
+                new PetLevelNotificationEventMessageComposerSerializer(
+                    MessageComposer.PetLevelNotificationComposer
+                )
+            },
+            {
+                typeof(RestoreClientMessageComposer),
+                new RestoreClientMessageComposerSerializer(
+                    MessageComposer.RestoreClientMessageComposer
+                )
+            },
+            {
+                typeof(UnseenItemsEventMessageComposer),
+                new AccountPreferencesEventMessageComposerSerializer(
+                    MessageComposer.UnseenItemsComposer
                 )
             },
             #endregion
@@ -2444,8 +2698,57 @@ public class Revision20240709 : IRevision
 
             #region Users
             {
+                typeof(AccountSafetyLockStatusChangeMessageComposer),
+                new AccountSafetyLockStatusChangeMessageComposerSerializer(
+                    MessageComposer.AccountSafetyLockStatusChangeMessageComposer
+                )
+            },
+            {
+                typeof(ApproveNameMessageComposer),
+                new ApproveNameMessageComposerSerializer(MessageComposer.ApproveNameMessageComposer)
+            },
+            {
+                typeof(ChangeEmailResultEventMessageComposer),
+                new ChangeEmailResultEventMessageComposerSerializer(
+                    MessageComposer.ChangeEmailResultComposer
+                )
+            },
+            {
+                typeof(EmailStatusResultEventMessageComposer),
+                new EmailStatusResultEventMessageComposerSerializer(
+                    MessageComposer.EmailStatusResultComposer
+                )
+            },
+            {
+                typeof(ExtendedProfileChangedMessageComposer),
+                new ExtendedProfileChangedMessageComposerSerializer(
+                    MessageComposer.ExtendedProfileChangedMessageComposer
+                )
+            },
+            {
                 typeof(ScrSendUserInfoMessageComposer),
                 new ScrSendUserInfoMessageSerializer(MessageComposer.ScrSendUserInfoComposer)
+            },
+            #endregion
+
+            #region Valut
+            {
+                typeof(CreditVaultStatusMessageComposer),
+                new CreditVaultStatusMessageComposerSerializer(
+                    MessageComposer.CreditVaultStatusMessageComposer
+                )
+            },
+            {
+                typeof(IncomeRewardClaimResponseMessageComposer),
+                new IncomeRewardClaimResponseMessageComposerSerializer(
+                    MessageComposer.IncomeRewardClaimResponseMessageComposer
+                )
+            },
+            {
+                typeof(IncomeRewardStatusMessageComposer),
+                new IncomeRewardStatusMessageComposerSerializer(
+                    MessageComposer.IncomeRewardStatusMessageComposer
+                )
             },
             #endregion
         };

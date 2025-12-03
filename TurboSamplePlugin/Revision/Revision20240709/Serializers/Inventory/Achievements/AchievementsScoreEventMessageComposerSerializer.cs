@@ -11,6 +11,6 @@ internal class AchievementsScoreEventMessageComposerSerializer(int header)
         AchievementsScoreEventMessageComposer message
     )
     {
-        //
+        packet.WriteInteger(message.Score);
     }
 }

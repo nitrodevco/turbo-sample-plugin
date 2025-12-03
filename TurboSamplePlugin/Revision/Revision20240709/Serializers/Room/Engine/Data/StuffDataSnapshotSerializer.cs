@@ -1,6 +1,6 @@
+using Turbo.Primitives.Furniture.Snapshots.StuffData;
 using Turbo.Primitives.Furniture.StuffData;
 using Turbo.Primitives.Packets;
-using Turbo.Primitives.Rooms.Snapshots.StuffData;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Engine.Data;
 
@@ -10,77 +10,49 @@ internal class StuffDataSnapshotSerializer
     {
         packet.WriteInteger(item.StuffBitmask);
 
-        if (item.LegacyPayload is not null)
+        switch (item)
         {
-            packet.WriteString(item.LegacyPayload.Data);
-        }
-        else if (item.MapPayload is not null)
-        {
-            packet.WriteInteger(item.MapPayload.Data.Count);
+            case EmptyStuffSnapshot empty:
+                break;
+            case HighscoreStuffSnapshot highscore:
+                packet
+                    .WriteString(highscore.Data)
+                    .WriteInteger(highscore.ScoreType)
+                    .WriteInteger(highscore.ClearType)
+                    .WriteInteger(highscore.Scores.Count);
 
-            foreach (var (key, value) in item.MapPayload.Data)
-                packet.WriteString(key).WriteString(value);
-        }
-        else if (item.StringPayload is not null)
-        {
-            packet.WriteInteger(item.StringPayload.Data.Length);
+                foreach (var score in highscore.Scores)
+                {
+                    packet.WriteInteger(score.Key).WriteInteger(score.Value.Length);
 
-            foreach (var value in item.StringPayload.Data)
-                packet.WriteString(value);
-        }
-        else if (item.VotePayload is not null)
-        {
-            packet.WriteString(item.VotePayload.Data).WriteInteger(item.VotePayload.Result);
-        }
-        else if (item.NumberPayload is not null)
-        {
-            packet.WriteInteger(item.NumberPayload.Data.Length);
-
-            foreach (var value in item.NumberPayload.Data)
-                packet.WriteInteger(value);
-        }
-        else if (item.HighscorePayload is not null)
-        {
-            packet
-                .WriteString(item.HighscorePayload.Data)
-                .WriteInteger(item.HighscorePayload.ScoreType)
-                .WriteInteger(item.HighscorePayload.ClearType)
-                .WriteInteger(item.HighscorePayload.Scores.Count);
-
-            foreach (var score in item.HighscorePayload.Scores)
-            {
-                packet.WriteInteger(score.Key).WriteInteger(score.Value.Length);
-
-                foreach (var name in score.Value)
-                    packet.WriteString(name);
-            }
+                    foreach (var name in score.Value)
+                        packet.WriteString(name);
+                }
+                break;
+            case LegacyStuffSnapshot legacy:
+                packet.WriteString(legacy.Data);
+                break;
+            case MapStuffSnapshot map:
+                packet.WriteInteger(map.Data.Count);
+                foreach (var (key, value) in map.Data)
+                    packet.WriteString(key).WriteString(value);
+                break;
+            case NumberStuffSnapshot number:
+                packet.WriteInteger(number.Data.Length);
+                foreach (var value in number.Data)
+                    packet.WriteInteger(value);
+                break;
+            case StringStuffSnapshot str:
+                packet.WriteInteger(str.Data.Length);
+                foreach (var value in str.Data)
+                    packet.WriteString(value);
+                break;
+            case VoteStuffSnapshot vote:
+                packet.WriteString(vote.Data).WriteInteger(vote.Result);
+                break;
         }
 
         if ((item.StuffBitmask & (int)StuffDataFlags.Unique) != 0)
             packet.WriteInteger(item.UniqueNumber).WriteInteger(item.UniqueSeries);
-    }
-
-    public static void SerializeLegacyString(IServerPacket packet, StuffDataSnapshot item)
-    {
-        var legacyString = string.Empty;
-
-        if (item.LegacyPayload is not null)
-        {
-            legacyString = item.LegacyPayload.Data;
-        }
-        else if (item.MapPayload is not null)
-        {
-            legacyString = item.MapPayload.Data["state"];
-        }
-        else if (item.NumberPayload is not null)
-        {
-            legacyString = item.NumberPayload.Data[0].ToString();
-        }
-        else if (item.StringPayload is not null)
-        {
-            legacyString = item.StringPayload.Data[0];
-        }
-
-        packet.WriteString(legacyString);
     }
 }

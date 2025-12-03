@@ -8,6 +8,6 @@ internal class MysteryBoxKeysMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, MysteryBoxKeysMessageComposer message)
     {
-        //
+        packet.WriteString(message.BoxColor).WriteString(message.KeyColor);
     }
 }

@@ -8,6 +8,9 @@ internal class ActivityPointsMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, ActivityPointsMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.PointsByCategoryId.Count);
+
+        foreach (var (categoryId, points) in message.PointsByCategoryId)
+            packet.WriteInteger(categoryId).WriteInteger(points);
     }
 }
