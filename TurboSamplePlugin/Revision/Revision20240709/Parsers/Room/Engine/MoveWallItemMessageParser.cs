@@ -6,5 +6,6 @@ namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Engine;
 
 internal class MoveWallItemMessageParser : IParser
 {
-    public IMessageEvent Parse(IClientPacket packet) => new MoveWallItemMessage();
+    public IMessageEvent Parse(IClientPacket packet) =>
+        new MoveWallItemMessage { ObjectId = packet.PopInt(), WallPosition = packet.PopString() };
 }
