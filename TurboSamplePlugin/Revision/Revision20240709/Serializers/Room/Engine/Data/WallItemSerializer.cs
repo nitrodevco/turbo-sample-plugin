@@ -10,7 +10,7 @@ internal class WallItemSerializer
         packet
             .WriteString(item.ObjectId.ToString())
             .WriteInteger(item.SpriteId)
-            .WriteString(item.WallLocation)
+            .WriteString(item.WallPosition)
             .WriteString(item.StuffData)
             .WriteInteger(-1) // expiration
             .WriteInteger((int)item.UsagePolicy)
