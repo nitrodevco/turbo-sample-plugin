@@ -1,4 +1,3 @@
-using Turbo.Primitives.Inventory.Snapshots;
 using Turbo.Primitives.Messages.Outgoing.Inventory.Furni;
 using Turbo.Primitives.Packets;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Inventory.Furni.Data;
@@ -16,11 +15,6 @@ internal class FurniListEventMessageComposerSerializer(int header)
             .WriteInteger(message.Items.Length);
 
         foreach (var item in message.Items)
-        {
-            if (item is FurnitureFloorItemSnapshot floorItem)
-            {
-                FurnitureFloorItemSerializer.Serialize(packet, floorItem);
-            }
-        }
+            FurnitureItemSerializer.Serialize(packet, item);
     }
 }

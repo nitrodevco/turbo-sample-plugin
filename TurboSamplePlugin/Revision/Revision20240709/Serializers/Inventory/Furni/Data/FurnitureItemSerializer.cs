@@ -6,13 +6,13 @@ using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Engine.Data;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Inventory.Furni.Data;
 
-internal class FurnitureFloorItemSerializer
+internal class FurnitureItemSerializer
 {
-    public static void Serialize(IServerPacket packet, FurnitureFloorItemSnapshot item)
+    public static void Serialize(IServerPacket packet, FurnitureItemSnapshot item)
     {
         packet
             .WriteInteger(-Math.Abs(item.ItemId))
-            .WriteString(ProductType.Floor.ToLegacyString().ToUpper())
+            .WriteString(item.Definition.ProductType.ToLegacyString().ToUpper())
             .WriteInteger(item.ItemId)
             .WriteInteger(item.SpriteId)
             .WriteInteger((int)item.Definition.FurniCategory);

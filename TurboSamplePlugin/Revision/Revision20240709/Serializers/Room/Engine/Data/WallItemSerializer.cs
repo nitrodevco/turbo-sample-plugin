@@ -1,3 +1,4 @@
+using Turbo.Primitives.Furniture.Snapshots.StuffData;
 using Turbo.Primitives.Packets;
 using Turbo.Primitives.Rooms.Snapshots;
 
@@ -10,8 +11,12 @@ internal class WallItemSerializer
         packet
             .WriteString(item.ObjectId.ToString())
             .WriteInteger(item.SpriteId)
-            .WriteString(item.WallPosition)
-            .WriteString(item.StuffData)
+            .WriteString(item.WallPosition);
+
+        if (item.StuffData is LegacyStuffSnapshot legacy)
+            packet.WriteString(legacy.Data);
+
+        packet
             .WriteInteger(-1) // expiration
             .WriteInteger((int)item.UsagePolicy)
             .WriteInteger((int)item.OwnerId);
