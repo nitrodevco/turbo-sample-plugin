@@ -6,5 +6,6 @@ namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Engine;
 
 internal class PlaceObjectMessageParser : IParser
 {
-    public IMessageEvent Parse(IClientPacket packet) => new PlaceObjectMessage();
+    public IMessageEvent Parse(IClientPacket packet) =>
+        new PlaceObjectMessage { Data = packet.PopString() };
 }
