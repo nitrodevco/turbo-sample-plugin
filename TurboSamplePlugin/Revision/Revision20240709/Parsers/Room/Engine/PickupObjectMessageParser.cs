@@ -6,5 +6,11 @@ namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Engine;
 
 internal class PickupObjectMessageParser : IParser
 {
-    public IMessageEvent Parse(IClientPacket packet) => new PickupObjectMessage();
+    public IMessageEvent Parse(IClientPacket packet) =>
+        new PickupObjectMessage
+        {
+            CategoryId = packet.PopInt(),
+            ObjectId = packet.PopInt(),
+            Confirm = packet.PopBoolean(),
+        };
 }
