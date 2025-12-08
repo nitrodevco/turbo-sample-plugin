@@ -10,10 +10,12 @@ internal class FurnitureItemSerializer
 {
     public static void Serialize(IServerPacket packet, FurnitureItemSnapshot item)
     {
+        var type = item.Definition.ProductType;
+
         packet
-            .WriteInteger(-Math.Abs(item.ItemId))
-            .WriteString(item.Definition.ProductType.ToLegacyString().ToUpper())
             .WriteInteger(item.ItemId)
+            .WriteString(type.ToLegacyString().ToUpper())
+            .WriteInteger(type == ProductType.Wall ? Math.Abs(item.ItemId) : -Math.Abs(item.ItemId))
             .WriteInteger(item.SpriteId)
             .WriteInteger((int)item.Definition.FurniCategory);
 
@@ -26,8 +28,9 @@ internal class FurnitureItemSerializer
             .WriteBoolean(item.Definition.CanSell)
             .WriteInteger(item.SecondsToExpiration)
             .WriteBoolean(item.HasRentPeriodStarted)
-            .WriteInteger(item.RoomId)
-            .WriteString(item.SlotId)
-            .WriteInteger(item.Extra);
+            .WriteInteger(item.RoomId);
+
+        if (type == ProductType.Floor)
+            packet.WriteString(item.SlotId).WriteInteger(item.Extra);
     }
 }
