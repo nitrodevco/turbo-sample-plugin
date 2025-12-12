@@ -12,22 +12,31 @@ internal class SlideObjectBundleMessageComposerSerializer(int header)
     )
     {
         packet
-            .WriteInteger(message.OldX)
-            .WriteInteger(message.OldY)
-            .WriteInteger(message.NewX)
-            .WriteInteger(message.NewY)
-            .WriteInteger(message.FloorHeights.Length);
+            .WriteInteger(message.FromX)
+            .WriteInteger(message.FromY)
+            .WriteInteger(message.ToX)
+            .WriteInteger(message.ToY)
+            .WriteInteger(message.FloorItemHeights.Length);
 
-        foreach (var (objectId, prev, next) in message.FloorHeights)
+        foreach (var (objectId, prev, next) in message.FloorItemHeights)
         {
             packet
-                .WriteInteger((int)objectId)
-                .WriteString(prev.ToString())
-                .WriteString(next.ToString());
+                .WriteInteger(objectId)
+                .WriteString(prev.ToString("0.000"))
+                .WriteString(next.ToString("0.000"));
         }
 
         packet.WriteInteger(message.RollerItemId);
 
-        // avatar int moveType, total, prev, next height single
+        if (message.Avatar is not null)
+        {
+            var (moveType, objectId, prev, next) = message.Avatar.Value;
+
+            packet
+                .WriteInteger((int)moveType)
+                .WriteInteger(objectId)
+                .WriteString(prev.ToString("0.000"))
+                .WriteString(next.ToString("0.000"));
+        }
     }
 }
