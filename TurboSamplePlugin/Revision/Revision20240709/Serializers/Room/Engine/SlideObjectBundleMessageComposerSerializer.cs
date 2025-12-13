@@ -22,8 +22,8 @@ internal class SlideObjectBundleMessageComposerSerializer(int header)
         {
             packet
                 .WriteInteger(objectId)
-                .WriteString(prev.ToString("0.000"))
-                .WriteString(next.ToString("0.000"));
+                .WriteString(prev.ToString("0.00"))
+                .WriteString(next.ToString("0.00"));
         }
 
         packet.WriteInteger(message.RollerItemId);
@@ -35,8 +35,8 @@ internal class SlideObjectBundleMessageComposerSerializer(int header)
             packet
                 .WriteInteger((int)moveType)
                 .WriteInteger(objectId)
-                .WriteString(prev.ToString("0.000"))
-                .WriteString(next.ToString("0.000"));
+                .WriteString(prev.ToString("0.00"))
+                .WriteString(next.ToString("0.00"));
         }
     }
 }
