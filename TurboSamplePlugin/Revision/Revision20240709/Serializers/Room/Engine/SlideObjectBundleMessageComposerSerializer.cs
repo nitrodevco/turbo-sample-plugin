@@ -20,10 +20,7 @@ internal class SlideObjectBundleMessageComposerSerializer(int header)
 
         foreach (var (objectId, prev, next) in message.FloorItemHeights)
         {
-            packet
-                .WriteInteger(objectId)
-                .WriteString(prev.ToString("0.00"))
-                .WriteString(next.ToString("0.00"));
+            packet.WriteInteger(objectId).WriteString(prev.ToString()).WriteString(next.ToString());
         }
 
         packet.WriteInteger(message.RollerItemId);
@@ -35,8 +32,8 @@ internal class SlideObjectBundleMessageComposerSerializer(int header)
             packet
                 .WriteInteger((int)moveType)
                 .WriteInteger(objectId)
-                .WriteString(prev.ToString("0.00"))
-                .WriteString(next.ToString("0.00"));
+                .WriteString(prev.ToString())
+                .WriteString(next.ToString());
         }
     }
 }
