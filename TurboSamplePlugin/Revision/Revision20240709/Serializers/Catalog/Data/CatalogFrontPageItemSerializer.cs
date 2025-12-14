@@ -1,6 +1,6 @@
 using Turbo.Primitives.Catalog.Enums;
+using Turbo.Primitives.Catalog.Snapshots;
 using Turbo.Primitives.Packets;
-using Turbo.Primitives.Snapshots.Catalog;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Catalog.Data;
 

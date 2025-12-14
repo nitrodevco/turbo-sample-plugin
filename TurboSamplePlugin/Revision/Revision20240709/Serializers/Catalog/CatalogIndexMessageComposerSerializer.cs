@@ -1,9 +1,8 @@
-using System.Linq;
+using System.Collections.Generic;
 using Turbo.Primitives.Catalog.Enums;
+using Turbo.Primitives.Catalog.Snapshots;
 using Turbo.Primitives.Messages.Outgoing.Catalog;
 using Turbo.Primitives.Packets;
-using Turbo.Primitives.Snapshots.Catalog;
-using Turbo.Primitives.Snapshots.Catalog.Extensions;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Catalog.Data;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Catalog;
@@ -13,7 +12,7 @@ internal class CatalogIndexMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, CatalogIndexMessageComposer message)
     {
-        var rootPage = message.Catalog.PagesById.First(x => x.Value.ParentId == -1).Value;
+        var rootPage = message.Catalog.PagesById[message.Catalog.RootPageId];
 
         if (rootPage is null)
             return;
@@ -33,19 +32,28 @@ internal class CatalogIndexMessageComposerSerializer(int header)
     {
         CatalogPageSnapshotSerializer.Serialize(packet, page);
 
-        var offers = snapshot.GetOfferIdsByPageId(page.Id);
+        if (snapshot.PageOfferIds.TryGetValue(page.Id, out var offerIds))
+        {
+            packet.WriteInteger(offerIds.Length);
 
-        packet.WriteInteger(offers.Length);
+            foreach (var offerId in offerIds)
+                packet.WriteInteger(offerId);
+        }
+        else
+            packet.WriteInteger(0);
 
-        foreach (var offerId in offers)
-            packet.WriteInteger(offerId);
+        List<CatalogPageSnapshot> children = [];
 
-        var children = snapshot
-            .GetChildPageIdsByPageId(page.Id)
-            .Select(snapshot.GetPageById)
-            .ToArray();
+        if (snapshot.PageChildrenIds.TryGetValue(page.Id, out var childIds))
+        {
+            foreach (var childId in childIds)
+            {
+                if (snapshot.PagesById.TryGetValue(childId, out var childPage))
+                    children.Add(childPage);
+            }
+        }
 
-        packet.WriteInteger(children.Length);
+        packet.WriteInteger(children.Count);
 
         foreach (var child in children)
             SerializePage(packet, snapshot, child);
