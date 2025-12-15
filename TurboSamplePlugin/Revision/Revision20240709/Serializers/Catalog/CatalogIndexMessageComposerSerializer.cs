@@ -32,25 +32,17 @@ internal class CatalogIndexMessageComposerSerializer(int header)
     {
         CatalogPageSnapshotSerializer.Serialize(packet, page);
 
-        if (snapshot.PageOfferIds.TryGetValue(page.Id, out var offerIds))
-        {
-            packet.WriteInteger(offerIds.Length);
+        packet.WriteInteger(page.OfferIds.Length);
 
-            foreach (var offerId in offerIds)
-                packet.WriteInteger(offerId);
-        }
-        else
-            packet.WriteInteger(0);
+        foreach (var offerId in page.OfferIds)
+            packet.WriteInteger(offerId);
 
         List<CatalogPageSnapshot> children = [];
 
-        if (snapshot.PageChildrenIds.TryGetValue(page.Id, out var childIds))
+        foreach (var childId in page.ChildIds)
         {
-            foreach (var childId in childIds)
-            {
-                if (snapshot.PagesById.TryGetValue(childId, out var childPage))
-                    children.Add(childPage);
-            }
+            if (snapshot.PagesById.TryGetValue(childId, out var childPage))
+                children.Add(childPage);
         }
 
         packet.WriteInteger(children.Count);

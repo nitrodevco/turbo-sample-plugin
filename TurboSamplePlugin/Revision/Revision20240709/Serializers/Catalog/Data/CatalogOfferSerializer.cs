@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Turbo.Primitives.Catalog.Snapshots;
 using Turbo.Primitives.Packets;
 
@@ -6,11 +5,7 @@ namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Catalog.Data;
 
 internal class CatalogOfferSerializer
 {
-    public static void Serialize(
-        IServerPacket packet,
-        CatalogOfferSnapshot offer,
-        List<CatalogProductSnapshot> offerProducts
-    )
+    public static void Serialize(IServerPacket packet, CatalogOfferSnapshot offer)
     {
         packet
             .WriteInteger(offer.Id)
@@ -21,9 +16,9 @@ internal class CatalogOfferSerializer
             .WriteInteger(offer.CurrencyType ?? -1)
             .WriteInteger(offer.CostSilver)
             .WriteBoolean(offer.CanGift)
-            .WriteInteger(offerProducts.Count);
+            .WriteInteger(offer.Products.Length);
 
-        foreach (var product in offerProducts)
+        foreach (var product in offer.Products)
             CatalogProductSerializer.Serialize(packet, product);
 
         packet
@@ -31,5 +26,23 @@ internal class CatalogOfferSerializer
             .WriteBoolean(offer.CanBundle)
             .WriteBoolean(false) // unknownBoolean
             .WriteString(string.Empty); // previewImage
+    }
+
+    public static void SerializeAsPurchased(IServerPacket packet, CatalogOfferSnapshot offer)
+    {
+        packet
+            .WriteInteger(offer.Id)
+            .WriteString(offer.LocalizationId)
+            .WriteBoolean(offer.Rentable)
+            .WriteInteger(offer.CostCredits)
+            .WriteInteger(offer.CostCurrency)
+            .WriteInteger(offer.CurrencyType ?? -1)
+            .WriteBoolean(offer.CanGift)
+            .WriteInteger(offer.Products.Length);
+
+        foreach (var product in offer.Products)
+            CatalogProductSerializer.Serialize(packet, product);
+
+        packet.WriteInteger(offer.ClubLevel).WriteBoolean(offer.CanBundle);
     }
 }

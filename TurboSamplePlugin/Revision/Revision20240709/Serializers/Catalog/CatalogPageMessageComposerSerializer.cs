@@ -17,19 +17,15 @@ internal class CatalogPageMessageComposerSerializer(int header)
 
         CatalogPageLocalizationSerializer.Serialize(packet, message.Page);
 
-        packet.WriteInteger(message.Offers.Count);
+        packet.WriteInteger(message.Offers.Length);
 
         foreach (var offer in message.Offers)
-        {
-            var products = message.OfferProducts[offer.Id];
-
-            CatalogOfferSerializer.Serialize(packet, offer, products);
-        }
+            CatalogOfferSerializer.Serialize(packet, offer);
 
         packet
             .WriteInteger(message.OfferId)
             .WriteBoolean(message.AcceptSeasonCurrencyAsCredits)
-            .WriteInteger(message.FrontPageItems.Count);
+            .WriteInteger(message.FrontPageItems.Length);
 
         foreach (var frontPageItem in message.FrontPageItems)
             CatalogFrontPageItemSerializer.Serialize(packet, frontPageItem);

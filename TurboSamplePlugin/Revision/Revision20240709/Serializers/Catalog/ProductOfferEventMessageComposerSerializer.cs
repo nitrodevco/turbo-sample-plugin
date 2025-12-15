@@ -12,6 +12,6 @@ internal class ProductOfferEventMessageComposerSerializer(int header)
         ProductOfferEventMessageComposer message
     )
     {
-        CatalogOfferSerializer.Serialize(packet, message.Offer, message.OfferProducts);
+        CatalogOfferSerializer.Serialize(packet, message.Offer);
     }
 }

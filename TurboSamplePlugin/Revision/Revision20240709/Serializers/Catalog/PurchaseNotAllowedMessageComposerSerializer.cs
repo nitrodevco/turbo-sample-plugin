@@ -11,6 +11,6 @@ internal class PurchaseNotAllowedMessageComposerSerializer(int header)
         PurchaseNotAllowedMessageComposer message
     )
     {
-        //
+        packet.WriteInteger((int)message.ErrorType);
     }
 }
