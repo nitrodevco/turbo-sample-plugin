@@ -7,7 +7,7 @@ internal class MessengerFriendSnapshotSerializer
 {
     public static void Serialize(IServerPacket packet, MessengerFriendSnapshot message)
     {
-        packet.WriteInteger((int)message.Id);
+        packet.WriteInteger(message.PlayerId);
         packet.WriteString(message.Name);
         packet.WriteInteger((int)message.Gender);
         packet.WriteBoolean(message.Online);

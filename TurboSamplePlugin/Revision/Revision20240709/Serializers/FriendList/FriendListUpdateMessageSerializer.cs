@@ -25,7 +25,7 @@ internal class FriendListUpdateMessageSerializer(int header)
 
             if (update.ActionType is FriendListUpdateActionType.Removed)
             {
-                packet.WriteInteger((int)update.FriendId);
+                packet.WriteInteger(update.FriendId);
 
                 continue;
             }

@@ -8,6 +8,6 @@ internal class RoomEntryInfoMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, RoomEntryInfoMessageComposer message)
     {
-        packet.WriteInteger((int)message.RoomId).WriteBoolean(message.IsOwner);
+        packet.WriteInteger(message.RoomId).WriteBoolean(message.IsOwner);
     }
 }

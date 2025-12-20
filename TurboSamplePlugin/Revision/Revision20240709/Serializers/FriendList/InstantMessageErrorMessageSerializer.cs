@@ -12,7 +12,7 @@ internal class InstantMessageErrorMessageSerializer(int header)
     )
     {
         packet.WriteInteger((int)message.ErrorCode);
-        packet.WriteInteger((int)message.PlayerId);
+        packet.WriteInteger(message.PlayerId);
         packet.WriteString(message.Message);
     }
 }

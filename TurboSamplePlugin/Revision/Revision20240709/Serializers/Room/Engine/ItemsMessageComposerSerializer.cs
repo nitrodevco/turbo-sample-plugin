@@ -13,7 +13,7 @@ internal class ItemsMessageComposerSerializer(int header)
 
         foreach (var (ownerId, ownerName) in message.OwnerNames)
         {
-            packet.WriteInteger((int)ownerId);
+            packet.WriteInteger(ownerId);
             packet.WriteString(ownerName);
         }
 

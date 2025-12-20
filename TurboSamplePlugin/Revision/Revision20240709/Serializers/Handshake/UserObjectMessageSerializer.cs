@@ -9,7 +9,7 @@ internal class UserObjectMessageSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, UserObjectMessage message)
     {
-        packet.WriteInteger((int)message.Player.PlayerId);
+        packet.WriteInteger(message.Player.PlayerId);
         packet.WriteString(message.Player.Name);
         packet.WriteString(message.Player.Figure);
         packet.WriteString(message.Player.Gender.ToLegacyString());

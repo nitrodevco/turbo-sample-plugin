@@ -9,9 +9,9 @@ internal class RoomSettingsSerializer
     public static void Serialize(IServerPacket packet, RoomInfoSnapshot message)
     {
         packet
-            .WriteInteger((int)message.RoomId)
+            .WriteInteger(message.RoomId)
             .WriteString(message.Name)
-            .WriteInteger((int)message.OwnerId)
+            .WriteInteger(message.OwnerId)
             .WriteString(message.OwnerName)
             .WriteInteger((int)message.DoorMode)
             .WriteInteger(message.Population)

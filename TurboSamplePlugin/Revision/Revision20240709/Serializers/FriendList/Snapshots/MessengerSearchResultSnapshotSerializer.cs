@@ -7,7 +7,7 @@ internal class MessengerSearchResultSnapshotSerializer
 {
     public static void Serialize(IServerPacket packet, MessengerSearchResultSnapshot message)
     {
-        packet.WriteInteger((int)message.Id);
+        packet.WriteInteger(message.PlayerId);
         packet.WriteString(message.Name);
         packet.WriteString(message.Motto);
         packet.WriteBoolean(message.Online);

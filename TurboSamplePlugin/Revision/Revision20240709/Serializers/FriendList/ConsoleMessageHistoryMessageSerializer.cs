@@ -16,7 +16,7 @@ internal class ConsoleMessageHistoryMessageSerializer(int header)
 
         foreach (var consoleMessage in message.Messages)
         {
-            packet.WriteInteger((int)consoleMessage.SenderId);
+            packet.WriteInteger(consoleMessage.SenderId);
             packet.WriteString(consoleMessage.SenderName);
             packet.WriteString(consoleMessage.SenderFigure);
             packet.WriteString(consoleMessage.Message);
