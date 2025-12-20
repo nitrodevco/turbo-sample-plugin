@@ -13,7 +13,7 @@ internal class UserUpdateMessageComposerSerializer(int header)
         foreach (var avatar in message.Avatars)
         {
             packet
-                .WriteInteger(avatar.ObjectId.Value)
+                .WriteInteger(avatar.ObjectId)
                 .WriteInteger(avatar.X)
                 .WriteInteger(avatar.Y)
                 .WriteString(avatar.Z.ToString())

@@ -13,7 +13,7 @@ internal class RoomAvatarSerializer
             .WriteString(item.Name)
             .WriteString(item.Motto)
             .WriteString(item.Figure)
-            .WriteInteger(item.ObjectId.Value)
+            .WriteInteger(item.ObjectId)
             .WriteInteger(item.X)
             .WriteInteger(item.Y)
             .WriteString(item.Z.ToString())

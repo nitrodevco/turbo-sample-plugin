@@ -8,7 +8,7 @@ internal class FloorItemSerializer
     public static void Serialize(IServerPacket packet, RoomFloorItemSnapshot item)
     {
         packet
-            .WriteInteger(item.ObjectId.Value)
+            .WriteInteger(item.ObjectId)
             .WriteInteger(item.SpriteId)
             .WriteInteger(item.X)
             .WriteInteger(item.Y)
