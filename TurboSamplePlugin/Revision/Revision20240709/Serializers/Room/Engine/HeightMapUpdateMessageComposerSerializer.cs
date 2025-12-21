@@ -8,9 +8,9 @@ internal class HeightMapUpdateMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, HeightMapUpdateMessageComposer message)
     {
-        packet.WriteByte((byte)message.Tiles.Length);
+        packet.WriteByte((byte)message.TileHeights.Length);
 
-        foreach (var tile in message.Tiles)
-            packet.WriteByte(tile.X).WriteByte(tile.Y).WriteShort(tile.EncodedHeight);
+        foreach (var tile in message.TileHeights)
+            packet.WriteByte((byte)tile.X).WriteByte((byte)tile.Y).WriteShort(tile.Height);
     }
 }
