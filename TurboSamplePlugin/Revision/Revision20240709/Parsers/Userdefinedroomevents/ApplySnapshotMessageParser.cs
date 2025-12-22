@@ -6,5 +6,6 @@ namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Userdefinedroomeve
 
 internal class ApplySnapshotMessageParser : IParser
 {
-    public IMessageEvent Parse(IClientPacket packet) => new ApplySnapshotMessage();
+    public IMessageEvent Parse(IClientPacket packet) =>
+        new ApplySnapshotMessage { Id = packet.PopInt() };
 }

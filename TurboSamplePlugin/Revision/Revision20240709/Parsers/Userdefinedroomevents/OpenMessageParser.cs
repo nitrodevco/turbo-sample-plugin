@@ -6,5 +6,5 @@ namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Userdefinedroomeve
 
 internal class OpenMessageParser : IParser
 {
-    public IMessageEvent Parse(IClientPacket packet) => new OpenMessage();
+    public IMessageEvent Parse(IClientPacket packet) => new OpenMessage { Id = packet.PopInt() };
 }
