@@ -8,6 +8,6 @@ internal class OpenEventMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, OpenEventMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.ItemId);
     }
 }

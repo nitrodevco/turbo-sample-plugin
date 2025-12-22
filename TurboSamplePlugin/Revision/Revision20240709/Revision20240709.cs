@@ -34,6 +34,7 @@ using Turbo.Primitives.Messages.Outgoing.Room.Permissions;
 using Turbo.Primitives.Messages.Outgoing.Room.Pets;
 using Turbo.Primitives.Messages.Outgoing.Room.Session;
 using Turbo.Primitives.Messages.Outgoing.Tracking;
+using Turbo.Primitives.Messages.Outgoing.Userdefinedroomevents;
 using Turbo.Primitives.Messages.Outgoing.Userdefinedroomevents.Wiredmenu;
 using Turbo.Primitives.Messages.Outgoing.Users;
 using Turbo.Primitives.Messages.Outgoing.Vault;
@@ -134,6 +135,7 @@ using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Permissions;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Pets;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Session;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Tracking;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Userdefinedroomevents;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Userdefinedroomevents.Wiredmenu;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Users;
 using TurboSamplePlugin.Revision.Revision20240709.Serializers.Vault;
@@ -2971,6 +2973,77 @@ public class Revision20240709 : IRevision
             },
             #endregion
 
+            #region Userdefinedroomevents
+
+            #region Userdefinedroomevents Wiredmenu
+            {
+                typeof(WiredPermissionsEventMessageComposer),
+                new WiredPermissionsEventMessageComposerSerializer(
+                    MessageComposer.WiredPermissionsComposer
+                )
+            },
+            #endregion
+
+            {
+                typeof(OpenEventMessageComposer),
+                new OpenEventMessageComposerSerializer(MessageComposer.OpenComposer)
+            },
+            {
+                typeof(WiredFurniActionEventMessageComposer),
+                new WiredFurniActionEventMessageComposerSerializer(
+                    MessageComposer.WiredFurniActionComposer
+                )
+            },
+            {
+                typeof(WiredFurniAddonEventMessageComposer),
+                new WiredFurniAddonEventMessageComposerSerializer(
+                    MessageComposer.WiredFurniAddonComposer
+                )
+            },
+            {
+                typeof(WiredFurniConditionEventMessageComposer),
+                new WiredFurniConditionEventMessageComposerSerializer(
+                    MessageComposer.WiredFurniConditionComposer
+                )
+            },
+            {
+                typeof(WiredFurniSelectorEventMessageComposer),
+                new WiredFurniSelectorEventMessageComposerSerializer(
+                    MessageComposer.WiredFurniSelectorComposer
+                )
+            },
+            {
+                typeof(WiredFurniTriggerEventMessageComposer),
+                new WiredFurniTriggerEventMessageComposerSerializer(
+                    MessageComposer.WiredFurniTriggerComposer
+                )
+            },
+            {
+                typeof(WiredFurniVariableEventMessageComposer),
+                new WiredFurniVariableEventMessageComposerSerializer(
+                    MessageComposer.WiredFurniVariableComposer
+                )
+            },
+            {
+                typeof(WiredRewardResultMessageComposer),
+                new WiredRewardResultMessageComposerSerializer(
+                    MessageComposer.WiredRewardResultMessageComposer
+                )
+            },
+            {
+                typeof(WiredSaveSuccessEventMessageComposer),
+                new WiredSaveSuccessEventMessageComposerSerializer(
+                    MessageComposer.WiredSaveSuccessComposer
+                )
+            },
+            {
+                typeof(WiredValidationErrorEventMessageComposer),
+                new WiredValidationErrorEventMessageComposerSerializer(
+                    MessageComposer.WiredValidationErrorComposer
+                )
+            },
+            #endregion
+
             #region Users
             {
                 typeof(AccountSafetyLockStatusChangeMessageComposer),
@@ -3025,19 +3098,6 @@ public class Revision20240709 : IRevision
                     MessageComposer.IncomeRewardStatusMessageComposer
                 )
             },
-            #endregion
-
-            #region Userdefinedroomevents
-
-            #region Userdefinedroomevents Wiredmenu
-            {
-                typeof(WiredPermissionsEventMessageComposer),
-                new WiredPermissionsEventMessageComposerSerializer(
-                    MessageComposer.WiredPermissionsComposer
-                )
-            },
-            #endregion
-
             #endregion
         };
     #endregion
