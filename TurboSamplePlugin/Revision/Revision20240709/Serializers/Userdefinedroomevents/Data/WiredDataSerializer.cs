@@ -74,10 +74,35 @@ internal class WiredDataSerializer
 
     private static void SerializeInputSources(IServerPacket packet, WiredDataSnapshot snapshot)
     {
-        SerializeAllowedSources(packet, snapshot);
-        SerializeAllowedSources(packet, snapshot);
-        SerializeDefaultSources(packet, snapshot);
-        SerializeDefaultSources(packet, snapshot);
+        packet.WriteInteger(snapshot.AllowedFurniSources.Count);
+
+        foreach (var furniSourceList in snapshot.AllowedFurniSources)
+        {
+            packet.WriteInteger(furniSourceList.Count);
+
+            foreach (var furniSourceId in furniSourceList)
+                packet.WriteInteger(furniSourceId);
+        }
+
+        packet.WriteInteger(snapshot.AllowedUserSources.Count);
+
+        foreach (var userSourceList in snapshot.AllowedUserSources)
+        {
+            packet.WriteInteger(userSourceList.Count);
+
+            foreach (var userSourceId in userSourceList)
+                packet.WriteInteger(userSourceId);
+        }
+
+        packet.WriteInteger(snapshot.DefaultFurniSources.Count);
+
+        foreach (var furniSourceId in snapshot.DefaultFurniSources)
+            packet.WriteInteger(furniSourceId);
+
+        packet.WriteInteger(snapshot.DefaultUserSources.Count);
+
+        foreach (var userSourceId in snapshot.DefaultUserSources)
+            packet.WriteInteger(userSourceId);
     }
 
     private static void SerializeTypeSpecifics(IServerPacket packet, WiredDataSnapshot snapshot)
@@ -90,21 +115,5 @@ internal class WiredDataSerializer
                     .WriteBoolean(conditionSnapshot.IsInvert);
                 break;
         }
-    }
-
-    private static void SerializeAllowedSources(IServerPacket packet, WiredDataSnapshot snapshot)
-    {
-        packet.WriteInteger(snapshot.FurniSourceTypes.Count);
-
-        foreach (var furniSourceType in snapshot.FurniSourceTypes)
-            packet.WriteInteger(furniSourceType);
-    }
-
-    private static void SerializeDefaultSources(IServerPacket packet, WiredDataSnapshot snapshot)
-    {
-        packet.WriteInteger(snapshot.FurniSourceTypes.Count);
-
-        foreach (var furniSourceType in snapshot.FurniSourceTypes)
-            packet.WriteInteger(furniSourceType);
     }
 }
