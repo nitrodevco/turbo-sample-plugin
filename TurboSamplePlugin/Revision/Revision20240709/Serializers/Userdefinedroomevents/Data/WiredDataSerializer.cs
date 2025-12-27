@@ -1,3 +1,4 @@
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Turbo.Primitives.Furniture.Snapshots.WiredData;
 using Turbo.Primitives.Packets;
 
@@ -28,13 +29,13 @@ internal class WiredDataSerializer
 
         packet.WriteInteger(snapshot.FurniSourceTypes.Count);
 
-        foreach (var furniSourceType in snapshot.FurniSourceTypes)
-            packet.WriteInteger(furniSourceType);
+        foreach (var furniSourceType in snapshot.FurniSourceTypes.Values)
+            packet.WriteInteger((int)furniSourceType);
 
         packet.WriteInteger(snapshot.UserSourceTypes.Count);
 
-        foreach (var userSourceType in snapshot.UserSourceTypes)
-            packet.WriteInteger(userSourceType);
+        foreach (var userSourceType in snapshot.UserSourceTypes.Values)
+            packet.WriteInteger((int)userSourceType);
 
         packet.WriteInteger(snapshot.Code);
 
@@ -78,31 +79,45 @@ internal class WiredDataSerializer
 
         foreach (var furniSourceList in snapshot.AllowedFurniSources)
         {
-            packet.WriteInteger(furniSourceList.Count);
+            packet.WriteInteger(furniSourceList.Length);
 
             foreach (var furniSourceId in furniSourceList)
-                packet.WriteInteger(furniSourceId);
+                packet.WriteInteger((int)furniSourceId);
         }
 
         packet.WriteInteger(snapshot.AllowedUserSources.Count);
 
         foreach (var userSourceList in snapshot.AllowedUserSources)
         {
-            packet.WriteInteger(userSourceList.Count);
+            packet.WriteInteger(userSourceList.Length);
 
             foreach (var userSourceId in userSourceList)
-                packet.WriteInteger(userSourceId);
+                packet.WriteInteger((int)userSourceId);
         }
 
-        packet.WriteInteger(snapshot.DefaultFurniSources.Count);
+        packet.WriteInteger(snapshot.AllowedFurniSources.Count);
 
-        foreach (var furniSourceId in snapshot.DefaultFurniSources)
-            packet.WriteInteger(furniSourceId);
+        foreach (var types in snapshot.AllowedFurniSources)
+        {
+            foreach (var type in types)
+            {
+                packet.WriteInteger((int)type);
 
-        packet.WriteInteger(snapshot.DefaultUserSources.Count);
+                break;
+            }
+        }
 
-        foreach (var userSourceId in snapshot.DefaultUserSources)
-            packet.WriteInteger(userSourceId);
+        packet.WriteInteger(snapshot.AllowedUserSources.Count);
+
+        foreach (var types in snapshot.AllowedUserSources)
+        {
+            foreach (var type in types)
+            {
+                packet.WriteInteger((int)type);
+
+                break;
+            }
+        }
     }
 
     private static void SerializeTypeSpecifics(IServerPacket packet, WiredDataSnapshot snapshot)
