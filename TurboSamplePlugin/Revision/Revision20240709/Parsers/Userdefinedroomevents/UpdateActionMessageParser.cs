@@ -1,95 +1,14 @@
+using System;
 using System.Collections.Generic;
 using Turbo.Primitives.Messages.Incoming.Userdefinedroomevents;
-using Turbo.Primitives.Networking;
 using Turbo.Primitives.Packets;
+using TurboSamplePlugin.Revision.Revision20240709.Parsers.Userdefinedroomevents.Data;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Userdefinedroomevents;
 
-internal class UpdateActionMessageParser : IParser
+internal class UpdateActionMessageParser : UpdateWiredDataParser, IParser
 {
-    public IMessageEvent Parse(IClientPacket packet)
-    {
-        var id = packet.PopInt();
-        var intParams = new List<int>();
-        var stuffIds = new List<int>();
-        var furniSources = new List<int>();
-        var userSources = new List<int>();
-        var variableIds = new List<int>();
+    public override List<object> GetRequiredDefinitionSpecifics() => [1];
 
-        var intCount = packet.PopInt();
-
-        if (intCount > 0)
-        {
-            while (intCount > 0)
-            {
-                intParams.Add(packet.PopInt());
-
-                intCount--;
-            }
-        }
-
-        var stringParam = packet.PopString();
-
-        var stuffIdCount = packet.PopInt();
-
-        if (stuffIdCount > 0)
-        {
-            while (stuffIdCount > 0)
-            {
-                stuffIds.Add(packet.PopInt());
-
-                stuffIdCount--;
-            }
-        }
-
-        var actionDelay = packet.PopInt();
-
-        var furniSourceCount = packet.PopInt();
-
-        if (furniSourceCount > 0)
-        {
-            while (furniSourceCount > 0)
-            {
-                furniSources.Add(packet.PopInt());
-
-                furniSourceCount--;
-            }
-        }
-
-        var userSourceCount = packet.PopInt();
-
-        if (userSourceCount > 0)
-        {
-            while (userSourceCount > 0)
-            {
-                userSources.Add(packet.PopInt());
-
-                userSourceCount--;
-            }
-        }
-
-        var variableIdCount = packet.PopInt();
-
-        if (variableIdCount > 0)
-        {
-            while (variableIdCount > 0)
-            {
-                variableIds.Add(packet.PopInt());
-
-                variableIdCount--;
-            }
-        }
-
-        return new UpdateActionMessage
-        {
-            Id = id,
-            IntParams = intParams,
-            VariableIds = variableIds,
-            StringParam = stringParam,
-            StuffIds = stuffIds,
-            ActionDelay = actionDelay,
-            FurniSources = furniSources,
-            PlayerSources = userSources,
-        };
-    }
+    public override Type UpdateMessageType => typeof(UpdateActionMessage);
 }

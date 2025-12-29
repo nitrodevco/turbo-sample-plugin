@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Turbo.Primitives.Furniture.Snapshots.WiredData;
 using Turbo.Primitives.Packets;
+using Turbo.Primitives.Rooms.Enums.Wired;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Userdefinedroomevents.Data;
 
@@ -28,17 +30,21 @@ internal class WiredDataSerializer
 
         packet.WriteInteger(snapshot.FurniSourceTypes.Count);
 
-        foreach (var furniSourceType in snapshot.FurniSourceTypes.Values)
-            packet.WriteInteger((int)furniSourceType);
+        foreach (var furniSourceType in snapshot.FurniSourceTypes)
+            packet.WriteInteger(
+                (int)WiredFurniSourceTypeExtensions.GetProtocolId(furniSourceType[0])
+            );
 
-        packet.WriteInteger(snapshot.UserSourceTypes.Count);
+        packet.WriteInteger(snapshot.PlayerSourceTypes.Count);
 
-        foreach (var userSourceType in snapshot.UserSourceTypes.Values)
-            packet.WriteInteger((int)userSourceType);
+        foreach (var userSourceType in snapshot.PlayerSourceTypes)
+            packet.WriteInteger(
+                (int)WiredPlayerSourceTypeExtensions.GetProtocolId(userSourceType[0])
+            );
 
         packet.WriteInteger(snapshot.Code);
 
-        SerializeDefinitionSpecifics(packet, snapshot);
+        SerializeSpecifics(packet, snapshot.DefinitionSpecifics);
 
         packet.WriteBoolean(snapshot.AdvancedMode);
 
@@ -46,29 +52,35 @@ internal class WiredDataSerializer
 
         packet.WriteBoolean(snapshot.AllowWallFurni);
 
-        SerializeTypeSpecifics(packet, snapshot);
+        SerializeSpecifics(packet, snapshot.TypeSpecifics);
 
         // wired context
     }
 
-    private static void SerializeDefinitionSpecifics(
-        IServerPacket packet,
-        WiredDataSnapshot snapshot
-    )
+    private static void SerializeSpecifics(IServerPacket packet, List<object> specifics)
     {
-        switch (snapshot)
+        foreach (var specific in specifics)
         {
-            case WiredDataConditionSnapshot conditionSnapshot:
-                packet.WriteInteger(conditionSnapshot.QuantifierCode);
-                break;
-            case WiredDataActionSnapshot actionSnapshot:
-                packet.WriteInteger(actionSnapshot.DelayInPulses);
-                break;
-            case WiredDataSelectorSnapshot selectorSnapshot:
-                packet
-                    .WriteBoolean(selectorSnapshot.IsFilter)
-                    .WriteBoolean(selectorSnapshot.IsInvert);
-                break;
+            if (specific is null)
+                continue;
+
+            switch (specific)
+            {
+                case int intValue:
+                    packet.WriteInteger(intValue);
+                    break;
+                case string stringValue:
+                    packet.WriteString(stringValue);
+                    break;
+                case bool boolValue:
+                    packet.WriteBoolean(boolValue);
+                    break;
+                case byte byteValue:
+                    packet.WriteByte(byteValue);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -81,53 +93,31 @@ internal class WiredDataSerializer
             packet.WriteInteger(furniSourceList.Length);
 
             foreach (var furniSourceId in furniSourceList)
-                packet.WriteInteger((int)furniSourceId);
+                packet.WriteInteger(
+                    (int)WiredFurniSourceTypeExtensions.GetProtocolId(furniSourceId)
+                );
         }
 
-        packet.WriteInteger(snapshot.AllowedUserSources.Count);
+        packet.WriteInteger(snapshot.AllowedPlayerSources.Count);
 
-        foreach (var userSourceList in snapshot.AllowedUserSources)
+        foreach (var userSourceList in snapshot.AllowedPlayerSources)
         {
             packet.WriteInteger(userSourceList.Length);
 
             foreach (var userSourceId in userSourceList)
-                packet.WriteInteger((int)userSourceId);
+                packet.WriteInteger(
+                    (int)WiredPlayerSourceTypeExtensions.GetProtocolId(userSourceId)
+                );
         }
 
-        packet.WriteInteger(snapshot.AllowedFurniSources.Count);
+        packet.WriteInteger(snapshot.DefaultFurniSources.Count);
 
-        foreach (var types in snapshot.AllowedFurniSources)
-        {
-            foreach (var type in types)
-            {
-                packet.WriteInteger((int)type);
+        foreach (var type in snapshot.DefaultFurniSources)
+            packet.WriteInteger((int)WiredFurniSourceTypeExtensions.GetProtocolId(type[0]));
 
-                break;
-            }
-        }
+        packet.WriteInteger(snapshot.DefaultPlayerSources.Count);
 
-        packet.WriteInteger(snapshot.AllowedUserSources.Count);
-
-        foreach (var types in snapshot.AllowedUserSources)
-        {
-            foreach (var type in types)
-            {
-                packet.WriteInteger((int)type);
-
-                break;
-            }
-        }
-    }
-
-    private static void SerializeTypeSpecifics(IServerPacket packet, WiredDataSnapshot snapshot)
-    {
-        switch (snapshot)
-        {
-            case WiredDataConditionSnapshot conditionSnapshot:
-                packet
-                    .WriteByte((byte)conditionSnapshot.QuantifierType)
-                    .WriteBoolean(conditionSnapshot.IsInvert);
-                break;
-        }
+        foreach (var type in snapshot.DefaultPlayerSources)
+            packet.WriteInteger((int)WiredPlayerSourceTypeExtensions.GetProtocolId(type[0]));
     }
 }

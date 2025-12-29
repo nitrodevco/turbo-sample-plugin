@@ -11,6 +11,9 @@ internal class WiredValidationErrorEventMessageComposerSerializer(int header)
         WiredValidationErrorEventMessageComposer message
     )
     {
-        //
+        packet.WriteString(message.LocalizationKey).WriteInteger(message.Parameters.Count);
+
+        foreach (var (key, value) in message.Parameters)
+            packet.WriteString(key).WriteString(value);
     }
 }
