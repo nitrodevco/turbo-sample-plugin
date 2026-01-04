@@ -495,6 +495,7 @@ internal static class MessageEvent
 
 internal static class MessageComposer
 {
+    #region Outgoing
     // Handshake
     public const int CantConnectMessageComposer = 858;
     public const int CloseConnectionMessageComposer = 2893;
@@ -995,4 +996,5 @@ internal static class MessageComposer
     public const int WiredRewardResultMessageComposer = 1758;
     public const int WiredSaveSuccessComposer = 1373;
     public const int WiredValidationErrorComposer = 3766;
+    #endregion
 }

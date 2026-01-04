@@ -2525,8 +2525,16 @@ public class Revision20240709 : IRevision
                 )
             },
             {
+                typeof(ShoutMessageComposer),
+                new ShoutMessageComposerSerializer(MessageComposer.ShoutMessageComposer)
+            },
+            {
                 typeof(UserTypingMessageComposer),
                 new UserTypingMessageComposerSerializer(MessageComposer.UserTypingMessageComposer)
+            },
+            {
+                typeof(WhisperMessageComposer),
+                new WhisperMessageComposerSerializer(MessageComposer.WhisperMessageComposer)
             },
             #endregion
 

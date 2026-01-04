@@ -1,5 +1,7 @@
 using Turbo.Primitives.Messages.Outgoing.Room.Engine;
 using Turbo.Primitives.Packets;
+using Turbo.Primitives.Rooms.Enums.Wired;
+using TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Engine.Data;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Room.Engine;
 
@@ -8,6 +10,40 @@ internal class WiredMovementsMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, WiredMovementsMessageComposer message)
     {
-        //
+        var updatesCount =
+            message.Users.Length
+            + message.FloorItems.Length
+            + message.WallItems.Length
+            + message.UserDirections.Length;
+
+        packet.WriteInteger(updatesCount);
+
+        foreach (var user in message.Users)
+        {
+            packet.WriteInteger((int)WiredMovementType.User);
+
+            WiredMovementSerializer.SerializeUserMovement(packet, user);
+        }
+
+        foreach (var floorItem in message.FloorItems)
+        {
+            packet.WriteInteger((int)WiredMovementType.FloorItem);
+
+            WiredMovementSerializer.SerializeFloorItemMovement(packet, floorItem);
+        }
+
+        foreach (var wallItem in message.WallItems)
+        {
+            packet.WriteInteger((int)WiredMovementType.WallItem);
+
+            WiredMovementSerializer.SerializeWallItemMovement(packet, wallItem);
+        }
+
+        foreach (var userDirection in message.UserDirections)
+        {
+            packet.WriteInteger((int)WiredMovementType.UserDirection);
+
+            WiredMovementSerializer.SerializeUserDirection(packet, userDirection);
+        }
     }
 }
