@@ -11,10 +11,10 @@ internal class WiredMovementsMessageComposerSerializer(int header)
     protected override void Serialize(IServerPacket packet, WiredMovementsMessageComposer message)
     {
         var updatesCount =
-            message.Users.Length
-            + message.FloorItems.Length
-            + message.WallItems.Length
-            + message.UserDirections.Length;
+            message.Users.Count
+            + message.FloorItems.Count
+            + message.WallItems.Count
+            + message.UserDirections.Count;
 
         packet.WriteInteger(updatesCount);
 

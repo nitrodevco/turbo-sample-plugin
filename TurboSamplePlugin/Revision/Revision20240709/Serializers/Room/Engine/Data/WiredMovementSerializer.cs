@@ -34,7 +34,6 @@ internal class WiredMovementSerializer
             .WriteString(item.SourceZ.ToString())
             .WriteString(item.TargetZ.ToString())
             .WriteInteger(item.ObjectId.Value)
-            .WriteInteger((int)item.MoveType)
             .WriteInteger(item.AnimationTime)
             .WriteInteger((int)item.Rotation);
     }
