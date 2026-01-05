@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Restore Solution",
+            "label": "restore-turbo-sample-plugin",
             "type": "shell",
             "command": "dotnet",
             "args": [
@@ -13,7 +13,7 @@
             "group": "build"
         },
         {
-            "label": "Build Solution (Debug)",
+            "label": "build-debug-turbo-sample-plugin",
             "type": "shell",
             "command": "dotnet",
             "args": [
@@ -25,9 +25,6 @@
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "dependsOn": [
-                "Restore Solution"
-            ],
             "problemMatcher": "$msCompile",
             "group": {
                 "kind": "build",
@@ -35,7 +32,7 @@
             }
         },
         {
-            "label": "Build Solution (Release)",
+            "label": "build-release-turbo-sample-plugin",
             "type": "shell",
             "command": "dotnet",
             "args": [
@@ -48,13 +45,38 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "dependsOn": [
-                "Restore Solution"
+                "restore-turbo-sample-plugin"
             ],
             "problemMatcher": "$msCompile",
             "group": "build"
         },
         {
-            "label": "Dotnet: Format (Roslyn)",
+            "label": "copy-debug-turbo-sample-plugin",
+            "type": "shell",
+            "problemMatcher": [],
+            "osx": {
+                "command": "bash",
+                "args": [
+                    "-c",
+                    "src='${workspaceFolder}/TurboSamplePlugin/bin/Debug/net9.0/TurboSamplePlugin.dll'; dst='${workspaceFolder}/../turbo-cloud/Turbo.Main/bin/Debug/net9.0/plugins/sample-plugin'; mkdir -p \"$dst\"; cp -f \"$src\" \"$dst/\""
+                ]
+            },
+            "linux": {
+                "command": "bash",
+                "args": [
+                    "-c",
+                    "src='${workspaceFolder}/TurboSamplePlugin/bin/Debug/net9.0/TurboSamplePlugin.dll'; dst='${workspaceFolder}/../turbo-cloud/Turbo.Main/bin/Debug/net9.0/plugins/sample-plugin'; mkdir -p \"$dst\"; cp -f \"$src\" \"$dst/\""
+                ]
+            },
+            "windows": {
+                "command": "powershell",
+                "args": [
+                    "Copy-Item -Path \"${workspaceFolder}/TurboSamplePlugin/bin/Debug/net9.0/TurboSamplePlugin.dll\" -Destination \"${workspaceFolder}/../turbo-cloud/Turbo.Main/bin/Debug/net9.0/plugins/sample-plugin/TurboSamplePlugin.dll\" -Force"
+                ]
+            }
+        },
+        {
+            "label": "roslyn-turbo-sample-plugin",
             "type": "shell",
             "command": "dotnet",
             "args": [
@@ -67,7 +89,7 @@
             "problemMatcher": []
         },
         {
-            "label": "CSharpier: Format",
+            "label": "csharpier-turbo-sample-plugin",
             "type": "shell",
             "command": "dotnet csharpier format .",
             "presentation": {
@@ -77,11 +99,21 @@
             "problemMatcher": []
         },
         {
-            "label": "Format: All (Roslyn + CSharpier)",
+            "label": "format-turbo-sample-plugin",
             "type": "shell",
             "dependsOn": [
-                "Dotnet: Format (Roslyn)",
-                "CSharpier: Format"
+                "roslyn-turbo-sample-plugin",
+                "csharpier-turbo-sample-plugin"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+        {
+            "label": "build-and-copy-turbo-sample-plugin",
+            "type": "shell",
+            "dependsOn": [
+                "build-debug-turbo-sample-plugin",
+                "copy-debug-turbo-sample-plugin"
             ],
             "dependsOrder": "sequence",
             "problemMatcher": []
