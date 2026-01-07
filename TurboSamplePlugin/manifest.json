@@ -4,11 +4,6 @@
     "Version": "1.0.0",
     "Author": "Billsonnn",
     "AssemblyFile": "TurboSamplePlugin.dll",
-    "Dependencies": [
-        {
-            "Key": "turbo-core",
-            "MinVersion": "1.0.0"
-        }
-    ],
-    "TablePrefix": "ts_"
+    "Dependencies": [],
+    "TablePrefix": "tsp_"
 }
