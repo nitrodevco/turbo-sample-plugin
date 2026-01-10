@@ -6,5 +6,6 @@ namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Room.Avatar;
 
 internal class DanceMessageParser : IParser
 {
-    public IMessageEvent Parse(IClientPacket packet) => new DanceMessage();
+    public IMessageEvent Parse(IClientPacket packet) =>
+        new DanceMessage { DanceId = packet.PopInt() };
 }
