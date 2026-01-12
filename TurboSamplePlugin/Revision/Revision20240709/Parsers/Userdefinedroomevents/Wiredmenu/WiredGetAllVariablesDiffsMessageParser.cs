@@ -6,5 +6,17 @@ namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Userdefinedroomeve
 
 internal class WiredGetAllVariablesDiffsMessageParser : IParser
 {
-    public IMessageEvent Parse(IClientPacket packet) => new WiredGetAllVariablesDiffsMessage();
+    public IMessageEvent Parse(IClientPacket packet)
+    {
+        var count = packet.PopInt();
+
+        while (count > 0)
+        {
+            var hash = packet.PopInt();
+            var value = packet.PopInt();
+
+            count--;
+        }
+        return new WiredGetAllVariablesDiffsMessage();
+    }
 }

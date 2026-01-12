@@ -3050,6 +3050,18 @@ public class Revision20240709 : IRevision
                     MessageComposer.WiredValidationErrorComposer
                 )
             },
+            {
+                typeof(WiredAllVariableHoldersEventMessageComposer),
+                new WiredAllVariableHoldersEventMessageComposerSerializer(
+                    MessageComposer.WiredAllVariableHoldersComposer
+                )
+            },
+            {
+                typeof(WiredAllVariablesDiffsEventMessageComposer),
+                new WiredAllVariablesDiffsEventMessageComposerSerializer(
+                    MessageComposer.WiredAllVariablesDiffsComposer
+                )
+            },
             #endregion
 
             #region Users
