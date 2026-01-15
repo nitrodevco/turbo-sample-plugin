@@ -2982,16 +2982,6 @@ public class Revision20240709 : IRevision
             #endregion
 
             #region Userdefinedroomevents
-
-            #region Userdefinedroomevents Wiredmenu
-            {
-                typeof(WiredPermissionsEventMessageComposer),
-                new WiredPermissionsEventMessageComposerSerializer(
-                    MessageComposer.WiredPermissionsComposer
-                )
-            },
-            #endregion
-
             {
                 typeof(OpenEventMessageComposer),
                 new OpenEventMessageComposerSerializer(MessageComposer.OpenComposer)
@@ -3060,6 +3050,48 @@ public class Revision20240709 : IRevision
                 typeof(WiredAllVariablesDiffsEventMessageComposer),
                 new WiredAllVariablesDiffsEventMessageComposerSerializer(
                     MessageComposer.WiredAllVariablesDiffsComposer
+                )
+            },
+            {
+                typeof(WiredAllVariablesHashEventMessageComposer),
+                new WiredAllVariablesHashEventMessageComposerSerializer(
+                    MessageComposer.WiredAllVariablesHashComposer
+                )
+            },
+            {
+                typeof(WiredErrorLogsEventMessageComposer),
+                new WiredErrorLogsEventMessageComposerSerializer(
+                    MessageComposer.WiredErrorLogsComposer
+                )
+            },
+            {
+                typeof(WiredMenuErrorEventMessageComposer),
+                new WiredMenuErrorEventMessageComposerSerializer(
+                    MessageComposer.WiredMenuErrorComposer
+                )
+            },
+            {
+                typeof(WiredPermissionsEventMessageComposer),
+                new WiredPermissionsEventMessageComposerSerializer(
+                    MessageComposer.WiredPermissionsComposer
+                )
+            },
+            {
+                typeof(WiredRoomSettingsEventMessageComposer),
+                new WiredRoomSettingsEventMessageComposerSerializer(
+                    MessageComposer.WiredRoomSettingsComposer
+                )
+            },
+            {
+                typeof(WiredRoomStatsEventMessageComposer),
+                new WiredRoomStatsEventMessageComposerSerializer(
+                    MessageComposer.WiredRoomStatsComposer
+                )
+            },
+            {
+                typeof(WiredVariablesForObjectEventMessageComposer),
+                new WiredVariablesForObjectEventMessageComposerSerializer(
+                    MessageComposer.WiredVariablesForObjectComposer
                 )
             },
             #endregion

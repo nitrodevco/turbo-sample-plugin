@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Turbo.Primitives.Messages.Incoming.Userdefinedroomevents.Wiredmenu;
 using Turbo.Primitives.Networking;
 using Turbo.Primitives.Packets;
@@ -8,15 +9,16 @@ internal class WiredGetAllVariablesDiffsMessageParser : IParser
 {
     public IMessageEvent Parse(IClientPacket packet)
     {
+        var variables = new List<(long Id, int Hash)>();
         var count = packet.PopInt();
 
         while (count > 0)
         {
-            var hash = packet.PopInt();
-            var value = packet.PopInt();
+            variables.Add((packet.PopLong(), packet.PopInt()));
 
             count--;
         }
-        return new WiredGetAllVariablesDiffsMessage();
+
+        return new WiredGetAllVariablesDiffsMessage { VariableHashes = variables };
     }
 }

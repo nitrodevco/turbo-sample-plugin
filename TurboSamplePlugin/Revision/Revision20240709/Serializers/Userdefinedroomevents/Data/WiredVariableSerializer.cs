@@ -1,5 +1,5 @@
 using Turbo.Primitives.Packets;
-using Turbo.Primitives.Snapshots.Wired;
+using Turbo.Primitives.Rooms.Snapshots.Wired;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Userdefinedroomevents.Data;
 

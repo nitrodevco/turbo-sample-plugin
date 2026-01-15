@@ -18,13 +18,13 @@ internal class WiredAllVariablesDiffsEventMessageComposerSerializer(int header)
             .WriteInteger(message.RemovedVariables.Count);
 
         foreach (var removedVariable in message.RemovedVariables)
-            packet.WriteLong(removedVariable);
+            packet.WriteLong((long)removedVariable);
 
         packet.WriteInteger(message.AddedOrUpdated.Count);
 
         foreach (var snapshot in message.AddedOrUpdated)
         {
-            packet.WriteInteger(snapshot.GetHashCode());
+            packet.WriteInteger(snapshot.HashCode);
 
             WiredVariableSerializer.Serialize(packet, snapshot);
         }

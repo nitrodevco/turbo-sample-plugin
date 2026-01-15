@@ -11,6 +11,6 @@ internal class WiredAllVariablesHashEventMessageComposerSerializer(int header)
         WiredAllVariablesHashEventMessageComposer message
     )
     {
-        //
+        packet.WriteInteger(message.AllVariablesHash);
     }
 }
