@@ -8,8 +8,8 @@ internal class WiredVariableSerializer
     public static void Serialize(IServerPacket packet, WiredVariableSnapshot snapshot)
     {
         packet
-            .WriteLong(snapshot.VariableId)
-            .WriteString(snapshot.VariableName)
+            .WriteLong(snapshot.VariableHash)
+            .WriteString(snapshot.VariableKey)
             .WriteInteger((int)snapshot.AvailabilityType)
             .WriteInteger((int)snapshot.VariableType)
             .WriteBoolean(snapshot.AlwaysAvailable)

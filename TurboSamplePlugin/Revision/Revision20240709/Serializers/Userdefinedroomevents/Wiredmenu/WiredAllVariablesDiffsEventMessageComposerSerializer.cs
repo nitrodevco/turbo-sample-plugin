@@ -13,7 +13,7 @@ internal class WiredAllVariablesDiffsEventMessageComposerSerializer(int header)
     )
     {
         packet
-            .WriteInteger(message.AllVariablesHash)
+            .WriteInteger((int)message.AllVariablesHash)
             .WriteBoolean(message.IsLastChunk)
             .WriteInteger(message.RemovedVariables.Count);
 
@@ -24,7 +24,7 @@ internal class WiredAllVariablesDiffsEventMessageComposerSerializer(int header)
 
         foreach (var snapshot in message.AddedOrUpdated)
         {
-            packet.WriteInteger(snapshot.HashCode);
+            packet.WriteInteger((int)snapshot.VariableHash);
 
             WiredVariableSerializer.Serialize(packet, snapshot);
         }
