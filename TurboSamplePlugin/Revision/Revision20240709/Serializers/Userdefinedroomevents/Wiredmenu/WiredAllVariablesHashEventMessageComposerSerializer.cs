@@ -9,8 +9,5 @@ internal class WiredAllVariablesHashEventMessageComposerSerializer(int header)
     protected override void Serialize(
         IServerPacket packet,
         WiredAllVariablesHashEventMessageComposer message
-    )
-    {
-        packet.WriteInteger(message.AllVariablesHash);
-    }
+    ) => packet.WriteInteger((int)message.AllVariablesHash);
 }

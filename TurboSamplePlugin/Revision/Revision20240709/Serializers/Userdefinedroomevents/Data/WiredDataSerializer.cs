@@ -57,7 +57,7 @@ internal class WiredDataSerializer
         packet
             .WriteInteger(1)
             .WriteInteger((int)WiredContextType.AllVariablesInRoom)
-            .WriteInteger(snapshot.GlobalHash);
+            .WriteInteger((int)snapshot.AllVariablesHash);
     }
 
     private static void SerializeSpecifics(IServerPacket packet, List<object> specifics)

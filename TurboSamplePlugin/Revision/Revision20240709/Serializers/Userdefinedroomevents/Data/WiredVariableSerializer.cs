@@ -8,10 +8,10 @@ internal class WiredVariableSerializer
     public static void Serialize(IServerPacket packet, WiredVariableSnapshot snapshot)
     {
         packet
-            .WriteLong(snapshot.VariableHash)
-            .WriteString(snapshot.VariableKey)
+            .WriteLong(snapshot.VariableId)
+            .WriteString(snapshot.VariableName)
             .WriteInteger((int)snapshot.AvailabilityType)
-            .WriteInteger((int)snapshot.VariableType)
+            .WriteInteger((int)snapshot.InputSourceType)
             .WriteBoolean(snapshot.AlwaysAvailable)
             .WriteBoolean(snapshot.CanCreateAndDelete)
             .WriteBoolean(snapshot.HasValue)
@@ -24,10 +24,10 @@ internal class WiredVariableSerializer
 
         if (snapshot.HasTextConnector)
         {
-            packet.WriteInteger(snapshot.TextConnector.Count);
+            packet.WriteInteger(snapshot.TextConnectors.Count);
 
-            foreach (var text in snapshot.TextConnector)
-                packet.WriteInteger(text.Length).WriteString(text);
+            foreach (var (key, value) in snapshot.TextConnectors)
+                packet.WriteInteger(key).WriteString(value);
         }
     }
 }

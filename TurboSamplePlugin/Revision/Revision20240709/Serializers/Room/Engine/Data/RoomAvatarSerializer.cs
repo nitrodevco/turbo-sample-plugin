@@ -9,7 +9,7 @@ internal class RoomAvatarSerializer
     public static void Serialize(IServerPacket packet, RoomAvatarSnapshot item)
     {
         packet
-            .WriteInteger((int)item.WebId)
+            .WriteInteger(item.WebId)
             .WriteString(item.Name)
             .WriteString(item.Motto)
             .WriteString(item.Figure)
@@ -17,19 +17,25 @@ internal class RoomAvatarSerializer
             .WriteInteger(item.X)
             .WriteInteger(item.Y)
             .WriteString(item.Z.ToString())
-            .WriteInteger((int)item.BodyRotation);
+            .WriteInteger((int)item.BodyRotation)
+            .WriteInteger((int)item.AvatarType);
 
         if (item is RoomPlayerAvatarSnapshot player)
-        {
-            packet
-                .WriteInteger((int)RoomObjectType.Player)
-                .WriteString(AvatarGenderTypeExtensions.ToLegacyString(player.Gender))
-                .WriteInteger(player.GroupId)
-                .WriteInteger(player.GroupStatus)
-                .WriteString(player.GroupName)
-                .WriteString(player.SwimFigure)
-                .WriteInteger(player.ActivityPoints)
-                .WriteBoolean(player.IsModerator);
-        }
+            SerializePlayerAvatar(packet, player);
+    }
+
+    public static void SerializePlayerAvatar(
+        IServerPacket packet,
+        RoomPlayerAvatarSnapshot snapshot
+    )
+    {
+        packet
+            .WriteString(AvatarGenderTypeExtensions.ToLegacyString(snapshot.Gender))
+            .WriteInteger(snapshot.GroupId)
+            .WriteInteger(snapshot.GroupStatus)
+            .WriteString(snapshot.GroupName)
+            .WriteString(snapshot.SwimFigure)
+            .WriteInteger(snapshot.ActivityPoints)
+            .WriteBoolean(snapshot.IsModerator);
     }
 }
