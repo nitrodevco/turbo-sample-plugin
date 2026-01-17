@@ -11,7 +11,7 @@ internal class WiredVariableSerializer
             .WriteLong(snapshot.VariableId)
             .WriteString(snapshot.VariableName)
             .WriteInteger((int)snapshot.AvailabilityType)
-            .WriteInteger((int)snapshot.InputSourceType)
+            .WriteInteger((int)snapshot.TargetType)
             .WriteBoolean(snapshot.AlwaysAvailable)
             .WriteBoolean(snapshot.CanCreateAndDelete)
             .WriteBoolean(snapshot.HasValue)
