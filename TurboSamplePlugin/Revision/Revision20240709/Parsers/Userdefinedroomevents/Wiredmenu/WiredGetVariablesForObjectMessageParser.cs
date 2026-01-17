@@ -6,5 +6,10 @@ namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Userdefinedroomeve
 
 internal class WiredGetVariablesForObjectMessageParser : IParser
 {
-    public IMessageEvent Parse(IClientPacket packet) => new WiredGetVariablesForObjectMessage();
+    public IMessageEvent Parse(IClientPacket packet) =>
+        new WiredGetVariablesForObjectMessage()
+        {
+            SourceType = packet.PopInt(),
+            SourceId = packet.PopInt(),
+        };
 }
