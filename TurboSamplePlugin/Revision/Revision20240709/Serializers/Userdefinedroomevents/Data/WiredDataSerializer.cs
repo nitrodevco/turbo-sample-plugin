@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Turbo.Primitives.Furniture.Snapshots.WiredData;
 using Turbo.Primitives.Packets;
 using Turbo.Primitives.Rooms.Enums.Wired;
+using Turbo.Primitives.Rooms.Snapshots.Wired.Variables;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Serializers.Userdefinedroomevents.Data;
 
@@ -54,10 +55,10 @@ internal class WiredDataSerializer
 
         SerializeSpecifics(packet, snapshot.TypeSpecifics);
 
-        packet
-            .WriteInteger(1)
-            .WriteInteger((int)WiredContextType.AllVariablesInRoom)
-            .WriteInteger((int)snapshot.AllVariablesHash);
+        packet.WriteInteger(snapshot.ContextSnapshots.Count);
+
+        foreach (var context in snapshot.ContextSnapshots)
+            SerializeWiredContext(packet, context);
     }
 
     private static void SerializeSpecifics(IServerPacket packet, List<object> specifics)
@@ -122,5 +123,33 @@ internal class WiredDataSerializer
 
         foreach (var type in snapshot.DefaultPlayerSources)
             packet.WriteInteger((int)WiredPlayerSourceTypeExtensions.GetProtocolId(type[0]));
+    }
+
+    private static void SerializeWiredContext(
+        IServerPacket packet,
+        WiredVariableContextSnapshot context
+    )
+    {
+        packet.WriteInteger((int)context.ContextType);
+
+        switch (context)
+        {
+            case WiredVariableAllInRoomSnapshot allInRoom:
+                packet.WriteInteger((int)allInRoom.VariableHash);
+                break;
+            case WiredVariableInfoAndHoldersSnapshot infoAndHolders:
+                WiredVariableSerializer.Serialize(packet, infoAndHolders.Variable);
+                packet.WriteInteger(infoAndHolders.Holders.Count);
+
+                foreach (var (objectId, value) in infoAndHolders.Holders)
+                    packet.WriteInteger(objectId).WriteInteger(value);
+                break;
+            case WiredVariableInfoAndValueSnapshot infoAndValue:
+                WiredVariableSerializer.Serialize(packet, infoAndValue.Variable);
+                packet.WriteInteger(infoAndValue.Value);
+                break;
+            default:
+                break;
+        }
     }
 }

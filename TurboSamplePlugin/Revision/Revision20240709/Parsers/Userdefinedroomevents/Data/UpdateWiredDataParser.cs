@@ -81,14 +81,14 @@ internal abstract class UpdateWiredDataParser : IParser
             }
         }
 
-        var variableIds = new List<int>();
+        var variableIds = new List<long>();
         var variableIdCount = packet.PopInt();
 
         if (variableIdCount > 0)
         {
             while (variableIdCount > 0)
             {
-                variableIds.Add(packet.PopInt());
+                variableIds.Add(packet.PopLong());
 
                 variableIdCount--;
             }
