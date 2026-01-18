@@ -18,7 +18,7 @@ internal class WiredVariablesForObjectEventMessageComposerSerializer(int header)
 
         foreach (var (id, value) in message.VariableValues)
         {
-            packet.WriteLong((long)id).WriteInteger(value);
+            packet.WriteLong(id.Value).WriteInteger(value);
         }
     }
 }

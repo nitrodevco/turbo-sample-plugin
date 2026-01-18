@@ -135,7 +135,7 @@ internal class WiredDataSerializer
         switch (context)
         {
             case WiredVariableAllInRoomSnapshot allInRoom:
-                packet.WriteInteger((int)allInRoom.VariableHash);
+                packet.WriteInteger(allInRoom.AllVariablesHash.Value);
                 break;
             case WiredVariableInfoAndHoldersSnapshot infoAndHolders:
                 WiredVariableSerializer.Serialize(packet, infoAndHolders.Variable);
