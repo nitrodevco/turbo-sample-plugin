@@ -4,6 +4,7 @@ using Turbo.Primitives.Messages.Incoming.Userdefinedroomevents;
 using Turbo.Primitives.Networking;
 using Turbo.Primitives.Packets;
 using Turbo.Primitives.Rooms.Enums.Wired;
+using Turbo.Primitives.Rooms.Object;
 
 namespace TurboSamplePlugin.Revision.Revision20240709.Parsers.Userdefinedroomevents.Data;
 

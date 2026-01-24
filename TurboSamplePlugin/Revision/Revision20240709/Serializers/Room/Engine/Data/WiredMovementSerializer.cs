@@ -46,14 +46,14 @@ internal class WiredMovementSerializer
         packet
             .WriteInteger(item.ObjectId.Value)
             .WriteBoolean(item.IsDirectionRight)
-            .WriteInteger(item.OldWallX)
-            .WriteInteger(item.OldWallY)
-            .WriteInteger(item.OldOffsetX)
-            .WriteInteger(item.OldOffsetY)
-            .WriteInteger(item.NewWallX)
-            .WriteInteger(item.NewWallY)
-            .WriteInteger(item.NewOffsetX)
-            .WriteInteger(item.NewOffsetY);
+            .WriteInteger(item.SourceX)
+            .WriteInteger(item.SourceY)
+            .WriteInteger(item.SourceWallOffset)
+            .WriteInteger(item.SourceZ)
+            .WriteInteger(item.TargetX)
+            .WriteInteger(item.TargetY)
+            .WriteInteger(item.TargetWallOffset)
+            .WriteInteger(item.TargetZ);
     }
 
     public static void SerializeUserDirection(IServerPacket packet, WiredUserDirectionSnapshot item)
