@@ -5,7 +5,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Turbo.Contracts.Plugins;
 using Turbo.Primitives.Networking.Revisions;
-using TurboSamplePlugin.Revision.Revision20240709;
+using TurboSamplePlugin.Revision.Revision20260112;
 using TurboSamplePlugin.Revision.RevisionDefault;
 
 namespace TurboSamplePlugin;
@@ -25,7 +25,7 @@ public class SamplePluginService(IHostServices host, ILogger<SamplePluginService
             if (revisionManager is not null)
             {
                 revisionManager.RegisterRevision(new RevisionDefault());
-                revisionManager.RegisterRevision(new Revision20240709());
+                revisionManager.RegisterRevision(new Revision20260112());
             }
 
             _logger.LogInformation("SamplePluginService started successfully.");

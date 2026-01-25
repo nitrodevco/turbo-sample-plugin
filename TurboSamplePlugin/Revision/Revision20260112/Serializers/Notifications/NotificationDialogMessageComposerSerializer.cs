@@ -1,0 +1,16 @@
+using Turbo.Primitives.Messages.Outgoing.Notifications;
+using Turbo.Primitives.Packets;
+
+namespace TurboSamplePlugin.Revision.Revision20260112.Serializers.Notifications;
+
+internal class NotificationDialogMessageComposerSerializer(int header)
+    : AbstractSerializer<NotificationDialogMessageComposer>(header)
+{
+    protected override void Serialize(
+        IServerPacket packet,
+        NotificationDialogMessageComposer message
+    )
+    {
+        //
+    }
+}
