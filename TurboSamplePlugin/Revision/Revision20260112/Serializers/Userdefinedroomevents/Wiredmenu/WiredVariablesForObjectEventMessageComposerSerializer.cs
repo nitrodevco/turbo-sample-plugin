@@ -18,7 +18,7 @@ internal class WiredVariablesForObjectEventMessageComposerSerializer(int header)
             .WriteInteger(message.VariableValues.Count);
 
         foreach (var (id, value) in message.VariableValues)
-            packet.WriteString(id.Value).WriteInteger(value);
+            packet.WriteString(id.ToString()).WriteInteger(value);
 
         if (message.TargetType == WiredVariableTargetType.Furni)
         {

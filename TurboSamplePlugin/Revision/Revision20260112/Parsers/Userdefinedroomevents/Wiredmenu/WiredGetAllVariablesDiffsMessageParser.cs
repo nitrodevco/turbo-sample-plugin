@@ -16,10 +16,7 @@ internal class WiredGetAllVariablesDiffsMessageParser : IParser
         while (count > 0)
         {
             variables.Add(
-                (
-                    WiredVariableId.FromValue(packet.PopString()),
-                    new WiredVariableHash(packet.PopInt())
-                )
+                (WiredVariableId.Parse(packet.PopString()), new WiredVariableHash(packet.PopInt()))
             );
 
             count--;

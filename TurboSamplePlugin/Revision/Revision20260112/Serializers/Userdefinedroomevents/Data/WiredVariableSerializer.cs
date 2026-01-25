@@ -8,7 +8,7 @@ internal class WiredVariableSerializer
     public static void Serialize(IServerPacket packet, WiredVariableSnapshot snapshot)
     {
         packet
-            .WriteString(snapshot.VariableId.Value)
+            .WriteString(snapshot.VariableId.ToString())
             .WriteInteger((int)snapshot.VariableType)
             .WriteString(snapshot.VariableName)
             .WriteInteger((int)snapshot.AvailabilityType)

@@ -18,7 +18,7 @@ internal class WiredAllVariablesDiffsEventMessageComposerSerializer(int header)
             .WriteInteger(message.RemovedVariableIds.Count);
 
         foreach (var removedVariable in message.RemovedVariableIds)
-            packet.WriteString(removedVariable.Value);
+            packet.WriteString(removedVariable.ToString());
 
         packet.WriteInteger(message.AddedOrUpdated.Count);
 
