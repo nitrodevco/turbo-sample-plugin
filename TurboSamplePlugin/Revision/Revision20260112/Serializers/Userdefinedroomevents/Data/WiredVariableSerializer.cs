@@ -1,4 +1,5 @@
 using Turbo.Primitives.Packets;
+using Turbo.Primitives.Rooms.Enums.Wired;
 using Turbo.Primitives.Rooms.Snapshots.Wired.Variables;
 
 namespace TurboSamplePlugin.Revision.Revision20260112.Serializers.Userdefinedroomevents.Data;
@@ -13,17 +14,17 @@ internal class WiredVariableSerializer
             .WriteString(snapshot.VariableName)
             .WriteInteger((int)snapshot.AvailabilityType)
             .WriteInteger((int)snapshot.TargetType)
-            .WriteBoolean(snapshot.AlwaysAvailable)
-            .WriteBoolean(snapshot.CanCreateAndDelete)
-            .WriteBoolean(snapshot.HasValue)
-            .WriteBoolean(snapshot.CanWriteValue)
-            .WriteBoolean(snapshot.CanInterceptChanges)
-            .WriteBoolean(snapshot.IsInvisible)
-            .WriteBoolean(snapshot.CanReadCreationTime)
-            .WriteBoolean(snapshot.CanReadLastUpdateTime)
-            .WriteBoolean(snapshot.HasTextConnector);
+            .WriteBoolean(snapshot.Flags.Has(WiredVariableFlags.AlwaysAvailable))
+            .WriteBoolean(snapshot.Flags.Has(WiredVariableFlags.CanCreateAndDelete))
+            .WriteBoolean(snapshot.Flags.Has(WiredVariableFlags.HasValue))
+            .WriteBoolean(snapshot.Flags.Has(WiredVariableFlags.CanWriteValue))
+            .WriteBoolean(snapshot.Flags.Has(WiredVariableFlags.CanInterceptChanges))
+            .WriteBoolean(snapshot.Flags.Has(WiredVariableFlags.IsInvisible))
+            .WriteBoolean(snapshot.Flags.Has(WiredVariableFlags.CanReadCreationTime))
+            .WriteBoolean(snapshot.Flags.Has(WiredVariableFlags.CanReadLastUpdateTime))
+            .WriteBoolean(snapshot.Flags.Has(WiredVariableFlags.HasTextConnector));
 
-        if (snapshot.HasTextConnector)
+        if (snapshot.Flags.Has(WiredVariableFlags.HasTextConnector))
         {
             packet.WriteInteger(snapshot.TextConnectors.Count);
 
