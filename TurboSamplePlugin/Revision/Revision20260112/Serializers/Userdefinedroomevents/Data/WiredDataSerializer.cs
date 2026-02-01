@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Turbo.Primitives.Furniture.Snapshots.WiredData;
 using Turbo.Primitives.Packets;
 using Turbo.Primitives.Rooms.Enums.Wired;
+using Turbo.Primitives.Rooms.Snapshots.Wired;
 using Turbo.Primitives.Rooms.Snapshots.Wired.Variables;
 
 namespace TurboSamplePlugin.Revision.Revision20260112.Serializers.Userdefinedroomevents.Data;
