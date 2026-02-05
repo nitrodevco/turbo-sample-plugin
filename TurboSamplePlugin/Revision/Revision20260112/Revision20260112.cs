@@ -3118,6 +3118,12 @@ public class Revision20260112 : IRevision
                 )
             },
             {
+                typeof(ExtendedProfileMessageComposer),
+                new ExtendedProfileMessageComposerSerializer(
+                    MessageComposer.ExtendedProfileMessageComposer
+                )
+            },
+            {
                 typeof(ExtendedProfileChangedMessageComposer),
                 new ExtendedProfileChangedMessageComposerSerializer(
                     MessageComposer.ExtendedProfileChangedMessageComposer
