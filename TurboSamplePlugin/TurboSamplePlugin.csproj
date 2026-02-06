@@ -5,9 +5,6 @@
     <SelfContained>false</SelfContained>
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <BuildProjectReferences>false</BuildProjectReferences>
-    <TurboCloudMainProjectPath>$(MSBuildProjectDirectory)\..\..\turbo-cloud\Turbo.Main\Turbo.Main.csproj</TurboCloudMainProjectPath>
-    <TurboPluginDeployRoot Condition="'$(TurboPluginDeployRoot)' == '' and Exists('$(TurboCloudMainProjectPath)')">$(MSBuildProjectDirectory)\..\..\turbo-cloud\Turbo.Main\bin\$(Configuration)\$(TargetFramework)\plugins\TurboSamplePlugin</TurboPluginDeployRoot>
-    <TurboPluginAutoDeploy Condition="'$(TurboPluginAutoDeploy)' == '' and '$(TurboPluginDeployRoot)' != ''">true</TurboPluginAutoDeploy>
   </PropertyGroup>
   <ItemGroup>
     <None
@@ -56,15 +53,4 @@
     />
   </ItemGroup>
 
-  <Target
-    Name="DeployTurboPluginArtifacts"
-    AfterTargets="Build"
-    Condition="'$(TurboPluginAutoDeploy)' == 'true' and '$(TurboPluginDeployRoot)' != '' and '$(DesignTimeBuild)' != 'true' and '$(IsCrossTargetingBuild)' != 'true'"
-  >
-    <MakeDir Directories="$(TurboPluginDeployRoot)" />
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(TurboPluginDeployRoot)" SkipUnchangedFiles="true" />
-    <Copy SourceFiles="$(MSBuildProjectDirectory)\manifest.json" DestinationFolder="$(TurboPluginDeployRoot)" SkipUnchangedFiles="true" />
-    <Copy SourceFiles="$(TargetDir)$(AssemblyName).pdb" DestinationFolder="$(TurboPluginDeployRoot)" SkipUnchangedFiles="true" Condition="Exists('$(TargetDir)$(AssemblyName).pdb')" />
-    <Copy SourceFiles="$(TargetDir)$(AssemblyName).deps.json" DestinationFolder="$(TurboPluginDeployRoot)" SkipUnchangedFiles="true" Condition="Exists('$(TargetDir)$(AssemblyName).deps.json')" />
-  </Target>
 </Project>
