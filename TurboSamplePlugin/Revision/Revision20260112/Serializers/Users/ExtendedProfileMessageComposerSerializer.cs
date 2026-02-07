@@ -1,5 +1,6 @@
 using Turbo.Primitives.Messages.Outgoing.Users;
 using Turbo.Primitives.Packets;
+using TurboSamplePlugin.Revision.Revision20260112.Serializers.Users.Data;
 
 namespace TurboSamplePlugin.Revision.Revision20260112.Serializers.Users;
 
@@ -19,19 +20,9 @@ internal class ExtendedProfileMessageComposerSerializer(int header)
         packet.WriteBoolean(message.IsFriendRequestSent);
         packet.WriteBoolean(message.IsOnline);
         
-        // Guild count and guild data
         packet.WriteInteger(message.Guilds.Count);
         foreach (var guild in message.Guilds)
-        {
-            packet.WriteInteger(guild.GroupId);
-            packet.WriteString(guild.GroupName);
-            packet.WriteString(guild.BadgeCode);
-            packet.WriteString(guild.PrimaryColor);
-            packet.WriteString(guild.SecondaryColor);
-            packet.WriteBoolean(guild.Favourite);
-            packet.WriteInteger(guild.OwnerId);
-            packet.WriteBoolean(guild.HasForum);
-        }
+            GuildInfoSerializer.Serialize(packet, guild);
         
         packet.WriteInteger(message.LastAccessSinceInSeconds);
         packet.WriteBoolean(message.OpenProfileWindow);
