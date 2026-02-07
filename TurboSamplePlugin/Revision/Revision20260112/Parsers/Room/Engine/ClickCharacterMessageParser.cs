@@ -1,0 +1,12 @@
+using Turbo.Primitives.Messages.Incoming.Room.Engine;
+using Turbo.Primitives.Networking;
+using Turbo.Primitives.Packets;
+
+namespace TurboSamplePlugin.Revision.Revision20260112.Parsers.Room.Engine;
+
+internal class ClickCharacterMessageParser : IParser
+{
+    public IMessageEvent Parse(IClientPacket packet) =>
+        new ClickCharacterMessage { UserId = packet.PopInt() };
+}
+
