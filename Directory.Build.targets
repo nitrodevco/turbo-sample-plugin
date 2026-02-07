@@ -4,7 +4,7 @@
     Condition="'$(MSBuildProjectName)' == 'TurboSamplePlugin'"
   >
     <Exec
-      Command="dotnet build TurboSamplePlugin/TurboSamplePlugin.csproj --no-restore"
+      Command="dotnet build TurboSamplePlugin/TurboSamplePlugin.csproj --no-restore -p:BuildProjectReferences=true"
       WorkingDirectory="$(MSBuildThisFileDirectory)"
     />
   </Target>
