@@ -13,12 +13,22 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout turbo-sample-plugin
+        uses: actions/checkout@v4
+        with:
+          path: turbo-sample-plugin
+
+      - name: Checkout turbo-cloud
+        uses: actions/checkout@v4
+        with:
+          repository: nitrodevco/turbo-cloud
+          path: turbo-cloud
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          global-json-file: global.json
+          global-json-file: turbo-sample-plugin/global.json
 
       - name: Run quality gate
+        working-directory: turbo-sample-plugin
         run: dotnet build TurboSamplePlugin/TurboSamplePlugin.csproj -t:TurboSamplePluginQualityGate
