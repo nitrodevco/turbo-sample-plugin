@@ -1,0 +1,26 @@
+<Project>
+  <Target
+    Name="TurboSamplePluginFastCheck"
+    Condition="'$(MSBuildProjectName)' == 'TurboSamplePlugin'"
+  >
+    <Exec
+      Command="dotnet build TurboSamplePlugin/TurboSamplePlugin.csproj --no-restore"
+      WorkingDirectory="$(MSBuildThisFileDirectory)"
+    />
+  </Target>
+
+  <Target
+    Name="TurboSamplePluginQualityGate"
+    Condition="'$(MSBuildProjectName)' == 'TurboSamplePlugin'"
+    DependsOnTargets="TurboSamplePluginFastCheck"
+  >
+    <Exec
+      Command="dotnet format TurboSamplePlugin/TurboSamplePlugin.csproj style --verify-no-changes --no-restore --severity error"
+      WorkingDirectory="$(MSBuildThisFileDirectory)"
+    />
+    <Exec
+      Command="dotnet format TurboSamplePlugin/TurboSamplePlugin.csproj analyzers --verify-no-changes --no-restore --severity error"
+      WorkingDirectory="$(MSBuildThisFileDirectory)"
+    />
+  </Target>
+</Project>

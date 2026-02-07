@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+set -eu
+
+echo "Running fast local checks..."
+dotnet tool restore
+
+staged_files="$(mktemp)"
+trap 'rm -f "$staged_files"' EXIT
+
+git diff --cached --name-only --diff-filter=ACMR -- '*.cs' \
+  | grep '^TurboSamplePlugin/.*\.cs$' \
+  > "$staged_files" || true
+
+if [ -s "$staged_files" ]; then
+  echo "Checking staged files with dotnet format (style)..."
+  tr '\n' '\0' < "$staged_files" \
+    | xargs -0 dotnet format TurboSamplePlugin/TurboSamplePlugin.csproj style --verify-no-changes --no-restore --severity error --include
+else
+  echo "No staged plugin C# files."
+fi
+
+dotnet build TurboSamplePlugin/TurboSamplePlugin.csproj -t:TurboSamplePluginFastCheck

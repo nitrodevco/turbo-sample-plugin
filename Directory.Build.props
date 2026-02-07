@@ -3,6 +3,8 @@
     <AnalysisLevel>latest</AnalysisLevel>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <!-- Enforce critical Orleans serialization diagnostics for contributor safety. -->
+    <WarningsAsErrors>$(WarningsAsErrors);ORLEANS0012;ORLEANS0013</WarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" PrivateAssets="all" />
