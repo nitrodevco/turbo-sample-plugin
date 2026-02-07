@@ -3,6 +3,24 @@
 ###############################################################################
 * text=auto
 
+# Force LF for source and tooling-related text files
+*.cs           text eol=lf
+*.csproj       text eol=lf
+*.props        text eol=lf
+*.targets      text eol=lf
+*.tt           text eol=lf
+*.md           text eol=lf
+*.json         text eol=lf
+*.yml          text eol=lf
+*.yaml         text eol=lf
+*.sh           text eol=lf
+*.ps1          text eol=lf
+.githooks/*    text eol=lf
+
+# Keep Windows endings for solution and batch files
+*.sln          text eol=crlf
+*.bat          text eol=crlf
+
 ###############################################################################
 # Set default behavior for command prompt diff.
 #
