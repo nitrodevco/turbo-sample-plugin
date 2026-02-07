@@ -81,6 +81,9 @@ This file explicitly defines the cross-repo boundary:
 
 For Boost-style AI task recipes and prompt contract, use:
 - `../turbo-cloud/AGENTS.md` (canonical source)
+- Local tool adapters:
+  - `CLAUDE.md`
+  - `CODEX.md`
 
 ## Quality Model (Two-Phase)
 - Fast local commit check:
