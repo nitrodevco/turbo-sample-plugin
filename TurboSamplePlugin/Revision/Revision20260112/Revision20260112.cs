@@ -954,7 +954,6 @@ public class Revision20260112 : IRevision
             },
             { MessageEvent.GetDailyTasksEvent, new GetDailyTasksMessageParser() },
             { MessageEvent.GetDailyQuestMessageEvent, new GetDailyQuestMessageParser() },
-            { MessageEvent.GetDailyTasksEvent, new GetDailyQuestMessageParser() },
             { MessageEvent.GetQuestsMessageEvent, new GetQuestsMessageParser() },
             {
                 MessageEvent.GetSeasonalQuestsOnlyMessageEvent,
@@ -998,7 +997,6 @@ public class Revision20260112 : IRevision
             },
             { MessageEvent.DanceMessageEvent, new DanceMessageParser() },
             { MessageEvent.DropCarryItemMessageEvent, new DropCarryItemMessageParser() },
-            { MessageEvent.ClickCharacterEvent, new LookToMessageParser() },
             { MessageEvent.LookToMessageEvent, new LookToMessageParser() },
             { MessageEvent.PassCarryItemMessageEvent, new PassCarryItemMessageParser() },
             { MessageEvent.PassCarryItemToPetMessageEvent, new PassCarryItemToPetMessageParser() },
@@ -1341,7 +1339,6 @@ public class Revision20260112 : IRevision
             },
             { MessageEvent.BlockListInitEvent, new BlockListInitMessageParser() },
             { MessageEvent.GetIgnoredUsersMessageEvent, new GetIgnoredUsersMessageParser() },
-            { MessageEvent.BlockListInitEvent, new GetIgnoredUsersMessageParser() },
             {
                 MessageEvent.GetMemberGuildItemCountMessageEvent,
                 new GetMemberGuildItemCountMessageParser()
