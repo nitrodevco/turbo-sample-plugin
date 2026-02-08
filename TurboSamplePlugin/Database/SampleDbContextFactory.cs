@@ -22,7 +22,7 @@ public class SampleDbContextFactory : IDesignTimeDbContextFactory<SampleDbContex
 
         services.AddSingleton(_ =>
             JsonSerializer.Deserialize<PluginManifest>(
-                File.ReadAllText("../TurboSamplePlugin/manifest.json")
+                File.ReadAllText("../manifest.json")
             )!
         );
         services.AddSingleton<TablePrefixProvider>(sp =>

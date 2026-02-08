@@ -7,13 +7,13 @@
     <BuildProjectReferences>false</BuildProjectReferences>
   </PropertyGroup>
   <ItemGroup>
-    <None
-      Include="manifest.json"
-      CopyToOutputDirectory="PreserveNewest"
-      CopyToPublishDirectory="PreserveNewest"
-    />
+    <None Include="manifest.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="Microsoft.Extensions.Logging" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
@@ -21,36 +21,27 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference
-      Include="..\..\turbo-cloud\Turbo.Contracts\Turbo.Contracts.csproj"
-      Private="false"
-      ExcludeAssets="runtime"
-    />
-    <ProjectReference
-      Include="..\..\turbo-cloud\Turbo.Database\Turbo.Database.csproj"
-      Private="false"
-      ExcludeAssets="runtime"
-    />
-    <ProjectReference
-      Include="..\..\turbo-cloud\Turbo.Events\Turbo.Events.csproj"
-      Private="false"
-      ExcludeAssets="runtime"
-    />
-    <ProjectReference
-      Include="..\..\turbo-cloud\Turbo.Messages\Turbo.Messages.csproj"
-      Private="false"
-      ExcludeAssets="runtime"
-    />
-    <ProjectReference
-      Include="..\..\turbo-cloud\Turbo.Primitives\Turbo.Primitives.csproj"
-      Private="false"
-      ExcludeAssets="runtime"
-    />
-    <ProjectReference
-      Include="..\..\turbo-cloud\Turbo.Crypto\Turbo.Crypto.csproj"
-      Private="false"
-      ExcludeAssets="runtime"
-    />
+    <Reference Include="Turbo.Contracts">
+      <HintPath>..\..\turbo-cloud\Turbo.Contracts\bin\Debug\net9.0\Turbo.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Turbo.Crypto">
+      <HintPath>..\..\turbo-cloud\Turbo.Crypto\bin\Debug\net9.0\Turbo.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Turbo.Database">
+      <HintPath>..\..\turbo-cloud\Turbo.Database\bin\Debug\net9.0\Turbo.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="Turbo.Events">
+      <HintPath>..\..\turbo-cloud\Turbo.Events\bin\Debug\net9.0\Turbo.Events.dll</HintPath>
+    </Reference>
+    <Reference Include="Turbo.Messages">
+      <HintPath>..\..\turbo-cloud\Turbo.Messages\bin\Debug\net9.0\Turbo.Messages.dll</HintPath>
+    </Reference>
+    <Reference Include="Turbo.Pipeline">
+      <HintPath>..\..\turbo-cloud\Turbo.Pipeline\bin\Debug\net9.0\Turbo.Pipeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Turbo.Primitives">
+      <HintPath>..\..\turbo-cloud\Turbo.Primitives\bin\Debug\net9.0\Turbo.Primitives.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
