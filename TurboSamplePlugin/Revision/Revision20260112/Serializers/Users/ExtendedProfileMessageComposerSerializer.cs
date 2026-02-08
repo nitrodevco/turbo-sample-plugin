@@ -9,28 +9,30 @@ internal class ExtendedProfileMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, ExtendedProfileMessageComposer message)
     {
-        packet.WriteInteger(message.UserId);
-        packet.WriteString(message.UserName);
-        packet.WriteString(message.Figure);
-        packet.WriteString(message.Motto);
-        packet.WriteString(message.CreationDate);
-        packet.WriteInteger(message.AchievementScore);
-        packet.WriteInteger(message.FriendCount);
-        packet.WriteBoolean(message.IsFriend);
-        packet.WriteBoolean(message.IsFriendRequestSent);
-        packet.WriteBoolean(message.IsOnline);
-        
-        packet.WriteInteger(message.Guilds.Count);
+        packet
+            .WriteInteger(message.UserId)
+            .WriteString(message.UserName)
+            .WriteString(message.Figure)
+            .WriteString(message.Motto)
+            .WriteString(message.CreationDate)
+            .WriteInteger(message.AchievementScore)
+            .WriteInteger(message.FriendCount)
+            .WriteBoolean(message.IsFriend)
+            .WriteBoolean(message.IsFriendRequestSent)
+            .WriteBoolean(message.IsOnline)
+            .WriteInteger(message.Guilds.Count);
+
         foreach (var guild in message.Guilds)
             GuildInfoSerializer.Serialize(packet, guild);
-        
-        packet.WriteInteger(message.LastAccessSinceInSeconds);
-        packet.WriteBoolean(message.OpenProfileWindow);
-        packet.WriteBoolean(message.IsHidden);
-        packet.WriteInteger(message.AccountLevel);
-        packet.WriteInteger(message.IntegerField24);
-        packet.WriteInteger(message.StarGemCount);
-        packet.WriteBoolean(message.BooleanField26);
-        packet.WriteBoolean(message.BooleanField27);
+
+        packet
+            .WriteInteger(message.LastAccessSinceInSeconds)
+            .WriteBoolean(message.OpenProfileWindow)
+            .WriteBoolean(message.IsHidden)
+            .WriteInteger(message.AccountLevel)
+            .WriteInteger(message.IntegerField24)
+            .WriteInteger(message.StarGemCount)
+            .WriteBoolean(message.BooleanField26)
+            .WriteBoolean(message.BooleanField27);
     }
 }

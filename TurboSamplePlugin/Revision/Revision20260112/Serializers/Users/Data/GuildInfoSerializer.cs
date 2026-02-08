@@ -1,19 +1,20 @@
-using Turbo.Primitives.Messages.Outgoing.Users;
+using Turbo.Primitives.Groups.Snapshots;
 using Turbo.Primitives.Packets;
 
 namespace TurboSamplePlugin.Revision.Revision20260112.Serializers.Users.Data;
 
 internal class GuildInfoSerializer
 {
-    public static void Serialize(IServerPacket packet, GuildInfo guild)
+    public static void Serialize(IServerPacket packet, GuildInfoSnapshot guild)
     {
-        packet.WriteInteger(guild.GroupId);
-        packet.WriteString(guild.GroupName);
-        packet.WriteString(guild.BadgeCode);
-        packet.WriteString(guild.PrimaryColor);
-        packet.WriteString(guild.SecondaryColor);
-        packet.WriteBoolean(guild.Favourite);
-        packet.WriteInteger(guild.OwnerId);
-        packet.WriteBoolean(guild.HasForum);
+        packet
+            .WriteInteger(guild.GroupId)
+            .WriteString(guild.GroupName)
+            .WriteString(guild.BadgeCode)
+            .WriteString(guild.PrimaryColor)
+            .WriteString(guild.SecondaryColor)
+            .WriteBoolean(guild.Favourite)
+            .WriteInteger(guild.OwnerId)
+            .WriteBoolean(guild.HasForum);
     }
 }

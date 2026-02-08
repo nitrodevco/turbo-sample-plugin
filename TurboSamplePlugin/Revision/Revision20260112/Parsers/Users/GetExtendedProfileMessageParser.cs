@@ -8,8 +8,5 @@ namespace TurboSamplePlugin.Revision.Revision20260112.Parsers.Users;
 internal class GetExtendedProfileMessageParser : IParser
 {
     public IMessageEvent Parse(IClientPacket packet) =>
-        new GetExtendedProfileMessage
-        {
-            UserId = (PlayerId)packet.PopInt()
-        };
+        new GetExtendedProfileMessage { UserId = (PlayerId)packet.PopInt() };
 }
