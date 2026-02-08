@@ -11,6 +11,6 @@ internal class ExtendedProfileChangedMessageComposerSerializer(int header)
         ExtendedProfileChangedMessageComposer message
     )
     {
-        //
+        packet.WriteInteger(message.UserId);
     }
 }
