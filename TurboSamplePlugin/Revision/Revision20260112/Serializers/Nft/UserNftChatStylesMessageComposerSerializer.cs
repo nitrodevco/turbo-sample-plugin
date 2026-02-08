@@ -11,6 +11,9 @@ internal class UserNftChatStylesMessageComposerSerializer(int header)
         UserNftChatStylesMessageComposer message
     )
     {
-        //
+        packet.WriteInteger(message.ChatStyleIds.Count);
+
+        foreach (var chatStyleId in message.ChatStyleIds)
+            packet.WriteInteger(chatStyleId);
     }
 }

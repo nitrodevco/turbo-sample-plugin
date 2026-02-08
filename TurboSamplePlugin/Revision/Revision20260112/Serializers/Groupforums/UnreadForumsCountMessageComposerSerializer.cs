@@ -11,6 +11,6 @@ internal class UnreadForumsCountMessageComposerSerializer(int header)
         UnreadForumsCountMessageComposer message
     )
     {
-        //
+        packet.WriteInteger(message.UnreadForumsCount);
     }
 }

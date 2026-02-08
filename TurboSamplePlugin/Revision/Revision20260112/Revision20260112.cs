@@ -9,6 +9,7 @@ using Turbo.Primitives.Messages.Outgoing.Campaign;
 using Turbo.Primitives.Messages.Outgoing.Catalog;
 using Turbo.Primitives.Messages.Outgoing.Collectibles;
 using Turbo.Primitives.Messages.Outgoing.FriendList;
+using Turbo.Primitives.Messages.Outgoing.Groupforums;
 using Turbo.Primitives.Messages.Outgoing.Handshake;
 using Turbo.Primitives.Messages.Outgoing.Inventory.Achievements;
 using Turbo.Primitives.Messages.Outgoing.Inventory.Avatareffect;
@@ -22,7 +23,9 @@ using Turbo.Primitives.Messages.Outgoing.Inventory.Trading;
 using Turbo.Primitives.Messages.Outgoing.Mysterybox;
 using Turbo.Primitives.Messages.Outgoing.Navigator;
 using Turbo.Primitives.Messages.Outgoing.NewNavigator;
+using Turbo.Primitives.Messages.Outgoing.Nft;
 using Turbo.Primitives.Messages.Outgoing.Notifications;
+using Turbo.Primitives.Messages.Outgoing.Perk;
 using Turbo.Primitives.Messages.Outgoing.Preferences;
 using Turbo.Primitives.Messages.Outgoing.Room.Action;
 using Turbo.Primitives.Messages.Outgoing.Room.Bots;
@@ -110,6 +113,7 @@ using TurboSamplePlugin.Revision.Revision20260112.Serializers.Campaign;
 using TurboSamplePlugin.Revision.Revision20260112.Serializers.Catalog;
 using TurboSamplePlugin.Revision.Revision20260112.Serializers.Collectibles;
 using TurboSamplePlugin.Revision.Revision20260112.Serializers.FriendList;
+using TurboSamplePlugin.Revision.Revision20260112.Serializers.Groupforums;
 using TurboSamplePlugin.Revision.Revision20260112.Serializers.Handshake;
 using TurboSamplePlugin.Revision.Revision20260112.Serializers.Inventory.Achievements;
 using TurboSamplePlugin.Revision.Revision20260112.Serializers.Inventory.Avatareffect;
@@ -123,7 +127,9 @@ using TurboSamplePlugin.Revision.Revision20260112.Serializers.Inventory.Trading;
 using TurboSamplePlugin.Revision.Revision20260112.Serializers.Mysterybox;
 using TurboSamplePlugin.Revision.Revision20260112.Serializers.Navigator;
 using TurboSamplePlugin.Revision.Revision20260112.Serializers.NewNavigator;
+using TurboSamplePlugin.Revision.Revision20260112.Serializers.Nft;
 using TurboSamplePlugin.Revision.Revision20260112.Serializers.Notifications;
+using TurboSamplePlugin.Revision.Revision20260112.Serializers.Perk;
 using TurboSamplePlugin.Revision.Revision20260112.Serializers.Preferences;
 using TurboSamplePlugin.Revision.Revision20260112.Serializers.Room.Action;
 using TurboSamplePlugin.Revision.Revision20260112.Serializers.Room.Bots;
@@ -946,8 +952,8 @@ public class Revision20260112 : IRevision
                 MessageEvent.GetConcurrentUsersRewardMessageEvent,
                 new GetConcurrentUsersRewardMessageParser()
             },
+            { MessageEvent.GetDailyTasksEvent, new GetDailyTasksMessageParser() },
             { MessageEvent.GetDailyQuestMessageEvent, new GetDailyQuestMessageParser() },
-            { MessageEvent.GetDailyTasksEvent, new GetDailyQuestMessageParser() },
             { MessageEvent.GetQuestsMessageEvent, new GetQuestsMessageParser() },
             {
                 MessageEvent.GetSeasonalQuestsOnlyMessageEvent,
@@ -991,7 +997,6 @@ public class Revision20260112 : IRevision
             },
             { MessageEvent.DanceMessageEvent, new DanceMessageParser() },
             { MessageEvent.DropCarryItemMessageEvent, new DropCarryItemMessageParser() },
-            { MessageEvent.ClickCharacterEvent, new LookToMessageParser() },
             { MessageEvent.LookToMessageEvent, new LookToMessageParser() },
             { MessageEvent.PassCarryItemMessageEvent, new PassCarryItemMessageParser() },
             { MessageEvent.PassCarryItemToPetMessageEvent, new PassCarryItemToPetMessageParser() },
@@ -1015,6 +1020,7 @@ public class Revision20260112 : IRevision
             #endregion
 
             #region Room Engine
+            { MessageEvent.ClickCharacterEvent, new ClickCharacterMessageParser() },
             { MessageEvent.ClickFurniMessageEvent, new ClickFurniMessageParser() },
             {
                 MessageEvent.GetFurnitureAliasesMessageEvent,
@@ -1331,8 +1337,8 @@ public class Revision20260112 : IRevision
                 MessageEvent.GetHabboGroupDetailsMessageEvent,
                 new GetHabboGroupDetailsMessageParser()
             },
+            { MessageEvent.BlockListInitEvent, new BlockListInitMessageParser() },
             { MessageEvent.GetIgnoredUsersMessageEvent, new GetIgnoredUsersMessageParser() },
-            { MessageEvent.BlockListInitEvent, new GetIgnoredUsersMessageParser() },
             {
                 MessageEvent.GetMemberGuildItemCountMessageEvent,
                 new GetMemberGuildItemCountMessageParser()
@@ -1782,6 +1788,12 @@ public class Revision20260112 : IRevision
                     MessageComposer.SilverBalanceMessageComposer
                 )
             },
+            {
+                typeof(UserNftChatStylesMessageComposer),
+                new UserNftChatStylesMessageComposerSerializer(
+                    MessageComposer.UserNftChatStylesMessageComposer
+                )
+            },
             #endregion
 
             #region FriendList
@@ -1860,6 +1872,15 @@ public class Revision20260112 : IRevision
             {
                 typeof(RoomInviteMessageComposer),
                 new RoomInviteMessageSerializer(MessageComposer.RoomInviteComposer)
+            },
+            #endregion
+
+            #region Groupforums
+            {
+                typeof(UnreadForumsCountMessageComposer),
+                new UnreadForumsCountMessageComposerSerializer(
+                    MessageComposer.UnreadForumsCountMessageComposer
+                )
             },
             #endregion
 
@@ -2427,6 +2448,15 @@ public class Revision20260112 : IRevision
                 typeof(UnseenItemsEventMessageComposer),
                 new AccountPreferencesEventMessageComposerSerializer(
                     MessageComposer.UnseenItemsComposer
+                )
+            },
+            #endregion
+
+            #region Perk
+            {
+                typeof(PerkAllowancesMessageComposer),
+                new PerkAllowancesMessageComposerSerializer(
+                    MessageComposer.PerkAllowancesMessageComposer
                 )
             },
             #endregion
@@ -3130,6 +3160,12 @@ public class Revision20260112 : IRevision
                 typeof(ExtendedProfileChangedMessageComposer),
                 new ExtendedProfileChangedMessageComposerSerializer(
                     MessageComposer.ExtendedProfileChangedMessageComposer
+                )
+            },
+            {
+                typeof(IgnoredUsersMessageComposer),
+                new IgnoredUsersMessageComposerSerializer(
+                    MessageComposer.IgnoredUsersMessageComposer
                 )
             },
             {

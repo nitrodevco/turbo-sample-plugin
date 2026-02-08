@@ -8,6 +8,9 @@ internal class IgnoredUsersMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, IgnoredUsersMessageComposer message)
     {
-        //
+        packet.WriteInteger(message.IgnoredUserIds.Count);
+
+        foreach (var userId in message.IgnoredUserIds)
+            packet.WriteInteger(userId);
     }
 }

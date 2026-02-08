@@ -8,6 +8,8 @@ internal class NotEnoughBalanceMessageComposerSerializer(int header)
 {
     protected override void Serialize(IServerPacket packet, NotEnoughBalanceMessageComposer message)
     {
-        //
+        packet.WriteBoolean(message.NotEnoughCredits);
+        packet.WriteBoolean(message.NotEnoughActivityPoints);
+        packet.WriteInteger(message.ActivityPointType);
     }
 }

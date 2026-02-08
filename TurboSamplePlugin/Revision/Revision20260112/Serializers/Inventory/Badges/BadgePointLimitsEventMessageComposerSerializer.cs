@@ -11,6 +11,14 @@ internal class BadgePointLimitsEventMessageComposerSerializer(int header)
         BadgePointLimitsEventMessageComposer message
     )
     {
-        //
+        packet.WriteInteger(message.LimitsByBadgeCodePrefix.Count);
+
+        foreach (var group in message.LimitsByBadgeCodePrefix)
+        {
+            packet.WriteString(group.BadgeCodePrefix).WriteInteger(group.Levels.Count);
+
+            foreach (var level in group.Levels)
+                packet.WriteInteger(level.Level).WriteInteger(level.Limit);
+        }
     }
 }
