@@ -32,7 +32,7 @@ internal class WiredDataSerializer
         packet.WriteInteger(snapshot.VariableIds.Count);
 
         foreach (var variableId in snapshot.VariableIds)
-            packet.WriteString(variableId);
+            packet.WriteString(variableId.ToString());
 
         packet.WriteInteger(snapshot.FurniSourceTypes.Count);
 

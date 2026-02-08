@@ -6,5 +6,6 @@ namespace TurboSamplePlugin.Revision.Revision20260112.Parsers.Room.Avatar;
 
 internal class AvatarExpressionMessageParser : IParser
 {
-    public IMessageEvent Parse(IClientPacket packet) => new AvatarExpressionMessage();
+    public IMessageEvent Parse(IClientPacket packet) =>
+        new AvatarExpressionMessage { ExpressionId = packet.PopInt() };
 }
